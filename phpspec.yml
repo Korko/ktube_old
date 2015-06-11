@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Korko\kTube
+        psr4_prefix: Korko\kTube
+        src_path: app

@@ -1,0 +1,7 @@
+[10-Jun-2015 21:20:06 UTC] PHP Parse error:  syntax error, unexpected ''redirect_uri'' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 13
+[10-Jun-2015 21:20:19 UTC] PHP Parse error:  syntax error, unexpected ';' in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 18
+[10-Jun-2015 21:20:27 UTC] PHP Fatal error:  Call to undefined function Korko\kTube\Http\Controllers\OAuth\redirection() in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 11
+[10-Jun-2015 22:17:32 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 44
+[11-Jun-2015 19:43:54 UTC] PHP Fatal error:  Class 'Korko\kTube\Http\Controllers\OAuth\Token' not found in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 53
+[11-Jun-2015 19:44:32 UTC] PHP Fatal error:  Class 'Korko\kTube\Http\Controllers\OAuth\Auth' not found in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 54
+[11-Jun-2015 20:24:40 UTC] PHP Fatal error:  Class 'Korko\kTube\Http\Controllers\OAuth\Carbon' not found in /var/www/ktube.yt/app/Http/Controllers/OAuth/Youtube.php on line 59
