@@ -4,6 +4,7 @@ namespace Korko\kTube\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Korko\kTube\Libs\TokenManager;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,5 +27,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+
+        $schedule->call(function () {
+            TokenManager::refreshAll();
+        })->everyThirtyMinutes()->sendOutputTo(storage_path('logs/tokenRefresh.log'));
     }
 }
