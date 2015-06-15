@@ -32,4 +32,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function youtubeSubscriptions()
+    {
+        return $this->belongsToMany('Korko\kTube\YoutubeChannel', 'youtube_user_subscription');
+    }
 }
