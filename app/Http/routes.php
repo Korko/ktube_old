@@ -33,5 +33,4 @@ Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('/password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('/home', 'HomeController@home');
-Route::get('/oauth/youtube/', 'OAuth\Youtube@init');
-Route::get('/oauth/youtube/auth', 'OAuth\Youtube@auth');
+Route::get('/oauth/{driver}', 'OAuthController@auth');

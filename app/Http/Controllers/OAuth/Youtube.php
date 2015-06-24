@@ -29,7 +29,7 @@ class Youtube extends Controller
 
         try {
             $data = Lib::validateCode($request->get('code'));
-        } catch(Exceptione) {
+        } catch(Exception $e) {
             abort(500);
         }
 

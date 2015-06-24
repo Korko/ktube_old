@@ -4,7 +4,6 @@ namespace Korko\kTube\Http\Controllers;
 
 use Korko\kTube\Http\Controllers\Controller;
 use Korko\kTube\Libs\Youtube;
-use Illuminate\Http\Request;
 use Korko\kTube\Token;
 use Carbon\Carbon;
 use Auth;

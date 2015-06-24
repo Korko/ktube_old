@@ -35,4 +35,10 @@ return [
         'secret' => '',
     ],
 
+    'google' => [
+        'client_id' => env('YOUTUBE_CLIENT_ID'),
+        'client_secret' => env('YOUTUBE_CLIENT_SECRET'),
+        'redirect' => 'https://ktube.yt/oauth/google',
+    ],
+
 ];
