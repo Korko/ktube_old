@@ -18,10 +18,10 @@ class Account extends Model
      *
      * @var array
      */
-    protected $fillable = ['site', 'name', 'access_token', 'refresh_token', 'expires_at'];
+    protected $fillable = ['user_id', 'site', 'name', 'access_token', 'refresh_token', 'expires_at'];
 
     public function user()
     {
-        return $this->hasOne('Korko\kTube\User');
+        return $this->belongsTo('Korko\kTube\User');
     }
 }
