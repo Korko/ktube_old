@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'holidays'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -33,8 +33,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function youtubeSubscriptions()
+    public function accounts()
     {
-        return $this->belongsToMany('Korko\kTube\YoutubeChannel', 'youtube_user_subscription');
+        return $this->hasMany('Korko\kTube\Account');
     }
 }

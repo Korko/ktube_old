@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTokensTable extends Migration
+class CreateAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,14 @@ class CreateTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('tokens', function (Blueprint $table) {
+        Schema::create('Account', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->enum('type', ['youtube', 'dailymotion', 'vimeo']);
+            $table->enum('site', ['youtube']);
+            $table->string('name');
             $table->string('access_token');
-            $table->string('refresh_token')->nullable();
+            $table->string('refrehs_token');
             $table->timestamp('expires_at');
-
-            $table->unique(['user_id', 'type']);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +30,6 @@ class CreateTokensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tokens');
+        Schema::drop('Account');
     }
 }
