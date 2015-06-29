@@ -17,16 +17,6 @@ class HomeController extends Controller
 
     public function home()
     {
-        \Korko\kTube\Libs\TokenManager::refreshAll();
-        $activities = [];
-        $tokens = Token::where('user_id', '=', Auth::user()->id)->get();
-        foreach ($tokens as $token) {
-            switch ($token->type) {
-                case 'youtube':
-                    $activities['youtube'] = Youtube::getActivities($token);
-                    break;
-            }
-        }
-        dd($activities);
+        return view('home');
     }
 }

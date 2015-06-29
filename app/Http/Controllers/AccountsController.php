@@ -3,7 +3,6 @@
 namespace Korko\kTube\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Korko\kTube\Http\Requests;
 use Korko\kTube\Http\Controllers\Controller;
 
@@ -17,7 +16,7 @@ class AccountsController extends Controller
     public function index()
     {
         $accounts = Auth::user()->accounts();
-	return view('accounts.index', compact('accounts'));
+        return view('accounts.index', compact('accounts'));
     }
 
     /**

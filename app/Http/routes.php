@@ -35,5 +35,4 @@ Route::post('/password/reset', 'Auth\PasswordController@postReset');
 Route::get('/oauth/youtube', 'OAuth\Youtube@auth');
 
 Route::get('/home', 'HomeController@home');
-Route::get('/dashboard', 'DashboardController@home');
 Route::get('/accounts', 'AccountsController@index');
