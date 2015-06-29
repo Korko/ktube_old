@@ -3,25 +3,32 @@
 namespace Korko\kTube\Http\Controllers;
 
 use Korko\kTube\Http\Controllers\Controller;
+use Korko\kTube\Account;
+use Auth;
+use Socialite;
 
 class AuthController extends Controller
 {
-    protected $socialite;
-
-    public function __construct(Socialite $socialite){
-        $this->socialite = $socialite;
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('auth', ['only' => 'getLogout']);
     }
 
     public function getLogin($provider)
     {
-        if (!config("services.$provider")) abort('404');
-        return $this->socialite->with($provider)->redirect();
+        if (!config("services.$provider")) {
+            abort('404');
+        }
+        return Socialite::with($provider)->redirect();
     }
 
     public function postLogin($provider)
     {
-        if ($user = $this->socialite->with($provider)->user()) {
-            dd($user);
+        if ($userData = Socialite::with($provider)->user()) {
+            $account = Account::findByProviderOrCreate($provider, $userData);
+            Auth::login($account->user, true);
+            return redirect('/home')->with('message', 'Welcome, '.$account->user->name);
         } else {
             abort(500);
         }
@@ -29,7 +36,9 @@ class AuthController extends Controller
 
     public function getLogout()
     {
+        $user = Auth::user();
         Auth::logout();
-        return redirect('/');
+        return redirect('/')->with('message', 'Goodbye, '.$user->name);
+        ;
     }
 }

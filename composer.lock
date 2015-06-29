@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9792765f2be52b4b736331cc3f26f673",
+    "hash": "ef70b6d11b35583cc5e6cce3348b92f1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -632,58 +632,6 @@
                 "tokenizer"
             ],
             "time": "2015-03-11 20:06:43"
-        },
-        {
-            "name": "korko/laravel-youtube",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Korko/laravel-youtube.git",
-                "reference": "4089627d553eb83cf7f1e82b864596e804e58b3a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Korko/laravel-youtube/zipball/4089627d553eb83cf7f1e82b864596e804e58b3a",
-                "reference": "4089627d553eb83cf7f1e82b864596e804e58b3a",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/socialite": "~2.0",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Korko\\YoutubeApi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeremy 'Korko' Lemesle",
-                    "email": "jeremy.lemesle@korko.fr",
-                    "homepage": "https://github.com/korko",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Youtube API for Laravel",
-            "homepage": "https://github.com/korko/laravel_youtube",
-            "keywords": [
-                "laravel",
-                "youtube"
-            ],
-            "time": "2015-06-25 21:59:28"
         },
         {
             "name": "laravel/framework",
@@ -1383,6 +1331,160 @@
                 "shell"
             ],
             "time": "2015-03-26 18:43:54"
+        },
+        {
+            "name": "socialiteproviders/dailymotion",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Dailymotion.git",
+                "reference": "b2a7db362387cd28feff3e372ea318428637464d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Dailymotion/zipball/b2a7db362387cd28feff3e372ea318428637464d",
+                "reference": "b2a7db362387cd28feff3e372ea318428637464d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Dailymotion\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "Dailymotion OAuth2 Provider for Laravel Socialite",
+            "time": "2015-06-18 14:16:42"
+        },
+        {
+            "name": "socialiteproviders/manager",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Manager.git",
+                "reference": "560f9ae20b039beb9de3af21571d8e598d73e6d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/560f9ae20b039beb9de3af21571d8e598d73e6d0",
+                "reference": "560f9ae20b039beb9de3af21571d8e598d73e6d0",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "laravel/framework": "~5.0|~5.1",
+                "laravel/socialite": "~2.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Manager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Wendt",
+                    "email": "andy@awendt.com"
+                }
+            ],
+            "description": "Easily add new or override built-in providers in Laravel Socialite.",
+            "time": "2015-06-27 08:24:58"
+        },
+        {
+            "name": "socialiteproviders/vimeo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Vimeo.git",
+                "reference": "74be54e41780d1c0da169b6e00aeec8638d670c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Vimeo/zipball/74be54e41780d1c0da169b6e00aeec8638d670c5",
+                "reference": "74be54e41780d1c0da169b6e00aeec8638d670c5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Vimeo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "Vimeo OAuth2 Provider for Laravel Socialite",
+            "time": "2015-06-18 14:24:20"
+        },
+        {
+            "name": "socialiteproviders/youtube",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/YouTube.git",
+                "reference": "ed77a4849b840a6b2db211ef5b870333697d04b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/YouTube/zipball/ed77a4849b840a6b2db211ef5b870333697d04b9",
+                "reference": "ed77a4849b840a6b2db211ef5b870333697d04b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\YouTube\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "YouTube OAuth2 Provider for Laravel Socialite",
+            "time": "2015-06-18 14:24:40"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2387,6 +2489,58 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
+        },
+        {
+            "name": "korko/laravel-youtube",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Korko/laravel-youtube.git",
+                "reference": "4089627d553eb83cf7f1e82b864596e804e58b3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Korko/laravel-youtube/zipball/4089627d553eb83cf7f1e82b864596e804e58b3a",
+                "reference": "4089627d553eb83cf7f1e82b864596e804e58b3a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/socialite": "~2.0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Korko\\YoutubeApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy 'Korko' Lemesle",
+                    "email": "jeremy.lemesle@korko.fr",
+                    "homepage": "https://github.com/korko",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Youtube API for Laravel",
+            "homepage": "https://github.com/korko/laravel_youtube",
+            "keywords": [
+                "laravel",
+                "youtube"
+            ],
+            "time": "2015-06-25 21:59:28"
         },
         {
             "name": "mockery/mockery",
@@ -3465,7 +3619,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "korko/laravel-youtube": 20
+        "socialiteproviders/youtube": 20,
+        "socialiteproviders/dailymotion": 20,
+        "socialiteproviders/vimeo": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -14,10 +14,10 @@ return [
     |
     */
 
-    'google' => [
-        'client_id' => env('YOUTUBE_CLIENT_ID'),
-        'client_secret' => env('YOUTUBE_CLIENT_SECRET'),
-        'redirect' => 'https://ktube.yt/auth/login/callback/google',
+    'youtube' => [
+        'client_id' => env('YOUTUBE_KEY'),
+        'client_secret' => env('YOUTUBE_SECRET'),
+        'redirect' => env('YOUTUBE_REDIRECT_URI'),
         'scopes' => [
             // TODO: Only use "https://www.googleapis.com/auth/youtube.readonly" by default
             // and switch to "https://www.googleapis.com/auth/youtube.force-ssl" for holidays mode
@@ -25,4 +25,15 @@ return [
         ]
     ],
 
+    'vimeo' => [
+        'client_id' => env('VIMEO_KEY'),
+        'client_secret' => env('VIMEO_SECRET'),
+        'redirect' => env('VIMEO_REDIRECT_URI')
+    ],
+
+    'dailymotion' => [
+        'client_id' => env('DAILYMOTION_KEY'),
+        'client_secret' => env('DAILYMOTION_SECRET'),
+        'redirect' => env('DAILYMOTION_REDIRECT_URI')
+    ]
 ];
