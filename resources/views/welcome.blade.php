@@ -42,7 +42,7 @@
             <div class="content">
                 <div class="title">Laravel 5</div>
                 <div class="quote">{{ Inspiring::quote() }}</div>
-                <a href="{{ route('home') }}"><button>Connect</button></a>
+                <a href="{{ url('/home') }}"><button>Connect</button></a>
             </div>
         </div>
     </body>
