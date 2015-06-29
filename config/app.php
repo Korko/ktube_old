@@ -140,7 +140,7 @@ return [
         /*
          * Vendors Service Providers...
          */
-        Korko\YoutubeApi\YoutubeApiServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -12,10 +12,11 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Account', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->enum('site', ['youtube']);
+            $table->string('provider');
+            $table->string('provider_id')->unique();
             $table->string('name');
             $table->string('access_token');
             $table->string('refrehs_token');
@@ -33,6 +34,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Account');
+        Schema::drop('accounts');
     }
 }
