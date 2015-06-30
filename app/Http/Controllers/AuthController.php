@@ -23,10 +23,10 @@ class AuthController extends Controller
 
         $socialite = Socialite::with($provider);
         if ($provider === 'google') {
-            $socialite->asOffline()->scopes([
-                'https://www.googleapis.com/auth/youtube.force-ssl',
-                'https://www.googleapis.com/auth/youtube.readonly'
-            ]);
+            $socialite
+                ->asOffline()
+                ->addScope('https://www.googleapis.com/auth/youtube.force-ssl')
+                ->addScope('https://www.googleapis.com/auth/youtube.readonly');
         }
         return $socialite->redirect();
     }
