@@ -8,7 +8,6 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravel/socialite": "~2.0",
-        "socialiteproviders/youtube": "dev-master",
         "socialiteproviders/dailymotion": "dev-master",
         "socialiteproviders/vimeo": "dev-master"
     },

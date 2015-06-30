@@ -14,15 +14,10 @@ return [
     |
     */
 
-    'youtube' => [
+    'google' => [
         'client_id' => env('YOUTUBE_KEY'),
         'client_secret' => env('YOUTUBE_SECRET'),
-        'redirect' => env('YOUTUBE_REDIRECT_URI'),
-        'scopes' => [
-            // TODO: Only use "https://www.googleapis.com/auth/youtube.readonly" by default
-            // and switch to "https://www.googleapis.com/auth/youtube.force-ssl" for holidays mode
-            'https://www.googleapis.com/auth/youtube.force-ssl'
-        ]
+        'redirect' => env('YOUTUBE_REDIRECT_URI')
     ],
 
     'vimeo' => [

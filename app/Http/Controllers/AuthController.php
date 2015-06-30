@@ -20,7 +20,15 @@ class AuthController extends Controller
         if (!config("services.$provider")) {
             abort('404');
         }
-        return Socialite::with($provider)->redirect();
+
+        $socialite = Socialite::with($provider);
+        if ($provider === 'google') {
+            $socialite->asOffline()->scopes([
+                'https://www.googleapis.com/auth/youtube.force-ssl',
+                'https://www.googleapis.com/auth/youtube.readonly'
+            ]);
+        }
+        return $socialite->redirect();
     }
 
     public function postLogin($provider)
@@ -39,6 +47,5 @@ class AuthController extends Controller
         $user = Auth::user();
         Auth::logout();
         return redirect('/')->with('message', 'Goodbye, '.$user->name);
-        ;
     }
 }
