@@ -14,7 +14,6 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
-            'SocialiteProviders\YouTube\YouTubeExtendSocialite@handle',
             'SocialiteProviders\Dailymotion\DailymotionExtendSocialite@handle',
             'SocialiteProviders\Vimeo\VimeoExtendSocialite@handle'
         ]
