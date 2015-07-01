@@ -4,6 +4,7 @@ namespace Korko\kTube\Http\Controllers;
 
 use Korko\kTube\Http\Controllers\Controller;
 use Korko\kTube\Account;
+use Korko\kTube\User;
 use Auth;
 use Socialite;
 use Carbon\Carbon;
