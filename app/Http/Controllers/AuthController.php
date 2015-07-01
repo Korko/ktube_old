@@ -5,6 +5,7 @@ namespace Korko\kTube\Http\Controllers;
 use Korko\kTube\Http\Controllers\Controller;
 use Korko\kTube\Account;
 use Korko\kTube\User;
+use Carbon\Carbon;
 use Auth;
 use Socialite;
 
@@ -60,7 +61,7 @@ class AuthController extends Controller
             'provider_id' => $userData->id
         ]);
 
-        $user = $this->getAuthUser($account, $userData)
+        $user = $this->getAuthUser($account, $userData);
 
         $account->fill([
             'user_id' => $user->id,

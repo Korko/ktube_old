@@ -3,9 +3,7 @@
 namespace Korko\kTube;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 use Korko\kTube\User;
-use Carbon\Carbon;
 
 class Account extends Model
 {
@@ -26,19 +24,5 @@ class Account extends Model
     public function user()
     {
         return $this->belongsTo('Korko\kTube\User');
-    }
-
-    public static function updateOrCreateByUserData($provider, $userData)
-    {
-        return Account::updateOrCreate([
-            'user_id' => Auth::user()->id,
-            'provider' => $provider,
-            'provider_id' => $userData->id
-        ], [
-            'name' => $userData->name ?: $userData->nickname,
-            'access_token' => $userData->token,
-            'refresh_token' => $userData->refreshToken,
-            'expires_at' => Carbon::now()->addSeconds($userData->tokenExpiresIn)
-        ]);
     }
 }
