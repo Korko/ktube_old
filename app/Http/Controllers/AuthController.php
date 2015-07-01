@@ -36,9 +36,7 @@ class AuthController extends Controller
     public function postLogin($provider)
     {
         if ($userData = Socialite::with($provider)->user()) {
-            $this->createAndAuthUser($userData);
-
-            $account = Account::updateOrCreateByUserData($provider, $userData);
+            $account = $this->updateOrCreateAccount($provider, $userData);
 
             return redirect('/home')->with('message', 'Welcome, '.$account->user->name);
         } else {
@@ -55,15 +53,49 @@ class AuthController extends Controller
         return redirect('/')->with('message', 'Goodbye, '.$user->name);
     }
 
-    protected function createAndAuthUser($userData)
+    protected function updateOrCreateAccount($provider, $userData)
     {
-        if (! ($user = Auth::user())) {
-            $user = User::create([
-                'name' => $userData->name ?: $userData->nickname,
-                'email' => $userData->email
-            ]);
+        $account = Account::firstOrNew([
+            'provider' => $provider,
+            'provider_id' => $userData->id
+        ]);
+
+        $user = $this->getAuthUser($account, $userData)
+
+        $account->fill([
+            'user_id' => $user->id,
+            'name' => $userData->name ?: $userData->nickname,
+            'access_token' => $userData->token,
+            'refresh_token' => $userData->refreshToken,
+            'expires_at' => Carbon::now()->addSeconds($userData->tokenExpiresIn)
+        ])->save();
+
+        return $account;
+    }
+
+    protected function getAuthUser($account, $userData)
+    {
+        // If nobody is connected
+        if (Auth::user() === null) {
+            $user = $this->findOrCreateAccountUser($account, $userData);
 
             Auth::login($user, true);
         }
+
+        return $user;
+    }
+
+    protected function findOrCreateAccountUser($account, $userData)
+    {
+        // Then tries to get the user from the account
+        if (! isset($account->user)) {
+            // If it's a new account, then create a new user
+            $account->user = User::create([
+                'name' => $userData->name ?: $userData->nickname,
+                'email' => $userData->email
+            ]);
+        }
+
+        return $account->user;
     }
 }
