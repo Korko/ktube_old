@@ -2,11 +2,13 @@
 
 namespace Korko\kTube\Jobs;
 
-use Korko\kTube\Token;
+use Korko\kTube\Account;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Carbon\Carbon;
+use Socialite;
 
 class RefreshToken extends Job implements SelfHandling, ShouldQueue {
 

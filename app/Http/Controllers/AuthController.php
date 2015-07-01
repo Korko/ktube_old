@@ -7,7 +7,6 @@ use Korko\kTube\Account;
 use Korko\kTube\User;
 use Auth;
 use Socialite;
-use Carbon\Carbon;
 
 class AuthController extends Controller
 {
