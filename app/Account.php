@@ -31,7 +31,7 @@ class Account extends Model
     public static function updateOrCreateByUserData($provider, $userData)
     {
         return Account::updateOrCreate([
-            'user' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'provider' => $provider,
             'provider_id' => $userData->id
         ], [
