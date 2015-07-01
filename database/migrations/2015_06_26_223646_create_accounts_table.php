@@ -19,8 +19,8 @@ class CreateAccountsTable extends Migration
             $table->string('provider_id')->unique();
             $table->string('name');
             $table->string('access_token');
-            $table->string('refresh_token');
-            $table->timestamp('expires_at');
+            $table->string('refresh_token')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

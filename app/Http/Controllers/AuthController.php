@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        // routes to logIn are not limited to guests
         $this->middleware('auth', ['only' => 'getLogout']);
     }
 
@@ -83,20 +83,22 @@ class AuthController extends Controller
             Auth::login($user, true);
         }
 
-        return $user;
+        return Auth::user();
     }
 
     protected function findOrCreateAccountUser($account, $userData)
     {
         // Then tries to get the user from the account
-        if (! isset($account->user)) {
+        if (! isset($account->user_id)) {
             // If it's a new account, then create a new user
-            $account->user = User::create([
+            $user = User::create([
                 'name' => $userData->name ?: $userData->nickname,
                 'email' => $userData->email
             ]);
+        } else {
+            $user = $account->user()->first();
         }
 
-        return $account->user;
+        return $user;
     }
 }
