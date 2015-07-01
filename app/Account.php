@@ -27,29 +27,17 @@ class Account extends Model
         return $this->belongsTo('Korko\kTube\User');
     }
 
-    public static function findByProviderOrCreate($provider, $userData)
+    public static function updateOrCreateByUserData($provider, $userData)
     {
-        $account = Account::where('provider', '=', $provider)
-            ->where('provider_id', '=', $userData->id)
-            ->first();
-
-        if (!$account) {
-            if (! ($user = Auth::user())) {
-                $user = User::create([
-                    'name' => $userData->name ?: $userData->nickname,
-                    'email' => $userData->email
-                ]);
-            }
-
-            $account = Account::create([
-                'user_id' => $user->id,
-                'provider' => $provider,
-                'provider_id' => $userData->id,
-                'name' => $userData->name ?: $userData->nickname,
-                'access_token' => $userData->token
-            ]);
-        }
-
-        return $account;
+        return Account::updateOrCreate([
+            'user' => Auth::user()->id,
+            'provider' => $provider,
+            'provider_id' => $userData->id
+        ], [
+            'name' => $userData->name ?: $userData->nickname,
+            'access_token' => $userData->token,
+            'refresh_token' => $userData->refreshToken,
+            'expires_at' => Carbon::now()->addSeconds($userData->tokenExpiresIn)
+        ]);
     }
 }

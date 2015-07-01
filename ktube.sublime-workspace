@@ -521,14 +521,9 @@
 	[
 	],
 	"build_system": "",
-	"build_system_choices":
-	[
-	],
-	"build_varint": "",
 	"command_palette":
 	{
 		"height": 375.0,
-		"last_filter": "log",
 		"selected_items":
 		[
 			[
@@ -616,16 +611,7 @@
 	},
 	"console":
 	{
-		"height": 359.0,
-		"history":
-		[
-			"ping \"wpad.ubisoft.org\";",
-			"ping \"wpad.ubisoft.org\"",
-			"ping wpad.ubisoft.org",
-			"echo $http_proxy",
-			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
-			"import urllib2,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')"
-		]
+		"height": 359.0
 	},
 	"distraction_free":
 	{
@@ -636,12 +622,12 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/var/www/ktube"
-	],
 	"file_history":
 	[
+		"/D/ktube/composer.json",
+		"/D/ktube/app/Http/Controllers/AuthController.php",
+		"/D/ktube/app/Providers/EventServiceProvider.php",
+		"/D/ktube/config/services.php",
 		"/home/owlient/owlient/status/view/status/template/package/form.tpl.php",
 		"/home/owlient/owlient/status/view/status/package/Framework/FrameworkCommonAction.pkg.php",
 		"/home/owlient/owlient/status/view/status/page/deploy/production/migrate.page.php",
@@ -765,11 +751,7 @@
 		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/LiveStreamEventService.php",
 		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/NetworkService.php",
 		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/OrderService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/PlacementService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ProductService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ProductTemplateService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ProposalLineItemService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ProposalService.php"
+		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/PlacementService.php"
 	],
 	"find":
 	{
@@ -777,7 +759,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 225.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"",
@@ -1236,12 +1218,14 @@
 	{
 		"height": 110.0
 	},
+	"output.sftp":
+	{
+		"height": 112.0
+	},
 	"output.xdebug":
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "",
-	"project": "ktube.sublime-project",
 	"replace":
 	{
 		"height": 46.0
@@ -1250,7 +1234,6 @@
 	"select_file":
 	{
 		"height": 0.0,
-		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1771,7 +1754,6 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1789,26 +1771,10 @@
 		],
 		"width": 380.0
 	},
-	"select_symbol":
-	{
-		"height": 375.0,
-		"last_filter": "",
-		"selected_items":
-		[
-		],
-		"width": 588.0
-	},
-	"selected_group": 0,
-	"settings":
-	{
-	},
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 260.0,
-	"status_bar_visible": true,
-	"template_settings":
-	{
-	}
+	"status_bar_visible": true
 }
