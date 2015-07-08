@@ -37,13 +37,13 @@ class RefreshToken extends Job implements SelfHandling, ShouldQueue {
      */
     public function handle()
     {
-        $token = Socialite::with($this->provider)->refresh($this->token);
+        $token = Socialite::with($this->provider)->refreshToken($this->token);
 
         Account::with('provider', $this->provider)
             ->with('access_token', $this->token)
             ->update([
                 'access_token' => $token->accessToken,
-                'expires_in' => Carbon::now()->addSeconds($token->expiresIn)
+                'expires_at' => Carbon::now()->addSeconds($token->expiresIn)
             ]);
     }
 }

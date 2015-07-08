@@ -2,9 +2,10 @@
 
 namespace Korko\kTube\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
-use Korko\kTube\Http\Requests;
 use Korko\kTube\Http\Controllers\Controller;
+use Korko\kTube\Http\Requests;
 
 class AccountsController extends Controller
 {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef70b6d11b35583cc5e6cce3348b92f1",
+    "hash": "1c16dc11eb256bf2f9b4c68e543b9a15",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1448,43 +1448,6 @@
             ],
             "description": "Vimeo OAuth2 Provider for Laravel Socialite",
             "time": "2015-06-18 14:24:20"
-        },
-        {
-            "name": "socialiteproviders/youtube",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SocialiteProviders/YouTube.git",
-                "reference": "ed77a4849b840a6b2db211ef5b870333697d04b9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/YouTube/zipball/ed77a4849b840a6b2db211ef5b870333697d04b9",
-                "reference": "ed77a4849b840a6b2db211ef5b870333697d04b9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0",
-                "socialiteproviders/manager": "~1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SocialiteProviders\\YouTube\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "DraperStudio",
-                    "email": "hello@draperstud.io"
-                }
-            ],
-            "description": "YouTube OAuth2 Provider for Laravel Socialite",
-            "time": "2015-06-18 14:24:40"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3619,7 +3582,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "socialiteproviders/youtube": 20,
         "socialiteproviders/dailymotion": 20,
         "socialiteproviders/vimeo": 20
     },

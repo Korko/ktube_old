@@ -30,5 +30,9 @@ return [
         'client_id' => env('DAILYMOTION_KEY'),
         'client_secret' => env('DAILYMOTION_SECRET'),
         'redirect' => env('DAILYMOTION_REDIRECT_URI')
+    ],
+
+    'youtube' => [
+        'api_key' => env('YOUTUBE_API_KEY')
     ]
 ];
