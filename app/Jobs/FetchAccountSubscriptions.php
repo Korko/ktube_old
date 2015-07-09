@@ -54,7 +54,7 @@ class FetchAccountSubscriptions extends Job implements SelfHandling, ShouldQueue
             foreach($apiData->items as $item) {
                 $channel = Channel::firstOrNew([
                     'site_id' => $this->account->site_id,
-                    'channel_id' => $item->id
+                    'channel_id' => $item->snippet->resourceId->channelId
                 ]);
 
                 $channel->fill([

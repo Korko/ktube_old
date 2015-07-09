@@ -16,4 +16,9 @@ class Channel extends Model
     {
         return $this->hasMany(Video::class);
     }
+
+    public function accounts()
+    {
+        return $this->belongsToMany(Channel::class, 'account_subscriptions');
+    }
 }
