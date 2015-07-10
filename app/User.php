@@ -20,9 +20,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany(Account::class);
     }
-
-    public function channels()
-    {
-        return $this->accounts()->with('channels');
-    }
 }

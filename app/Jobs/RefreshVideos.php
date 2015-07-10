@@ -114,7 +114,9 @@ class FetchLastVideos extends Job implements SelfHandling, ShouldQueue {
                         ->get(['video_id'])->keyBy('video_id')->all()
                 ));
 
-                Video::insert($videos->toArray());
+                if (!$videos->isEmpty()) {
+                    Video::insert($videos->toArray());
+                }
             });
     }
 

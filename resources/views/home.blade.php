@@ -1,7 +1,9 @@
 @extends('layout')
 
 <ul>
-@foreach($channels as $channel)
-	<li>{{ $channel->name }} (#{{ $channel->channel_id }})</li>
+@foreach($videos as $video)
+	<li>{{ $video->name }} (#{{ $video->video_id }}) - {{ $video->published_at->diffForHumans() }}</li>
 @endforeach
 </ul>
+
+{!! $videos->render() !!}

@@ -3,11 +3,16 @@
 namespace Korko\kTube\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Korko\kTube\Libs\TokenManager;
+use Korko\kTube\Jobs\RefreshAllSubscriptions;
+use Korko\kTube\Jobs\RefreshAllVideos;
+use Korko\kTube\Jobs\RefreshTokens;
 
 class Kernel extends ConsoleKernel
 {
+    use DispatchesJobs;
+
     /**
      * The Artisan commands provided by your application.
      *
@@ -25,11 +30,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        $schedule->call(function () {
+            $this->dispatch(new RefreshTokens());
+        })->everyMinute();
 
         $schedule->call(function () {
-            TokenManager::refreshAll();
-        })->everyThirtyMinutes()->sendOutputTo(storage_path('logs/tokenRefresh.log'));
+            $this->dispatch(new RefreshAllVideos());
+            $this->dispatch(new RefreshAllSubscriptions());
+        })->cron('*/15 * * * *');
+
+        $schedule->call(function () {
+            //$this->dispatch(new BackupVideos());
+        })->dailyAt('12:00');
     }
 }
