@@ -12,7 +12,7 @@ use Korko\kTube\Channel;
 use Korko\kTube\Video;
 use Socialite;
 
-class FetchLastVideos extends Job implements SelfHandling, ShouldQueue {
+class RefreshVideos extends Job implements SelfHandling, ShouldQueue {
 
     use InteractsWithQueue, SerializesModels;
 
@@ -61,7 +61,7 @@ class FetchLastVideos extends Job implements SelfHandling, ShouldQueue {
                 'order'          => 'date',
                 'safeSearch'     => 'none',
                 'type'           => 'video',
-                'publishedAfter' => $channel->scanned_at->toRfc3339String(),
+                'publishedAfter' => $channel->scanned_at->setTimezone('UTC')->toRfc3339String(),
                 'maxResults'     => 50,
                 'pageToken'      => $pageToken
             );
@@ -105,7 +105,7 @@ class FetchLastVideos extends Job implements SelfHandling, ShouldQueue {
             'channel_id'   => $channel->id,
             'video_id'     => $item->id->videoId,
             'name'         => $item->snippet->title,
-            'published_at' => Carbon::parse($item->snippet->publishedAt)
+            'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
         ]);
     }
 

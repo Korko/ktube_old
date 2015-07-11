@@ -8,7 +8,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Channel;
-use Korko\kTube\Jobs\FetchLastVideos;
 
 class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue {
 
@@ -33,7 +32,7 @@ class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue {
 
         // For each of these channels, get the last videos uploaded
         foreach ($channels as $channel) {
-            $this->dispatch(new FetchLastVideos($channel));
+            $this->dispatch(new RefreshVideos($channel));
         }
     }
 }

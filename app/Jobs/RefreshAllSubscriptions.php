@@ -8,7 +8,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Account;
-use Korko\kTube\Jobs\RefreshSubscriptions;
 
 class RefreshAllSubscriptions extends Job implements SelfHandling, ShouldQueue {
 

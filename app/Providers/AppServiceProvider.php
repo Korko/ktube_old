@@ -5,6 +5,8 @@ namespace Korko\kTube\Providers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\ServiceProvider;
 use Korko\kTube\Account;
+use Korko\kTube\Channel;
+use Korko\kTube\Jobs\RefreshVideos;
 use Korko\kTube\Jobs\RefreshSubscriptions;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,14 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Account::created(function (Account $account) {
-            $this->dispatch(new RefreshSubscriptions($account));
-
-            $channels = Channel::where('account', $account->id)->get();
-            foreach ($channels as $channel) {
-                $this->dispatch(new FetchLastVideos($channel));
-            }
-        });
+        //
     }
 
     /**
