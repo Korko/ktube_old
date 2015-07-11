@@ -107,13 +107,13 @@ return array(
         ),
         'db' => array(
             'with_params'       => true,   // Render SQL with the parameters substituted
-            'timeline'          => false,  // Add the queries to the timeline
-            'backtrace'         => false,  // EXPERIMENTAL: Use a backtrace to find the origin of the query in your files.
+            'timeline'          => true,  // Add the queries to the timeline
+            'backtrace'         => true,  // EXPERIMENTAL: Use a backtrace to find the origin of the query in your files.
             'explain' => array(            // EXPERIMENTAL: Show EXPLAIN output on queries
                 'enabled' => false,
                 'types' => array('SELECT'), // array('SELECT', 'INSERT', 'UPDATE', 'DELETE'); for MySQL 5.6.3+
             ),
-            'hints'             => true,    // Show hints for common mistakes
+            'hints'             => false,    // Show hints for common mistakes
         ),
         'mail' => array(
             'full_log' => false

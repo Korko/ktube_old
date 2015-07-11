@@ -38,7 +38,7 @@ return [
         'database' => [
             'driver' => 'database',
             'table' => 'jobs',
-            'queue' => 'default',
+            'queue' => 'tokens,channels,videos,playlists',
             'expire' => 60,
         ],
 
