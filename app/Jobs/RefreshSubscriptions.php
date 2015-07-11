@@ -14,6 +14,13 @@ class RefreshSubscriptions extends Job implements SelfHandling, ShouldQueue {
 
     use InteractsWithQueue, SerializesModels;
 
+    /**
+     * The name of the queue the job should be sent to.
+     *
+     * @var string
+     */
+    public $queue = 'channels';
+
     protected $account;
 
     public function __construct(Account $account)

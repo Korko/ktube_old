@@ -32,15 +32,15 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $this->dispatch(new RefreshTokens());
-        })->everyMinute();
+        })->description('Refresh tokens')->everyMinute();
 
         $schedule->call(function () {
-            $this->dispatch(new RefreshAllVideos());
             $this->dispatch(new RefreshAllSubscriptions());
-        })->cron('*/15 * * * *');
+            $this->dispatch(new RefreshAllVideos());
+        })->description('Refresh channels and videos')->cron('*/15 * * * *')->withoutOverlapping();
 
         $schedule->call(function () {
-            //$this->dispatch(new BackupVideos());
-        })->dailyAt('12:00');
+            //$this->dispatch(new BackupVideos())->onQueue('playlists');
+        })->description('Backups yesterday\'s videos for users in holidays')->dailyAt('12:00');
     }
 }

@@ -15,6 +15,13 @@ class RefreshAllSubscriptions extends Job implements SelfHandling, ShouldQueue {
     use InteractsWithQueue, SerializesModels, DispatchesJobs;
 
     /**
+     * The name of the queue the job should be sent to.
+     *
+     * @var string
+     */
+    public $queue = 'channels';
+
+    /**
      * Execute the job.
      *
      * @return void

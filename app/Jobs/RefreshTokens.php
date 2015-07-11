@@ -15,6 +15,13 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue {
     use InteractsWithQueue, SerializesModels;
 
     /**
+     * The name of the queue the job should be sent to.
+     *
+     * @var string
+     */
+    public $queue = 'tokens';
+
+    /**
      * Execute the job.
      *
      * @return void
@@ -22,6 +29,7 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue {
     public function handle()
     {
         $accounts = Account::whereRaw('TIMESTAMPDIFF(MINUTE, NOW(), expires_at) <= 5')->with('site')->get();
+
         foreach ($accounts as $account) {
             $this->refreshToken($account);
         }
@@ -31,11 +39,9 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue {
     {
         $token = Socialite::with($account->site->name)->refreshToken($account->refresh_token);
 
-        Account::with('provider', $account->site->name)
-            ->with('access_token', $account->refresh_token)
-            ->update([
-                'access_token' => $token->accessToken,
-                'expires_at'   => Carbon::now()->addSeconds($token->expiresIn)
-            ]);
+        $account->update([
+            'access_token' => $token->accessToken,
+            'expires_at'   => Carbon::now()->addSeconds($token->expiresIn)
+        ]);
     }
 }

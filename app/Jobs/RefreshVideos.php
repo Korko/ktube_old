@@ -16,6 +16,13 @@ class FetchLastVideos extends Job implements SelfHandling, ShouldQueue {
 
     use InteractsWithQueue, SerializesModels;
 
+    /**
+     * The name of the queue the job should be sent to.
+     *
+     * @var string
+     */
+    public $queue = 'videos';
+
     protected $channel;
 
     public function __construct(Channel $channel)
