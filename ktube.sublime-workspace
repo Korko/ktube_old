@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"st",
+				"stylesheet"
+			],
+			[
+				"inlin",
+				"inline-block〔value〕"
+			],
+			[
+				"num",
+				"numberBetween($min	(Generator.php)"
+			],
+			[
+				"getYou",
+				"getYouTubePlaylist"
+			],
+			[
+				"old",
+				"oldChannels"
+			],
+			[
+				"array_di",
+				"array_diff_key〔function〕"
+			],
+			[
+				"refresh",
+				"refresh_token	(AuthController.php)"
+			],
+			[
 				"direct",
 				"directories"
 			],
@@ -486,44 +514,64 @@
 			[
 				"egForu",
 				"egForumMessageOld"
-			],
-			[
-				"eForumTopi",
-				"eForumTopicOld"
-			],
-			[
-				"egFor",
-				"egForumMessageOld"
-			],
-			[
-				"eF",
-				"egForum"
-			],
-			[
-				"egForuM",
-				"egForumMessageInfo"
-			],
-			[
-				"egForumM",
-				"egForumMessageOld"
-			],
-			[
-				"rsF",
-				"rsForumMessage"
-			],
-			[
-				"rsFor",
-				"rsForumMessageOld"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"contents": "<?php\n\nnamespace Illuminate\\Pagination;\n\nuse Countable;\nuse ArrayAccess;\nuse IteratorAggregate;\nuse Illuminate\\Support\\Collection;\nuse Illuminate\\Contracts\\Support\\Jsonable;\nuse Illuminate\\Contracts\\Support\\Arrayable;\nuse Illuminate\\Contracts\\Pagination\\Presenter;\nuse Illuminate\\Contracts\\Pagination\\Paginator as PaginatorContract;\n\nclass Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Countable, IteratorAggregate, Jsonable, PaginatorContract\n{\n    /**\n     * Determine if there are more items in the data source.\n     *\n     * @return bool\n     */\n    protected $hasMore;\n\n    /**\n     * Create a new paginator instance.\n     *\n     * @param  mixed  $items\n     * @param  int  $perPage\n     * @param  int|null  $currentPage\n     * @param  array  $options (path, query, fragment, pageName)\n     * @return void\n     */\n    public function __construct($items, $perPage, $currentPage = null, array $options = [])\n    {\n        foreach ($options as $key => $value) {\n            $this->{$key} = $value;\n        }\n\n        $this->perPage = $perPage;\n        $this->currentPage = $this->setCurrentPage($currentPage);\n        $this->path = $this->path != '/' ? rtrim($this->path, '/').'/' : $this->path;\n        $this->items = $items instanceof Collection ? $items : Collection::make($items);\n\n        $this->checkForMorePages();\n    }\n\n    /**\n     * Get the current page for the request.\n     *\n     * @param  int  $currentPage\n     * @return int\n     */\n    protected function setCurrentPage($currentPage)\n    {\n        $currentPage = $currentPage ?: static::resolveCurrentPage();\n\n        return $this->isValidPageNumber($currentPage) ? (int) $currentPage : 1;\n    }\n\n    /**\n     * Check for more pages. The last item will be sliced off.\n     *\n     * @return void\n     */\n    protected function checkForMorePages()\n    {\n        $this->hasMore = count($this->items) > ($this->perPage);\n\n        $this->items = $this->items->slice(0, $this->perPage);\n    }\n\n    /**\n     * Get the URL for the next page.\n     *\n     * @return string|null\n     */\n    public function nextPageUrl()\n    {\n        if ($this->hasMore) {\n            return $this->url($this->currentPage() + 1);\n        }\n    }\n\n    /**\n     * Determine if there are more items in the data source.\n     *\n     * @return bool\n     */\n    public function hasMorePages()\n    {\n        return $this->hasMore;\n    }\n\n    /**\n     * Render the paginator using the given presenter.\n     *\n     * @param  \\Illuminate\\Contracts\\Pagination\\Presenter|null  $presenter\n     * @return string\n     */\n    public function render(Presenter $presenter = null)\n    {\n        if (is_null($presenter) && static::$presenterResolver) {\n            $presenter = call_user_func(static::$presenterResolver, $this);\n        }\n\n        $presenter = $presenter ?: new SimpleBootstrapThreePresenter($this);\n\n        return $presenter->render();\n    }\n\n    /**\n     * Get the instance as an array.\n     *\n     * @return array\n     */\n    public function toArray()\n    {\n        return [\n            'per_page' => $this->perPage(), 'current_page' => $this->currentPage(),\n            'next_page_url' => $this->nextPageUrl(), 'prev_page_url' => $this->previousPageUrl(),\n            'from' => $this->firstItem(), 'to' => $this->lastItem(),\n            'data' => $this->items->toArray(),\n        ];\n    }\n\n    /**\n     * Convert the object to its JSON representation.\n     *\n     * @param  int  $options\n     * @return string\n     */\n    public function toJson($options = 0)\n    {\n        return json_encode($this->toArray(), $options);\n    }\n}\n",
+			"file": "vendor/laravel/framework/src/Illuminate/Pagination/Paginator.php",
+			"file_size": 3597,
+			"file_write_time": 130808578553743423,
+			"settings":
+			{
+				"buffer_size": 3597,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/laravel/framework/src/Illuminate/Pagination/SimpleBootstrapThreePresenter.php",
+			"settings":
+			{
+				"buffer_size": 1081,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/laravel/framework/src/Illuminate/Pagination/BootstrapThreeNextPreviousButtonRendererTrait.php",
+			"settings":
+			{
+				"buffer_size": 1511,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/laravel/framework/src/Illuminate/Pagination/UrlWindowPresenterTrait.php",
+			"settings":
+			{
+				"buffer_size": 1485,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/laravel/framework/src/Illuminate/Pagination/BootstrapThreePresenter.php",
+			"settings":
+			{
+				"buffer_size": 3102,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 288.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -607,11 +655,15 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 579.0
+		"width": 464.0
 	},
 	"console":
 	{
-		"height": 359.0
+		"height": 359.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
 	},
 	"distraction_free":
 	{
@@ -622,12 +674,131 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/Users/Korko/Code/ktube",
+		"/C/Users/Korko/Code/ktube/app",
+		"/C/Users/Korko/Code/ktube/app/Console",
+		"/C/Users/Korko/Code/ktube/app/Console/Commands",
+		"/C/Users/Korko/Code/ktube/app/Http",
+		"/C/Users/Korko/Code/ktube/app/Http/Controllers",
+		"/C/Users/Korko/Code/ktube/database",
+		"/C/Users/Korko/Code/ktube/database/factories",
+		"/C/Users/Korko/Code/ktube/database/migrations",
+		"/C/Users/Korko/Code/ktube/database/seeds",
+		"/C/Users/Korko/Code/ktube/resources",
+		"/C/Users/Korko/Code/ktube/resources/views"
+	],
 	"file_history":
 	[
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Pagination/BootstrapThreePresenter.php",
+		"/C/Users/Korko/Code/ktube/vendor/fzaninotto/faker/src/Faker/Provider/fr_FR/Text.php",
+		"/C/Users/Korko/Code/ktube/resources/views/home.blade.php",
+		"/C/Users/Korko/Code/ktube/app/Channel.php",
+		"/C/Users/Korko/Code/ktube/app/Http/Controllers/HomeController.php",
+		"/C/Users/Korko/Code/ktube/database/seeds/SitesTableSeeder.php",
+		"/C/Users/Korko/Code/ktube/app/Http/Controllers/AuthController.php",
+		"/C/Users/Korko/Code/ktube/database/migrations/2015_06_10_193231_create_sites_table.php",
+		"/C/Users/Korko/Code/ktube/resources/views/layout.blade.php",
+		"/C/Users/Korko/Code/ktube/resources/views/welcome.blade.php",
+		"/C/Users/Korko/Code/ktube/database/seeds/ChannelsTableSeeder.php",
+		"/C/Users/Korko/Code/ktube/database/factories/ModelFactory.php",
+		"/C/Users/Korko/Code/ktube/database/seeds/UsersTableSeeder.php",
+		"/C/Users/Korko/Code/ktube/vendor/symfony/debug/ExceptionHandler.php",
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/FactoryBuilder.php",
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+		"/C/Users/Korko/Code/ktube/database/seeds/DatabaseSeeder.php",
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factory.php",
+		"/C/Users/Korko/Code/ktube/vendor/fzaninotto/faker/src/Faker/Generator.php",
+		"/C/Users/Korko/Code/ktube/app/Console/Kernel.php",
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php",
+		"/C/Users/Korko/Code/ktube/app/Http/routes.php",
+		"/C/Users/Korko/Code/ktube/vendor/laravel/framework/src/Illuminate/Auth/Guard.php",
+		"/C/Users/Korko/Code/ktube/.env",
+		"/C/Users/Korko/Code/ktube/vendor/symfony/debug/ErrorHandler.php",
+		"/C/Users/Korko/Code/ktube/vendor/symfony/debug/Exception/FlattenException.php",
+		"/C/Users/Korko/Code/ktube/app/Jobs/RefreshVideos.php",
+		"/C/Users/Korko/Code/ktube/app/Jobs/Job.php",
+		"/C/Users/Korko/Code/ktube/app/Jobs/BackupAccount.php",
+		"/C/Users/Korko/.homestead/Homestead.yaml",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/Korko/.ssh/id_rsa_pub.ppk",
+		"/C/HashiCorp/Vagrant/embedded/config.yml",
+		"/C/HashiCorp/Vagrant/embedded/plugins.json",
+		"/C/Users/Korko/.ssh/id_rsa",
+		"/C/Users/Korko/.ssh/id_rsa.pub",
+		"/C/Users/Korko/.ssh/id_rsa.ppk",
+		"/D/ktube/vendor/google/apiclient/src/Google/Service/Resource.php",
+		"/D/ktube/vendor/google/apiclient/src/Google/Client.php",
+		"/D/ktube/vendor/nesbot/carbon/src/Carbon/Carbon.php",
+		"/D/ktube/vendor/google/apiclient/src/Google/Auth/OAuth2.php",
+		"/D/ktube/vendor/google/apiclient/src/Google/Service/YouTube.php",
+		"/D/ktube/app/Jobs/RefreshSubscriptions.php",
+		"/D/ktube/app/Jobs/RefreshVideos.php",
+		"/D/ktube/app/Jobs/Job.php",
 		"/D/ktube/composer.json",
+		"/D/ktube/vendor/google/apiclient/src/Google/Service.php",
+		"/D/ktube/config/app.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Support/Collection.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Support/Arr.php",
+		"/D/ktube/resources/views/home.blade.php",
+		"/D/ktube/config/debugbar.php",
+		"/D/ktube/app/Jobs/BackupAllAccounts.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php",
+		"/D/ktube/app/Console/Kernel.php",
+		"/D/ktube/config/queue.php",
+		"/D/ktube/app/Jobs/RefreshAllVideos.php",
+		"/D/ktube/app/Providers/AppServiceProvider.php",
+		"/D/ktube/app/Jobs/RefreshAllSubscriptions.php",
+		"/D/ktube/app/Jobs/RefreshTokens.php",
+		"/D/ktube/app/User.php",
+		"/D/ktube/resources/views/welcome.blade.php",
+		"/D/ktube/public/info.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Console/Scheduling/Event.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Console/Scheduling/CallbackEvent.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Bus/Queueable.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
 		"/D/ktube/app/Http/Controllers/AuthController.php",
-		"/D/ktube/app/Providers/EventServiceProvider.php",
+		"/D/ktube/app/Account.php",
+		"/D/ktube/app/Listeners/AccountCreatedListener.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/View/Factory.php",
+		"/D/ktube/app/Jobs/FetchAllLastVideos.php",
+		"/D/ktube/database/migrations/2015_07_09_224104_create_videos_table.php",
+		"/D/ktube/app/Video.php",
+		"/D/ktube/database/migrations/2015_07_08_193441_create_channels_table.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/QueryException.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Grammar.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Query/Grammars/Grammar.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+		"/D/ktube/app/Jobs/FetchAccountSubscriptions.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Support/helpers.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/ConnectionInterface.php",
+		"/D/ktube/vendor/alaouy/youtube/src/Alaouy/Youtube/YoutubeServiceProvider.php",
+		"/D/ktube/ktube.sublime-project",
+		"/D/ktube/ktube.sublime-workspace",
+		"/D/ktube/app/Channel.php",
+		"/D/ktube/database/migrations/2015_06_26_223646_create_accounts_table.php",
 		"/D/ktube/config/services.php",
+		"/D/ktube/app/Jobs/RefreshToken.php",
+		"/D/ktube/app/Http/Controllers/HomeController.php",
+		"/D/ktube/vendor/laravel/socialite/src/Two/GoogleProvider.php",
+		"/D/ktube/vendor/laravel/socialite/src/Two/AbstractProvider.php",
+		"/D/ktube/database/seeds/SiteTableSeeder.php",
+		"/C/Users/Korko/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/D/ktube/database/migrations/2015_07_08_201340_create_account_subscriptions_table.php",
+		"/D/ktube/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php",
+		"/D/ktube/database/migrations/2015_07_08_201340_create_channel_users_table.php",
+		"/D/ktube/database/seeds/DatabaseSeeder.php",
+		"/D/ktube/app/Http/Controllers/AccountsController.php",
+		"/D/ktube/app/Http/Controllers/Controller.php",
+		"/D/ktube/app/Site.php",
+		"/D/ktube/database/migrations/2015_07_08_193231_create_sites_table.php",
+		"/D/ktube/database/migrations/2015_07_08_193231_create_channels_table.php",
+		"/D/ktube/app/Providers/EventServiceProvider.php",
 		"/home/owlient/owlient/status/view/status/template/package/form.tpl.php",
 		"/home/owlient/owlient/status/view/status/package/Framework/FrameworkCommonAction.pkg.php",
 		"/home/owlient/owlient/status/view/status/page/deploy/production/migrate.page.php",
@@ -647,121 +818,21 @@
 		"/home/owlient/owlient/status/view/status/module/Server/Server.class.php",
 		"/home/owlient/owlient/status/view/owrigine/page/cron/dev/devError.page.php",
 		"/home/owlient/owlient/status/view/status/package/Framework/Haricow/Reload.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/Framework/Haricow/Script.pkg.php",
-		"/home/owlient/owlient/status/view/status/page/deploy/preproduction/script.page.php",
-		"/home/owlient/owlient/status/view/status/package/Framework/Framework.pkg.php",
-		"/home/owlient/owlient/status/view/status/page/mon/getErrorsList.page.php",
-		"/home/owlient/owlient/tutow/Envoy.blade.php",
-		"/home/owlient/owlient/status/view/status/package/Framework/FrameworkCommon.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/Framework/FrameworkHaricow.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/Framework/Haricow/Migrate.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/Framework/Haricow/Publish.pkg.php",
-		"/home/owlient/owlient/status/view/status/page/operations/index.page.php",
-		"/home/owlient/owlient/status/view/status/page/deploy/production/script.page.php",
-		"/home/owlient/owlient/status/view/status/package/Project/ProjectProduction.pkg.php",
-		"/home/owlient/owlient/status/view/status/template/deploy/preproduction/script.tpl.php",
-		"/home/owlient/owlient/status/view/status/page/deploy/twitter.page.php",
-		"/home/owlient/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
-		"/home/owlient/owlient/status/view/owrigine/scripts/hrc-reload.sh",
-		"/home/owlient/Documents/testCharles/testCharles2.trace",
-		"/home/owlient/Documents/testCharles/testCharles.trace",
-		"/home/owlient/owlient/status/view/owrigine/page/cron/dev/nginxLog.page.php",
-		"/home/owlient/owlient/status/view/owrigine/conf/dev.cfg.php",
-		"/home/owlient/owlient/status/view/owrigine/cron/nginx.sh",
-		"/home/owlient/.bashrc",
-		"/home/owlient/owlient/status/haricow.php",
-		"/home/owlient/owlient/status/view/status/conf/rewrite/dev-ssl.cfg",
-		"/home/owlient/owlient/status/view/status/template/deploy/twitter.tpl.php",
-		"/home/owlient/owlient/status/view/status/migration/status/2.8/2.8.0.mig.php",
-		"/home/owlient/owlient/status/view/status/migration/status/2.7/2.7.0.mig.php",
-		"/home/owlient/owlient/status/view/owrigine/scripts/hrc-publication.sh",
-		"/home/owlient/owlient/status/view/status/page/cron/mon/checkNginxLog.page.php",
-		"/home/owlient/owlient/status/view/status/page/cron/mon/getDb.page.php",
-		"/home/owlient/owlient/status/view/status/package/Ssh/SshFactory.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/Ssh/Ssh.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/Project/Project.pkg.php",
-		"/home/owlient/Téléchargements/ Kaze no sekai tachinu.txt",
-		"/home/owlient/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/owlient/owlient/status/view/status/template/customerTransaction/list.tpl.php",
-		"/home/owlient/owlient/status/view/status/page/access/common.page.php",
-		"/home/owlient/owlient/status/view/status/page/access/index.page.php",
-		"/home/owlient/owlient/status/view/status/page/access/details.page.php",
-		"/home/owlient/owlient/status/view/owrigine/package/Common/CommonTool.pkg.php",
-		"/home/owlient/owlient/status/view/owrigine/package/Rpc/RpcClient.pkg.php",
-		"/home/owlient/owlient/status/core/Remote.class.php",
-		"/home/owlient/owlient/status/view/status/page/cron/mon/getVersion.page.php",
-		"/home/owlient/owlient/status/view/status/package/Customer/CustomerOfferpayment.pkg.php",
-		"/home/owlient/owlient/status/view/owrigine/package/Curl/Curl.pkg.php",
-		"/home/owlient/.config/sublime-text-3/Packages/DocBlockr/Base File.sublime-settings",
-		"/home/owlient/.config/sublime-text-3/Packages/User/Base File.sublime-settings",
-		"/home/owlient/owlient/status/view/owlient/page/rpc/playerTranslation/fixVoteBonus.page.php",
-		"/home/owlient/owlient/status/lib/Stowck/drivers/MySQL/MySQLApi.class.php",
-		"/home/owlient/owlient/status/core/Module.class.php",
-		"/home/owlient/owlient/status/view/status/page/configure/test.page.php",
-		"/home/owlient/owlient/status/view/status/template/mon/devErrorItemCommon.tpl.php",
-		"/home/owlient/owlient/status/view/status/template/mon/index.tpl.php",
-		"/home/owlient/owlient/status/view/status/page/rpc/statOperation.page.php",
-		"/home/owlient/owlient/status/view/owrigine/page/remote/getVersion.page.php",
-		"/home/owlient/owlient/status/view/status/page/cron/mon/getSpeed.page.php",
-		"/home/owlient/owlient/status/view/status/page/mon/servers.page.php",
-		"/home/owlient/owlient/status/view/owrigine/package/Dev/DevError.pkg.php",
-		"/home/owlient/owlient/status/view/status/package/User/User.pkg.php",
-		"/home/owlient/owlient/status/view/owrigine/page/rpc/tool/sqlExplain.page.php",
-		"/home/owlient/owlient/status/view/owrigine/page/rpc/getVersion.page.php",
-		"/home/owlient/owlient/status/view/status/page/mon/devErrorItem.page.php",
-		"/home/owlient/Bureau/note",
-		"/home/owlient/owlient/status/functions.php",
-		"/home/owlient/owlient/status/view/status/page/remote/group.page.php",
-		"/home/owlient/owlient/status/view/status/page/rpc/group.page.php",
-		"/home/owlient/owlient/status/view/status/page/remote/importDevError.page.php",
-		"/home/owlient/owlient/status/view/status/page/rpc/importDevError.page.php",
-		"/home/owlient/owlient/status/view/status/page/operations/preproduction/index.page.php",
-		"/home/owlient/owlient/status/view/status/page/production/history.page.php",
-		"/home/owlient/owlient/status/view/status/page/operations/preproduction/query.page.php",
-		"/home/owlient/owlient/status/view/status/page/deploy/result.page.php",
-		"/home/owlient/owlient/status/view/status/module/Request/Request.class.php",
-		"/home/owlient/owlient/status/view/status/page/salles/updateEvent.page.php",
-		"/home/owlient/owlient/status/view/status/page/salles/getEvents.page.php",
-		"/home/owlient/owlient/status/view/status/page/salles/addEvent.page.php",
-		"/home/owlient/owlient/status/view/status/page/cron/mon/budgetAdwords.page.php",
-		"/home/owlient/owlient/status/view/status/page/rpc/checkUser.page.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ActivityGroupService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ActivityService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/AdRuleService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/AudienceSegmentService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/BaseRateService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CompanyService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ContactService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ContentBundleService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ContentMetadataKeyHierarchyService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ContentService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CreativeService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CreativeSetService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CreativeTemplateService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CreativeWrapperService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CustomFieldService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/CustomTargetingService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ExchangeRateService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/ForecastService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/InventoryService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/LabelService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/LineItemCreativeAssociationService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/LineItemService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/LineItemTemplateService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/LiveStreamEventService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/NetworkService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/OrderService.php",
-		"/home/owlient/owlient/status/view/status/lib/Google/Api/Ads/Dfp/v201403/PlacementService.php"
+		"/home/owlient/owlient/status/view/status/package/Framework/Haricow/Script.pkg.php"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"",
+			"vendor/google/",
+			"",
+			"app/",
 			"",
 			"page/deploy/",
 			"page/",
@@ -885,11 +956,7 @@
 			"sowcle/",
 			"sowcle/package/",
 			"sowcle/page/",
-			"sowcle/template/",
-			"equideo/template/",
-			"sowcle/template/",
-			"equideo/template/",
-			"equideo/"
+			"sowcle/template/"
 		]
 	},
 	"find_state":
@@ -897,6 +964,84 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"getAvailablePageWrapper",
+			"getPageLinkWrapper",
+			"getPreviousButton",
+			"«",
+			"Site::where('name'",
+			"BadMethodCallException",
+			"get_class(",
+			"[%s]",
+			"each",
+			"Query",
+			"defineAs",
+			"Collection",
+			"function sync",
+			"email",
+			"name",
+			"int",
+			"Whoops",
+			"Whoops, looks like something went wrong.",
+			"ExceptionHandler",
+			"Whoops, looks like something went wrong.",
+			"            }",
+			"description",
+			"isAccessTokenExpired",
+			"The OAuth 2.0 access token has expired",
+			"The OAuth 2.0 access token has expired, and a refresh token is not available. Refresh tokens are not returned for responses that were auto-approved.",
+			"access_token",
+			"collapse",
+			"with",
+			"eagerLoad",
+			"whereIn",
+			"Socialite",
+			"site",
+			"()->get()",
+			"config('timezone",
+			"config('app.timezone",
+			"dd",
+			"withoutOverlapping",
+			"$this->events->fire",
+			"auth.",
+			"Account::",
+			"Carbon",
+			"class Arr",
+			"Arr",
+			"$this->account",
+			"commandShouldBeQueued",
+			"dispatch",
+			"Expres",
+			"$this->connection",
+			"cleanBindings",
+			"str_replace_array",
+			"preg_replace",
+			"$this->query",
+			"Illuminate\\Database\\Query\\Builder",
+			"Illuminate\\Support\\Facades\\DB",
+			"$this->connection",
+			"$connection->insert",
+			"PDO",
+			"prepare",
+			"$this->grammar",
+			"function(",
+			"addHasWhere",
+			"getHasRelationQuery",
+			"whereHas",
+			"data_get",
+			"valueRetriever",
+			"firstOrCreate",
+			"findOrCreate",
+			"channels.list",
+			"config",
+			"	",
+			"updateOrCreateAccount",
+			"function sync",
+			"query",
+			"passthru",
+			"\n            ",
+			"cascade",
+			"getDates",
+			"timestamps",
 			"main_category",
 			"maincategory",
 			"ItemSource",
@@ -946,85 +1091,7 @@
 			"$this->tag",
 			"$this->mode",
 			"$this->type",
-			"up",
-			"getMigrateAction",
-			"getReloadAction",
-			"saveActionScriptAndCron",
-			"getPost",
-			"protected function clearMemCache($eProject, $environment) {",
-			"clearMemCache",
-			"type",
-			"getReloadAction",
-			"getProjects",
-			"views",
-			"$this->eProject",
-			"selectProject",
-			"egProject",
-			"$this->eProject",
-			"getPost('view-all')",
-			"-c HARICOW_MODE=",
-			"version=`git rev-parse --abbrev-ref HEAD`; git pull --rebase --stat origin refs/heads/${version}",
-			"HARICOW_MODE",
-			"getArchitectureAndMode",
-			"$this->mode",
-			"$this->type",
-			"$this->tag",
-			"saveHistory",
-			"selectedProjectsProduct",
-			"$this->egProject",
-			"$version",
-			"saveHistory",
-			"saveActionScriptAndCron",
-			"getProjectInfosByProjects",
-			"saveAction",
-			"$this->errors",
-			"$this->revision",
-			"$this->view",
-			"reloadPath",
-			"saveAction",
-			"$this->view",
-			"array_value($args, 'reloadPath', './')",
-			"$this->view",
-			"urgence",
-			"protected $urgence",
-			"urgence",
-			"$this->executionDate",
-			"executionDate",
-			"array_value($args, 'mode', '')",
-			"array_value($args, 'tag', '')",
-			"$this->mode",
-			"$this->tag",
-			"$this->reloadPath",
-			"reloadPath",
-			"$this->tag",
-			"$this->mode",
-			"$this->data['multiple']",
-			"$number",
-			"$this->type",
-			"saveAction",
-			"$this->path",
-			"path",
-			"reloadPath",
-			"$this->environment = ",
-			"$this->environment =",
-			"$this->environment ",
-			"$this->environment = ",
-			"$this->environment =",
-			"$this->mode",
-			"projectName",
-			"$port",
-			"$path",
-			"$eProject",
-			"$server",
-			"getProjectInfos",
-			"'number'",
-			"saveAction",
-			"getProjectInfosByProject",
-			"saveAction",
-			"reloadPath",
-			"$eHistory['information']['command']",
-			"eHistory",
-			"saveAction"
+			"up"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1032,6 +1099,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$account",
 			"",
 			"$args['tag']",
 			"$args['mode']",
@@ -1158,8 +1226,7 @@
 			"dragow-",
 			"\\n",
 			"",
-			"World",
-			"'.$world.'"
+			"World"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1170,14 +1237,461 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "vendor/laravel/framework/src/Illuminate/Pagination/Paginator.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3597,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2854,
+								2854
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1193.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "vendor/laravel/framework/src/Illuminate/Pagination/SimpleBootstrapThreePresenter.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1081,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								968,
+								985
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vendor/laravel/framework/src/Illuminate/Pagination/BootstrapThreeNextPreviousButtonRendererTrait.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1511,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								771,
+								789
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "vendor/laravel/framework/src/Illuminate/Pagination/UrlWindowPresenterTrait.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1485,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1433,
+								1456
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "vendor/laravel/framework/src/Illuminate/Pagination/BootstrapThreePresenter.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1894,
+								1897
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 848.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -1226,16 +1740,163 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "",
+	"project": "ktube.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"bootstrapthreepresenter",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Pagination\\BootstrapThreePresenter.php"
+			],
+			[
+				"simplebootstrapthreepresenter",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Pagination\\SimpleBootstrapThreePresenter.php"
+			],
+			[
+				"exceptionh",
+				"vendor\\symfony\\debug\\ExceptionHandler.php"
+			],
+			[
+				"facto",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\FactoryBuilder.php"
+			],
+			[
+				"factorybuilder",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\FactoryBuilder.php"
+			],
+			[
+				"model",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php"
+			],
+			[
+				"fakergenerator",
+				"vendor\\fzaninotto\\faker\\src\\Faker\\Generator.php"
+			],
+			[
+				"auth/gu",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Guard.php"
+			],
+			[
+				"errorh",
+				"vendor\\symfony\\debug\\ErrorHandler.php"
+			],
+			[
+				"flatete",
+				"vendor\\symfony\\debug\\Exception\\FlattenException.php"
+			],
+			[
+				"carbon/carbo",
+				"vendor\\nesbot\\carbon\\src\\Carbon\\Carbon.php"
+			],
+			[
+				"google/service/resou",
+				"vendor\\google\\apiclient\\src\\Google\\Service\\Resource.php"
+			],
+			[
+				"google/service/youtu",
+				"vendor\\google\\apiclient\\src\\Google\\Service\\YouTube.php"
+			],
+			[
+				"google/ser",
+				"vendor\\google\\apiclient\\src\\Google\\Service.php"
+			],
+			[
+				"google/client",
+				"vendor\\google\\apiclient\\src\\Google\\Client.php"
+			],
+			[
+				"arr",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Support\\Arr.php"
+			],
+			[
+				"collec",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Support\\Collection.php"
+			],
+			[
+				"collection",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Collection.php"
+			],
+			[
+				"builder",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php"
+			],
+			[
+				"carbon",
+				"vendor\\nesbot\\carbon\\src\\Carbon\\Carbon.php"
+			],
+			[
+				"schedulingeve",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Console\\Scheduling\\Event.php"
+			],
+			[
+				"queueab",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Queueable.php"
+			],
+			[
+				"queryb",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php"
+			],
+			[
+				"database/gra",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Grammar.php"
+			],
+			[
+				"querye",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\QueryException.php"
+			],
+			[
+				"grammar",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Grammars\\Grammar.php"
+			],
+			[
+				"queryex",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\QueryException.php"
+			],
+			[
+				"illuminate/database/connection",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php"
+			],
+			[
+				"query",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php"
+			],
+			[
+				"querybuilder",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php"
+			],
+			[
+				"connectioi",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\ConnectionInterface.php"
+			],
+			[
+				"illuminate/database/conn",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php"
+			],
+			[
+				"collectio",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Support\\Collection.php"
+			],
+			[
+				"abstractprovider",
+				"vendor\\laravel\\socialite\\src\\Two\\AbstractProvider.php"
+			],
+			[
+				"googlepr",
+				"vendor\\laravel\\socialite\\src\\Two\\GoogleProvider.php"
+			],
+			[
+				"illumina/eloquent",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php"
+			],
 			[
 				"cron/deploy/launch",
 				"view/status/page/cron/deploy/launch.page.php"
@@ -1603,150 +2264,6 @@
 			[
 				"dodisplay",
 				"view/status/page/product/doDisplayCalendar.page.php"
-			],
-			[
-				"group",
-				"view/status/page/remote/group.page.php"
-			],
-			[
-				"testremo",
-				"view/status/page/script/testRemote.page.php"
-			],
-			[
-				"operation/dosave",
-				"view/status/page/product/operation/doSave.page.php"
-			],
-			[
-				"operation/dele",
-				"view/status/page/product/operation/delete.page.php"
-			],
-			[
-				"dofix",
-				"view/status/page/playerTranslation/doFixVoteBonus.page.php"
-			],
-			[
-				"setmainte",
-				"view/status/page/payment/setMaintenance.page.php"
-			],
-			[
-				"getpayment",
-				"view/status/page/payment/getPayment.page.php"
-			],
-			[
-				"page/marketing/advert/common.page.php",
-				"view/status/page/marketing/advert/common.page.php"
-			],
-			[
-				"page/cron/ucp/extract.page.php",
-				"view/status/page/cron/ucp/extract.page.php"
-			],
-			[
-				"sendmp",
-				"view/status/page/cron/test/sendMp.page.php"
-			],
-			[
-				"page/configure/migration_2_1_0.page.php",
-				"view/status/page/configure/migration_2_1_0.page.php"
-			],
-			[
-				"docheckuser",
-				"view/status/page/access/doCheckUserByLogin.page.php"
-			],
-			[
-				"page/access/details.page.php",
-				"view/status/page/access/details.page.php"
-			],
-			[
-				"access/code",
-				"view/status/page/access/code.page.php"
-			],
-			[
-				"package/operation/operation.pkg.php",
-				"view/status/package/Operation/Operation.pkg.php"
-			],
-			[
-				"package/customer/customerofferpayment.pkg.php",
-				"view/status/package/Customer/CustomerOfferpayment.pkg.php"
-			],
-			[
-				"payment/comm",
-				"view/status/page/payment/common.page.php"
-			],
-			[
-				"migration/status/1.13/1.13.3.mig.php",
-				"view/status/migration/status/1.13/1.13.3.mig.php"
-			],
-			[
-				"customeroffe",
-				"view/status/package/Customer/CustomerOfferpayment.pkg.php"
-			],
-			[
-				"deploy/t",
-				"view/status/page/deploy/twitter.page.php"
-			],
-			[
-				"deploy/com",
-				"view/status/page/deploy/common.page.php"
-			],
-			[
-				"stat.cla",
-				"view/status/module/Stat/Stat.class.php"
-			],
-			[
-				"stowck",
-				"view/status/conf/stowck.cfg.php"
-			],
-			[
-				"evolution/index",
-				"view/status/template/marketing/stat/evolution/index.tpl.php"
-			],
-			[
-				"evolution/",
-				"view/status/template/marketing/stat/evolution/common.tpl.php"
-			],
-			[
-				"marketing/stat/evolution/",
-				"view/status/page/marketing/stat/evolution/common.page.php"
-			],
-			[
-				"execu",
-				"view/status/page/configure/executeCron.page.php"
-			],
-			[
-				"product/operation/",
-				"view/status/page/product/operation/doSave.page.php"
-			],
-			[
-				"operation/view",
-				"view/status/page/product/operation/view.page.php"
-			],
-			[
-				"product/operation",
-				"view/status/page/product/operation/operation.page.php"
-			],
-			[
-				"remote/group",
-				"view/status/page/remote/group.page.php"
-			],
-			[
-				"translationtem",
-				"view/owrigine/package/Translation/TranslationTemplate.pkg.php"
-			],
-			[
-				"ptranslationprepare",
-				"view/owrigine/package/Translation/TranslationPrepare.pkg.php"
-			],
-			[
-				"functions.php",
-				"functions.php"
-			],
-			[
-				"pdate.",
-				"view/owrigine/package/Date/Date.pkg.php"
-			],
-			[
-				"page/marketing/budget/clientacquisition.page.php",
-				"view/status/page/marketing/budget/clientAcquisition.page.php"
 			]
 		],
 		"width": 0.0
@@ -1754,6 +2271,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1771,10 +2289,26 @@
 		],
 		"width": 380.0
 	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 260.0,
-	"status_bar_visible": true
+	"side_bar_width": 378.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }

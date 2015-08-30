@@ -22,3 +22,7 @@ Route::get('/auth/logout', 'AuthController@getLogout');
 
 Route::get('/home', 'HomeController@home');
 Route::get('/accounts', 'AccountsController@index');
+
+if (env('APP_ENV') === 'local') {
+	Route::get('/auth/debug', 'AuthController@debugLogin');
+}

@@ -57,7 +57,7 @@ class AuthController extends Controller
 
     protected function updateOrCreateAccount($provider, $userData)
     {
-        $site = Site::where('name', $provider)->firstOrFail();
+        $site = Site::where('provider', $provider)->firstOrFail();
 
         $account = Account::firstOrNew([
             'site_id' => $site->id,
@@ -103,5 +103,14 @@ class AuthController extends Controller
         }
 
         return $user;
+    }
+
+    public function debugLogin()
+    {
+        $user = User::firstOrFail();
+
+        Auth::login($user, true);
+
+        return redirect('/home')->with('message', 'Welcome, '.$user->name);
     }
 }

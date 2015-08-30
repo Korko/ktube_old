@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a6f7944f4288b87d44434cd9e4a1c91",
+    "hash": "7885e6fe509675c3b60b24be8e585f05",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -802,16 +802,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "2.0.x-dev",
+            "version": "v2.0.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Korko/socialite.git",
-                "reference": "20fae9358d1f401cb5b00d0e5d84f379b7e1e8ec"
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "2f77e4f4bc16a7984ab6f30409bdd05c55f9159c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Korko/socialite/zipball/20fae9358d1f401cb5b00d0e5d84f379b7e1e8ec",
-                "reference": "20fae9358d1f401cb5b00d0e5d84f379b7e1e8ec",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/2f77e4f4bc16a7984ab6f30409bdd05c55f9159c",
+                "reference": "2f77e4f4bc16a7984ab6f30409bdd05c55f9159c",
                 "shasum": ""
             },
             "require": {
@@ -851,10 +851,7 @@
                 "laravel",
                 "oauth"
             ],
-            "support": {
-                "source": "https://github.com/Korko/socialite/tree/2.0"
-            },
-            "time": "2015-07-11 21:33:18"
+            "time": "2015-07-09 23:55:17"
         },
         {
             "name": "league/flysystem",
@@ -2401,32 +2398,30 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
+                "reference": "c27c8263797619a97987bd2411f1084b9d03e90a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/c27c8263797619a97987bd2411f1084b9d03e90a",
+                "reference": "c27c8263797619a97987bd2411f1084b9d03e90a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
+                "ext-intl": "*",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~1.5"
-            },
-            "suggest": {
-                "ext-intl": "*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -2449,7 +2444,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-05-29 06:29:14"
+            "time": "2015-08-26 15:00:40"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -3633,6 +3628,10 @@
         "socialiteproviders/dailymotion": 20,
         "socialiteproviders/vimeo": 20,
         "google/apiclient": 20,
+<<<<<<< Updated upstream
+=======
+        "fzaninotto/faker": 20,
+>>>>>>> Stashed changes
         "barryvdh/laravel-debugbar": 20
     },
     "prefer-stable": true,

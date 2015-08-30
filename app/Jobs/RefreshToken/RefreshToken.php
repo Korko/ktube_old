@@ -1,13 +1,14 @@
 <?php
 
-namespace Korko\kTube\Jobs;
+namespace Korko\kTube\Jobs\RefreshToken;
 
-use Korko\kTube\Account;
+use Carbon\Carbon;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Carbon\Carbon;
+use Korko\kTube\Account;
+use Korko\kTube\Jobs\Job;
 use Socialite;
 
 class RefreshToken extends Job implements SelfHandling, ShouldQueue {

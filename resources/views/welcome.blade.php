@@ -1,49 +1,42 @@
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layout')
 
-        <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@section('body')
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
 
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">kTube</h3>
+                        <nav>
+                            <ul class="nav masthead-nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Features</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+                <div class="inner cover">
+                    <h1 class="cover-heading">kTube</h1>
+                    <p class="lead">Easily watch videos from multiple sources.</p>
+                    <p class="lead">
+                        <div class="col-lg-12 text-center" style="font-size:39pt;">
+                            <a href="/auth/login/dailymotion" class="disabled"><img src="/media/images/Dailymotion.png" width="100" height="100" /></a>
+                            <a href="/auth/login/vimeo" class="disabled"><img src="/media/images/Vimeo.png" width="100" height="100" /></a>
+                            <a href="/auth/login/google"><img src="/media/images/Youtube.png" width="100" height="100" /></a>
+                        </div>
+                    </p>
+                </div>
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    </div>
+                </div>
 
-            .title {
-                font-size: 96px;
-                margin-bottom: 40px;
-            }
-
-            .quote {
-                font-size: 24px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-                <div class="quote">{{ Inspiring::quote() }}</div>
-                <a href="{{ url('/home') }}"><button>Connect</button></a>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection

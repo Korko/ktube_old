@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SitesTableSeeder::class);
 
+        if (env('APP_ENV') === 'local') {
+            $this->call(ChannelsTableSeeder::class);
+            $this->call(UsersTableSeeder::class);
+        }
+
         Model::reguard();
     }
 }

@@ -5,10 +5,10 @@ namespace Korko\kTube\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Korko\kTube\Jobs\BackupAllAccounts;
-use Korko\kTube\Jobs\RefreshAllSubscriptions;
-use Korko\kTube\Jobs\RefreshAllVideos;
-use Korko\kTube\Jobs\RefreshTokens;
+use Korko\kTube\Jobs\BackupAccount\BackupAllAccounts;
+use Korko\kTube\Jobs\RefreshSubscriptions\RefreshAllSubscriptions;
+use Korko\kTube\Jobs\RefreshVideos\RefreshAllVideos;
+use Korko\kTube\Jobs\RefreshToken\RefreshTokens;
 
 class Kernel extends ConsoleKernel
 {
@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Korko\kTube\Console\Commands\Inspire::class,
+
     ];
 
     /**
