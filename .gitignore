@@ -1,5 +1,5 @@
 /vendor
 /node_modules
 .env
-ktube.sublime-project
-ktube.sublime-workspace
+*.sublime-project
+*.sublime-workspace
