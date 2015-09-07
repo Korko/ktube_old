@@ -21,4 +21,9 @@ class Channel extends Model
     {
         return $this->belongsToMany(Channel::class, 'account_subscriptions');
     }
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 }

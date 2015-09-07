@@ -44,6 +44,7 @@ class RefreshYoutubeVideos extends RefreshVideos {
             'channel_id'   => $channel->id,
             'video_id'     => $item->id->videoId,
             'name'         => $item->snippet->title,
+            'thumbnail'    => $item->snippet->thumbnails->mqdefault->url,
             'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
         ]);
     }

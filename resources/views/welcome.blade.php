@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('style')
+    <link href="{{ asset('/media/style/cover.css') }}" rel="stylesheet" type="text/css">
+@endsection
+
 @section('body')
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
