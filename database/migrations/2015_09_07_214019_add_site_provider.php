@@ -15,14 +15,18 @@ class AddSiteProvider extends Migration
     public function up()
     {
         Schema::table('sites', function ($table) {
-            $table->string('provider')->unique();
-            $table->dropUnique('sites_name_unique');
+            $table->string('provider');
         });
 
 
         Site::where('name', 'google')->update(['name' => 'Youtube', 'provider' => 'google']);
         Site::where('name', 'facebook')->update(['name' => 'Facebook', 'provider' => 'facebook']);
         Site::where('name', 'vimeo')->update(['name' => 'Vimeo', 'provider' => 'vimeo']);
+
+	Schema::table('sites', function ($table) {
+	    $table->unique('provider');
+            $table->dropUnique('sites_name_unique');
+	});
     }
 
     /**
@@ -32,6 +36,8 @@ class AddSiteProvider extends Migration
      */
     public function down()
     {
+        Site::update(['name' => new Expression('`provider`')]);
+
         Schema::table('sites', function ($table) {
             $table->dropColumn('provider');
             $table->unique('name');
