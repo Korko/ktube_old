@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7885e6fe509675c3b60b24be8e585f05",
+    "hash": "64e3c4587433063a5b2195049595931e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -358,16 +358,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.0.2",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "a8dfeff00eb84616a17fea7a4d72af35e750410f"
+                "reference": "66fd14b4d0b8f2389eaf37c5458608c7cb793a81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a8dfeff00eb84616a17fea7a4d72af35e750410f",
-                "reference": "a8dfeff00eb84616a17fea7a4d72af35e750410f",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/66fd14b4d0b8f2389eaf37c5458608c7cb793a81",
+                "reference": "66fd14b4d0b8f2389eaf37c5458608c7cb793a81",
                 "shasum": ""
             },
             "require": {
@@ -383,7 +383,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -416,7 +416,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-07-04 20:09:24"
+            "time": "2015-09-08 17:36:26"
         },
         {
             "name": "guzzlehttp/promises",
@@ -802,16 +802,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v2.0.6",
+            "version": "dev-2.0-refreshToken",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Korko/socialite.git",
-                "reference": "31685e257ad092fb1a37f9d5d0d87f343e63c568"
+                "reference": "8cc60208b11914269f2ba93a4939623dab489daa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Korko/socialite/zipball/31685e257ad092fb1a37f9d5d0d87f343e63c568",
-                "reference": "31685e257ad092fb1a37f9d5d0d87f343e63c568",
+                "url": "https://api.github.com/repos/Korko/socialite/zipball/8cc60208b11914269f2ba93a4939623dab489daa",
+                "reference": "8cc60208b11914269f2ba93a4939623dab489daa",
                 "shasum": ""
             },
             "require": {
@@ -829,7 +829,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -852,9 +852,9 @@
                 "oauth"
             ],
             "support": {
-                "source": "https://github.com/Korko/socialite/tree/v2.0.6"
+                "source": "https://github.com/Korko/socialite/tree/2.0-refreshToken"
             },
-            "time": "2015-06-18 16:36:42"
+            "time": "2015-09-09 13:13:06"
         },
         {
             "name": "league/flysystem",
@@ -2289,16 +2289,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "753106cd1f9c724d05bb48728bc652231174e279"
+                "reference": "23672cbbe78278ff1fdb258caa0b1de7b5d0bc0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/753106cd1f9c724d05bb48728bc652231174e279",
-                "reference": "753106cd1f9c724d05bb48728bc652231174e279",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/23672cbbe78278ff1fdb258caa0b1de7b5d0bc0c",
+                "reference": "23672cbbe78278ff1fdb258caa0b1de7b5d0bc0c",
                 "shasum": ""
             },
             "require": {
@@ -2310,7 +2310,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -2339,7 +2339,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2015-07-09 14:51:59"
+            "time": "2015-09-09 11:39:27"
         },
         {
             "name": "doctrine/instantiator",
@@ -3620,7 +3620,14 @@
             "time": "2015-08-24 07:13:45"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.0.x-dev",
+            "alias_normalized": "2.0.9999999.9999999-dev",
+            "version": "dev-2.0-refreshToken",
+            "package": "laravel/socialite"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "laravel/socialite": 20,
