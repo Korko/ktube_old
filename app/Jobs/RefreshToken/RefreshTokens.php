@@ -38,7 +38,7 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue {
 
     protected function refreshToken(Account $account)
     {
-        $token = Socialite::with($account->site->name)->refreshToken($account->refresh_token);
+        $token = Socialite::with($account->site->provider)->refreshToken($account->refresh_token);
 
         $account->update([
             'access_token' => $token->accessToken,
