@@ -3,8 +3,10 @@
 namespace Korko\kTube\Jobs\BackupAccount;
 
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Account;
@@ -24,9 +26,12 @@ abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue {
 
     protected $account;
 
-    public function __construct(Account $account)
+    protected $backupDate;
+
+    public function __construct(Account $account, DateTime $backupDate)
     {
         $this->account = $account;
+        $this->backupDate = $backupDate;
     }
 
     /**
@@ -42,18 +47,18 @@ abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue {
 
         $videos = $this->getVideos($channels);
 
-        $this->createPlaylist($this->account, 'Backup '.date("Y-m-d", time() - 86400), $videos);
+        $this->createPlaylist($this->account, 'Backup '.$this->backupDate->format('Y-m-d'), $videos);
     }
 
     /**
      * Get videos published yesterday
-     * @param  Collection $channels List of channels from which get videos 
+     * @param  Collection $channels List of channels from which get videos
      * @return Collection           List of videos of these channels published yesterday
      */
     protected function getVideos(Collection $channels)
     {
         return Video::whereIn('channel_id', $channels->pluck('id')->all())
-            ->whereRaw('published_at BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND CURDATE()')
+            ->whereRaw('published_at BETWEEN DATE_SUB(?, INTERVAL 1 DAY) AND ?', [$this->backupDate, $this->backupDate])
             ->orderBy('published_at', 'asc')
             ->get();
     }

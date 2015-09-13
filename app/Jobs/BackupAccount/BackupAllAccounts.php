@@ -2,6 +2,7 @@
 
 namespace Korko\kTube\Jobs\BackupAccount;
 
+use DateTime;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -21,6 +22,13 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue {
      */
     public $queue = 'playlists';
 
+    protected $backupDate;
+
+    public function __construct(DateTime $backupDate)
+    {
+        $this->backupDate = $backupDate ?: new DateTime('yesterday');
+    }
+
     /**
      * Execute the job.
      *
@@ -34,7 +42,7 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue {
         foreach ($accounts as $account) {
             switch ($account->site->provider) {
                 case 'google':
-                    $this->dispatch(new BackupYoutubeAccount($account));
+                    $this->dispatch(new BackupYoutubeAccount($account, $this->backupDate));
                     break;
 
                 default:

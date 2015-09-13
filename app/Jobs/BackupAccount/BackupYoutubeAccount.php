@@ -11,6 +11,7 @@ use Google_Service_YouTube_PlaylistSnippet;
 use Google_Service_YouTube_PlaylistStatus;
 use Google_Service_YouTube_ResourceId;
 use Korko\kTube\Account;
+use Korko\kTube\Video;
 use Log;
 
 class BackupYoutubeAccount extends BackupAccount
