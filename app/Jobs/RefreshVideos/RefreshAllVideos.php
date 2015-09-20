@@ -33,13 +33,10 @@ class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue {
 
         // For each of these channels, get the last videos uploaded
         foreach ($channels as $channel) {
-            switch ($channel->site->provider) {
-                case 'google':
-                    $this->dispatch(new RefreshYoutubeVideos($channel));
-                    break;
-
-                default:
-                    Log::error('Channel provider not managed', ['channel' => $channel]);
+            try {
+                $this->dispatch(RefreshVideos::getInstance($channel));
+            } catch(Exception $e) {
+                Log::error($e->getMessage(), ['channel' => $channel]);
             }
         }
     }

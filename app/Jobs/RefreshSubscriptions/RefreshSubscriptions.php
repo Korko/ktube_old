@@ -22,6 +22,18 @@ abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQ
      */
     public $queue = 'channels';
 
+    public static function getInstance(Account $account)
+    {
+            switch ($account->site->provider) {
+                case 'google':
+                    return new RefreshYoutubeSubscriptions($account);
+                    break;
+
+                default:
+                    throw new Exception('Account provider not managed');
+            }
+    }
+
     protected $account;
 
     public function __construct(Account $account)

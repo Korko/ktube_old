@@ -31,13 +31,10 @@ class RefreshAllSubscriptions extends Job implements SelfHandling, ShouldQueue {
         $accounts = Account::with('site')->get();
 
         foreach ($accounts as $account) {
-            switch ($account->site->provider) {
-                case 'google':
-                    $this->dispatch(new RefreshYoutubeSubscriptions($account));
-                    break;
-
-                default:
-                    Log::error('Account provider not managed', ['account' => $account]);
+            try {
+                $this->dispatch(RefreshSubscriptions::getInstance($account));
+            } catch(Exception $e) {
+                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

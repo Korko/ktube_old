@@ -22,6 +22,18 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue {
      */
     public $queue = 'videos';
 
+    public static function getInstance(Channel $channel)
+    {
+            switch ($channel->site->provider) {
+                case 'google':
+                    return new RefreshYoutubeVideos($channel);
+                    break;
+
+                default:
+                    throw new Exception('Channel provider not managed');
+            }
+    }
+
     protected $channel;
 
     public function __construct(Channel $channel)
