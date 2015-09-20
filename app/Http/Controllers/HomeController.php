@@ -3,7 +3,6 @@
 namespace Korko\kTube\Http\Controllers;
 
 use Auth;
-use Illuminate\Support\Collection;
 use Korko\kTube\Account;
 use Korko\kTube\Http\Controllers\Controller;;
 use Korko\kTube\Video;
@@ -15,9 +14,9 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function home()
+    public function index()
     {
-        $channels = Account::where('user_id', Auth::user()->id)
+        $channels = Auth::user()->accounts()
             ->with('channels')->get()
             ->pluck('channels')->collapse();
 

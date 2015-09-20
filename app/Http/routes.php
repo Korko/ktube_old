@@ -20,8 +20,10 @@ Route::get('/auth/login/{provider}', 'AuthController@getLogin');
 Route::get('/auth/login/callback/{provider}', 'AuthController@postLogin');
 Route::get('/auth/logout', 'AuthController@getLogout');
 
-Route::get('/home', 'HomeController@home');
+Route::get('/home', 'HomeController@index');
 Route::get('/accounts', 'AccountsController@index');
+
+Route::get('/profile', 'ProfileController@index');
 
 if (env('APP_ENV') === 'local') {
 	Route::get('/auth/debug', 'AuthController@debugLogin');
