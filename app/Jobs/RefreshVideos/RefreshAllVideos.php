@@ -2,6 +2,7 @@
 
 namespace Korko\kTube\Jobs\RefreshVideos;
 
+use Exception;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
