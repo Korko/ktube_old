@@ -11,8 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\User;
 
-class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue {
-
+class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
+{
     use InteractsWithQueue, SerializesModels, DispatchesJobs;
 
     /**

@@ -11,8 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Channel;
 use Korko\kTube\Jobs\Job;
 
-class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue {
-
+class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue
+{
     use InteractsWithQueue, SerializesModels, DispatchesJobs;
 
     /**

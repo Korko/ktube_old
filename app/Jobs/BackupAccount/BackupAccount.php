@@ -13,8 +13,8 @@ use Korko\kTube\Account;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\Video;
 
-abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue {
-
+abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue
+{
     use InteractsWithQueue, SerializesModels;
 
     /**

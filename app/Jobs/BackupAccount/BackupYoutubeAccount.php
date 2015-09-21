@@ -12,10 +12,13 @@ use Google_Service_YouTube_PlaylistStatus;
 use Google_Service_YouTube_ResourceId;
 use Korko\kTube\Account;
 use Korko\kTube\Video;
+use Korko\kTube\Jobs\YoutubeJob;
 use Log;
 
 class BackupYoutubeAccount extends BackupAccount
 {
+    use YoutubeJob;
+
     protected function createPlaylist(Account $account, $title, $videos)
     {
         $youTubePlaylist = $this->getYouTubePlaylist($title);

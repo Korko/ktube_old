@@ -12,8 +12,8 @@ use Korko\kTube\Account;
 use Korko\kTube\Channel;
 use Korko\kTube\Jobs\Job;
 
-abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQueue {
-
+abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQueue
+{
     use InteractsWithQueue, SerializesModels;
 
     /**
@@ -57,27 +57,6 @@ abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQ
     }
 
     abstract protected function getChannels(Account $account);
-
-    protected function getYoutubeRawChannels(Account $account)
-    {
-        $pageToken = null;
-
-        $api = $this->getYoutubeApi($account);
-
-        do {
-            $items = $api->subscriptions->listSubscriptions('snippet', [
-                'mine'       => 'true',
-                'maxResults' => 50,
-                'pageToken'  => $pageToken
-            ]);
-
-            foreach ($items as $item) {
-                yield $item;
-            }
-
-            $pageToken = $items->nextPageToken;
-        } while ($pageToken !== null);
-    }
 
     protected function saveChannels(Account $account, Collection $channels)
     {

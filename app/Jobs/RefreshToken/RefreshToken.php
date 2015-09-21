@@ -11,8 +11,8 @@ use Korko\kTube\Account;
 use Korko\kTube\Jobs\Job;
 use Socialite;
 
-class RefreshToken extends Job implements SelfHandling, ShouldQueue {
-
+class RefreshToken extends Job implements SelfHandling, ShouldQueue
+{
     use InteractsWithQueue, SerializesModels;
 
     protected $provider;

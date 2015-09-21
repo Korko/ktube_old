@@ -6,8 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Korko\kTube\Channel;
 use Korko\kTube\Video;
+use Korko\kTube\Jobs\YoutubeJob;
 
-class RefreshYoutubeVideos extends RefreshVideos {
+class RefreshYoutubeVideos extends RefreshVideos
+{
+    use YoutubeJob;
 
     protected function fetchVideos(Channel $channel)
     {

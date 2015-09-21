@@ -9,9 +9,12 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Korko\kTube\Account;
 use Korko\kTube\Channel;
+use Korko\kTube\Jobs\YoutubeJob;
 
 class RefreshYoutubeSubscriptions extends RefreshSubscriptions
 {
+    use YoutubeJob;
+
     protected function getChannels(Account $account)
     {
         $channels = new Collection();
@@ -27,7 +30,7 @@ class RefreshYoutubeSubscriptions extends RefreshSubscriptions
         return $channels;
     }
 
-    protected function getRawChannels(Account $account)
+    protected function getYoutubeRawChannels(Account $account)
     {
         $pageToken = null;
 
