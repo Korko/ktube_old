@@ -22,7 +22,7 @@ class RefreshDailymotionVideos extends RefreshVideos
         $page = 0;
         do {
             $data = $api->get('/user/'.$channel->channel_id.'/videos', [
-                'fields'         => 'id,title,thumbnail_360_url,created_time',
+                'fields'         => 'id,title,thumbnail_180_url,created_time',
                 'sort'           => 'recent',
                 'created_after'  => $channel->scanned_at->setTimezone('UTC')->toRfc3339String(),
                 'limit'          => 50,
@@ -43,7 +43,7 @@ class RefreshDailymotionVideos extends RefreshVideos
             'channel_id'   => $channel->id,
             'video_id'     => $item['id'],
             'name'         => $item['title'],
-            'thumbnail'    => $item['thumbnail_360_url'],
+            'thumbnail'    => $item['thumbnail_180_url'],
             'published_at' => Carbon::createFromTimeStamp($item['created_time'])->setTimezone(date_default_timezone_get())
         ]);
     }
