@@ -16,7 +16,7 @@ class RefreshYoutubeVideos extends RefreshVideos
     {
         $videos = new Collection();
 
-        $api = $this->getYoutubeApi();
+        $api = $this->getApi();
 
         // There might be multiple pages to request so make a loop untile its done
         $pageToken = null;

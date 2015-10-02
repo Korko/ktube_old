@@ -13,7 +13,7 @@ trait YoutubeJob
      * @param  Account|null            $account
      * @return Google_Service_YouTube
      */
-    protected function getYoutubeApi(Account $account = null)
+    protected function getApi(Account $account = null)
     {
         $pageToken = null;
 

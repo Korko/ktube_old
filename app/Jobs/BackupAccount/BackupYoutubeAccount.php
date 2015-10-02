@@ -23,7 +23,7 @@ class BackupYoutubeAccount extends BackupAccount
     {
         $youTubePlaylist = $this->getYouTubePlaylist($title);
 
-        $api = $this->getYoutubeApi($account);
+        $api = $this->getApi($account);
 
         $playlistResponse = $api->playlists->insert('snippet,status', $youTubePlaylist);
 

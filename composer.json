@@ -16,7 +16,8 @@
         "laravel/socialite": "dev-2.0-refreshToken as 2.0.x-dev",
         "socialiteproviders/dailymotion": "dev-master",
         "socialiteproviders/vimeo": "dev-master",
-        "google/apiclient": "1.0.*@dev"
+        "google/apiclient": "1.0.*@dev",
+        "dailymotion/sdk": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.6@dev",

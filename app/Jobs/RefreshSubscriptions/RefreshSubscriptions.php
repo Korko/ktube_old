@@ -30,6 +30,10 @@ abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQ
                     return new RefreshYoutubeSubscriptions($account);
                     break;
 
+                case 'dailymotion':
+                    return new RefreshDailymotionSubscriptions($account);
+                    break;
+
                 default:
                     throw new Exception('Account provider not managed');
             }

@@ -34,7 +34,7 @@ class RefreshYoutubeSubscriptions extends RefreshSubscriptions
     {
         $pageToken = null;
 
-        $api = $this->getYoutubeApi($account);
+        $api = $this->getApi($account);
 
         do {
             $items = $api->subscriptions->listSubscriptions('snippet', [

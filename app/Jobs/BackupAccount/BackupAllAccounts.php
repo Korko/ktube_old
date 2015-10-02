@@ -47,7 +47,7 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
                     break;
 
                 default:
-                    Log::error('Account provider not managed', ['account' => $account]);
+//                    Log::error('Account provider not managed', ['account' => $account]);
             }
         }
     }

@@ -30,6 +30,10 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
                     return new RefreshYoutubeVideos($channel);
                     break;
 
+                case 'dailymotion':
+                    return new RefreshDailymotionVideos($channel);
+                    break;
+
                 default:
                     throw new Exception('Channel provider not managed');
             }
