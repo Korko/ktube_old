@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Channel;
 use Korko\kTube\Jobs\Job;
+use Log;
 
 class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue
 {

@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\User;
+use Log;
 
 class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
 {
@@ -24,7 +25,7 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
 
     protected $backupDate;
 
-    public function __construct(DateTime $backupDate)
+    public function __construct(DateTime $backupDate = null)
     {
         $this->backupDate = $backupDate ?: new DateTime('yesterday');
     }

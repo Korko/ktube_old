@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Account;
 use Korko\kTube\Jobs\Job;
+use Log;
 
 class RefreshAllSubscriptions extends Job implements SelfHandling, ShouldQueue
 {
