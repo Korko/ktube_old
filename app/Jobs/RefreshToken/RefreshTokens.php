@@ -30,10 +30,14 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $accounts = Account::whereRaw('TIMESTAMPDIFF(MINUTE, NOW(), expires_at) <= 5')->with('site')->get();
+        $accounts = Account::whereRaw('TIMESTAMPDIFF(MINUTE, NOW(), expires_at) <= 5')->canRefreshTokens()->with('site')->get();
 
         foreach ($accounts as $account) {
-            $this->refreshToken($account);
+	    try {
+                $this->refreshToken($account);
+            } catch(Exception $e) {
+                Log::warning('Cannot refresh token for account '.$account->id.' (provider '.$account->site->provider.')');
+            }
         }
     }
 
