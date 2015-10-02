@@ -7,14 +7,10 @@
 			<li>
 				<div class="row">
 					<div class="col-md-2">
-						@if($video->thumbnail === null)
-							<img src="http://img.youtube.com/vi/79818649422324816361/default.jpg" />
-						@else
-							<img src="{{ $video->thumbnail }}" />
-						@endif
+						<img src="{{ $video->thumbnail }}" />
 					</div>
 					<div class="col-md-10">
-						<h2>{{ $video->name }}</h2>
+						<h2><a href="/video/{{ Hashids::encode($video->id) }}">{{ $video->name }}</a></h2>
 						<span class="author small em">by {{ $video->channel->name }}</span>
 						<span>{{ $video->published_at->diffForHumans() }}</span>
 						<span>in {{ $video->channel->site->name }}</span>

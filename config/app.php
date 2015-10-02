@@ -141,6 +141,7 @@ return [
          * Vendors Service Providers...
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
 
         /*
@@ -180,6 +181,7 @@ return [
         'Event'     => Illuminate\Support\Facades\Event::class,
         'File'      => Illuminate\Support\Facades\File::class,
         'Hash'      => Illuminate\Support\Facades\Hash::class,
+        'Hashids'   => Vinkla\Hashids\Facades\Hashids::class,
         'Input'     => Illuminate\Support\Facades\Input::class,
         'Inspiring' => Illuminate\Foundation\Inspiring::class,
         'Lang'      => Illuminate\Support\Facades\Lang::class,
