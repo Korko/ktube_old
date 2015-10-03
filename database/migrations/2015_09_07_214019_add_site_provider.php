@@ -23,10 +23,10 @@ class AddSiteProvider extends Migration
         Site::where('name', 'facebook')->update(['name' => 'Facebook', 'provider' => 'facebook']);
         Site::where('name', 'vimeo')->update(['name' => 'Vimeo', 'provider' => 'vimeo']);
 
-	Schema::table('sites', function ($table) {
-	    $table->unique('provider');
+        Schema::table('sites', function ($table) {
+            $table->unique('provider');
             $table->dropUnique('sites_name_unique');
-	});
+        });
     }
 
     /**
