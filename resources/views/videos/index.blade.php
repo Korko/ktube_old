@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="row" ng-controller="VideoController">
-	<ul>
-		<li ng-repeat="video in videos.data">
+	<ul infinite-scroll="videoLoader.nextPage()" infinite-scroll-distance="3" infinite-scroll-disabled="!videoLoader.hasNextPage()">
+		<li ng-repeat="video in videoLoader.videos">
 			<div class="row">
 				<div class="col-md-2">
 					<img ng-src="{{ video.thumbnail }}" />
@@ -19,10 +19,9 @@
 	</ul>
 
 	<nav>
-		<ul class="pager" ng-model="videos.current_page">
-			<li ng-class="videos.current_page <= 1 ? 'disabled' : ''"><a href="#"><span aria-hidden="true">&larr;</span> Newer</a></li>
-			<li ng-class="!videos.has_more ? 'disabled' : ''"><a href="#">Older <span aria-hidden="true">&rarr;</span></a></li>
-		</ul>
+		<button type="button" class="btn btn-primary btn-lg" aria-label="Left Align" ng-click="videoLoader.nextPage()" ng-disabled="videoLoader.isLocked() || !videoLoader.hasNextPage()">
+			<span ng-class="videoLoader.isLocked() ? 'glyphicon-refresh glyphicon-refresh-animate' : 'glyphicon-triangle-bottom'" class="glyphicon" aria-hidden="true"></span> More
+		</button>
 	</nav>
 </div>
 @endsection

@@ -81,10 +81,11 @@
 				.add("jQuery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
 				.add("Bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js", ["jQuery"])
 				.add("Angular", "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js")
+				.add("Angular-InfiniteScroll", "https://cdnjs.cloudflare.com/ajax/libs/ngInfiniteScroll/1.2.1/ng-infinite-scroll.min.js", ["jQuery", "Angular"])
 				.add("Angular-Bootstrap", "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap.min.js", ["Angular", "Bootstrap"])
-				.add("App", "<< asset('media/js/app.js') >>", ["Angular", "MomentJS"])
+				.add("App", "<< asset('media/js/app.js') >>", ["Angular", "MomentJS", "Angular-InfiniteScroll"])
 				.add("Script", "<< asset('media/js/script.js') >>", ["jQuery", "MomentJS"])
-				.load();
+				.init();
 		</script>
 
 
