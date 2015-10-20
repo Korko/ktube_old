@@ -3,6 +3,7 @@
 namespace Korko\kTube\Http\Controllers;
 
 use Auth;
+use Hashids;
 use Korko\kTube\Account;
 use Korko\kTube\Http\Controllers\Controller;;
 use Korko\kTube\Video;
@@ -21,15 +22,32 @@ class VideoController extends Controller
      */
     public function index()
     {
+        return view('videos.index');
+    }
+
+    public function all()
+    {
         $channels = Auth::user()->accounts()
+            ->select('id')
             ->with('channels')->get()
             ->pluck('channels')->collapse();
 
-        $videos = Video::whereIn('channel_id', $channels->pluck('id')->all())->with('channel.site')->orderBy('published_at', 'desc')->simplePaginate(20);
+        $videos = Video::whereIn('channel_id', $channels->pluck('id')->all())
+            ->select(['id', 'name', 'published_at', 'thumbnail', 'channel_id'])
+            ->with('channel.site')
+            ->orderBy('published_at', 'desc')
+            ->simplePaginate(20);
 
-        return view('videos.index', [
-            'videos' => $videos
-        ]);
+        foreach($videos as &$video) {
+            $video->hash = Hashids::encode($video->id);
+        }
+
+        return [
+            'data' => $videos->items(),
+            'per_page' => $videos->perPage(),
+            'current_page' => $videos->currentPage(),
+            'has_more' => $videos->hasMorePages()
+        ];
     }
 
     /**

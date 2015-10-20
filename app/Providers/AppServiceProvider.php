@@ -2,6 +2,7 @@
 
 namespace Korko\kTube\Providers;
 
+use Blade;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\ServiceProvider;
 use Korko\kTube\Account;
@@ -31,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
                 }
             });
         }
+
+        Blade::setContentTags('<<', '>>');
+        Blade::setEscapedContentTags('<<<', '>>>');
     }
 
     /**
