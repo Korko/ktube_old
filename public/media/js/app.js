@@ -12,7 +12,7 @@ myApp.factory('VideoLoader', function($http) {
 
 		this.videos = [];
 		this.has_more = false;
-		this.current_page = 1;
+		this.last_video = null;
 		this.lock = false;
 		this.$container = $('#container');
 
@@ -25,20 +25,20 @@ myApp.factory('VideoLoader', function($http) {
 		return this.lock;
 	};
 
-	VideoLoader.prototype.getVideos = function(page) {
+	VideoLoader.prototype.getVideos = function() {
 		return this.videos;
 	};
 
-	VideoLoader.prototype.loadPage = function(page) {
+	VideoLoader.prototype.loadPage = function(last_video) {
 
 		if (this.lock) return;
 		this.lock = true;
 
-		$http.get('/videos/all?page=' + parseInt(page, 10)).success(function ($data) {
+		$http.get('/videos/all?last=' + (last_video || '')).success(function ($data) {
 
 			this.videos = this.videos.concat($data.data);
 			this.has_more = $data.has_more;
-			this.current_page = $data.current_page;
+			this.last_video = this.videos[this.videos.length - 1].hash;
 			this.$container.removeClass('loading');
 			this.lock = false;
 
@@ -46,20 +46,12 @@ myApp.factory('VideoLoader', function($http) {
 
 	};
 
-	VideoLoader.prototype.hasPrevPage = function() {
-		return this.current_page > 1;
-	};
-
-	VideoLoader.prototype.prevPage = function() {
-		this.hasPrevPage() && this.loadPage(this.current_page - 1);
-	};
-
 	VideoLoader.prototype.hasNextPage = function() {
 		return this.has_more;
 	};
 
 	VideoLoader.prototype.nextPage = function() {
-		this.hasNextPage() && this.loadPage(this.current_page + 1);
+		this.hasNextPage() && this.loadPage(this.last_video);
 	};
 
 	return VideoLoader;
