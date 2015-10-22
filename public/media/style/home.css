@@ -1,0 +1,18 @@
+body {
+	padding-top: 50px;
+}
+
+.row li {
+	list-style: none;
+	padding: 10px 0;
+}
+
+.video-thumbnail {
+	float: left;
+	width: 350px;
+}
+
+.video-data {
+	float: left;
+	clear: right;
+}

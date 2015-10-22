@@ -15,16 +15,7 @@
 			<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 			@section('style')
-				<style>
-					body {
-						padding-top: 50px;
-					}
-					.video_thumbnail {
-						width: 100px;
-						height: 100px;
-						display: inline-block;
-					}
-				</style>
+				<link href="{{ asset('/media/style/home.css') }}" rel="stylesheet" type="text/css">
 			@show
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
