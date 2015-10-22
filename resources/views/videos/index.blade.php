@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('headers')
+<link href="<< asset('/media/style/home.css') >>" rel="stylesheet" type="text/css">
+@endsection
+
 @section('content')
 <div class="row" ng-controller="VideoController">
 	<ul infinite-scroll="videoLoader.nextPage()" infinite-scroll-distance="3" infinite-scroll-disabled="!videoLoader.hasNextPage()">
