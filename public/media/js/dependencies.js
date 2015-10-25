@@ -85,7 +85,7 @@ var Dependencies = (function() {
 			for(var depKey in deps[scriptName]) {
 				// For each script needing this one which is fetched, check all dependencies
 				var dep = deps[scriptName][depKey];
-				if(scripts[dep].fetched) {
+				if(scripts[dep].fetched && !scripts[dep].loaded) {
 					loadIfReady(dep);
 				}
 			}
