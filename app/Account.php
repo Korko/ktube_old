@@ -23,6 +23,11 @@ class Account extends Model
         return $this->belongsToMany(Channel::class, 'account_subscriptions');
     }
 
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
+
     public function scopeCanRefreshTokens($query)
     {
         return $query->whereHas('site', function ($query) {
