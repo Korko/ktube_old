@@ -41,13 +41,10 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
             ->pluck('accounts')->collapse();
 
         foreach ($accounts as $account) {
-            switch ($account->site->provider) {
-                case 'google':
-                    $this->dispatch(new BackupYoutubeAccount($account, $this->backupDate));
-                    break;
-
-                default:
-//                    Log::error('Account provider not managed', ['account' => $account]);
+            try {
+                $this->dispatch(RefreshPlaylists::getInstance($account, $this->backupDate));
+            } catch(Exception $e) {
+//                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

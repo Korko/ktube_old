@@ -24,6 +24,18 @@ abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue
      */
     public $queue = 'playlists';
 
+    public static function getInstance(Account $account, DateTime $backupDate)
+    {
+            switch ($account->site->provider) {
+                case 'google':
+                    return new BackupYoutubeAccount($account, $backupDate);
+                    break;
+
+                default:
+                    throw new Exception('Account provider not managed');
+            }
+    }
+
     protected $account;
 
     protected $backupDate;
