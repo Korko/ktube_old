@@ -76,6 +76,7 @@
 
 		<script src="<< asset('media/js/dependencies.js') >>"></script>
 		<script type="text/javascript">
+			window.name = 'NG_DEFER_BOOTSTRAP! ' + window.name;
 			Dependencies
 				.add("MomentJS", "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js")
 				.add("jQuery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
@@ -86,11 +87,6 @@
 				.add("App", "<< asset('media/js/app.js') >>", ["Angular", "MomentJS", "Angular-InfiniteScroll"])
 				.add("Script", "<< asset('media/js/script.js') >>", ["jQuery", "MomentJS"])
 				.init();
-		</script>
-
-		<script src=></script>
-		<script type="text/javascript">
-
 		</script>
 	</body>
 </html>

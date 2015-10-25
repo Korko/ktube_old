@@ -1,5 +1,7 @@
 var myApp = angular.module('ktube', ['infinite-scroll']);
 
+myApp.value('appName', 'kTube');
+
 myApp.controller('VideoController', function($scope, VideoLoader) {
 
 	$scope.videoLoader = new VideoLoader();
@@ -62,4 +64,8 @@ myApp.filter('fromNow', function() {
 	return function(dateString) {
 		return moment(dateString, 'YYYY-MM-DD HH:mm:ss').fromNow()
 	};
+});
+
+angular.element(document).ready(function() {
+	angular.resumeBootstrap();
 });
