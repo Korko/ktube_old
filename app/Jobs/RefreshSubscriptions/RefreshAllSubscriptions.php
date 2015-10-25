@@ -36,7 +36,7 @@ class RefreshAllSubscriptions extends Job implements SelfHandling, ShouldQueue
             try {
                 $this->dispatch(RefreshSubscriptions::getInstance($account));
             } catch(Exception $e) {
-                Log::error($e->getMessage(), ['account' => $account]);
+//                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }
