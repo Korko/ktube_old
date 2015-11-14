@@ -49,10 +49,12 @@ abstract class RefreshPlaylists extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+try {
         $playlists = $this->fetchPlaylists($this->account);
 
         // Now save those playlists in DB
         $this->savePlaylists($this->account, $playlists);
+} catch(Exception $e) { dd($e); }
     }
 
     /**
@@ -69,20 +71,16 @@ abstract class RefreshPlaylists extends Job implements SelfHandling, ShouldQueue
      * @return [type]                [description]
      */
     protected function savePlaylists(Account $account, Collection $playlists)
-    {/*
-        $videos
-            ->chunk(100)
-            ->each(function ($videos) use ($channel) {
-                $videos = new Collection(array_diff_key(
-                    $videos->keyBy('video_id')->all(),
-                    Video::where('channel_id', $channel->id)
-                        ->whereIn('video_id', $videos->pluck('video_id')->all())
-                        ->get(['video_id'])->keyBy('video_id')->all()
-                ));
+    {
+        $playlists = new Collection(array_diff_key(
+            $playlists->keyBy('playlist_id')->all(),
+            Playlist::where('account_id', $account->id)
+                ->whereIn('playlist_id', $playlists->pluck('playlist_id')->all())
+                ->get(['playlist_id'])->keyBy('playlist_id')->all()
+        ));
 
-                if (!$videos->isEmpty()) {
-                    Video::insert($videos->toArray());
-                }
-            });
-    */}
+        if (!$playlists->isEmpty()) {
+            Playlist::insert($playlists->toArray());
+        }
+    }
 }
