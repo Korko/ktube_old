@@ -31,6 +31,7 @@ var Dependencies = (function() {
 				})(scriptName);
 			}
 		}
+
 	};
 
 	this.getDeps = function() {
