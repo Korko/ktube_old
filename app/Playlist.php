@@ -8,9 +8,9 @@ class Playlist extends Model
 {
     protected $fillable = ['playlist_id', 'name', 'account_id', 'type'];
 
-    public function site()
+    public function account()
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsTo(Account::class);
     }
 
     public function videos()
