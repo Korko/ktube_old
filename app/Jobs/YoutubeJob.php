@@ -2,6 +2,7 @@
 
 namespace Korko\kTube\Jobs;
 
+use Closure;
 use Google_Client;
 use Google_Service_YouTube;
 use Korko\kTube\Account;
@@ -32,5 +33,22 @@ trait YoutubeJob
         }
 
         return new Google_Service_YouTube($client);
+    }
+
+    protected function allPages(Closure $fetch, Closure $format)
+    {
+        $content = [];
+
+        // There might be multiple pages to request so make a loop untile its done
+        $pageToken = null;
+        do {
+            $data = $fetch($pageToken);
+
+            $content = array_merge($content, $format($data));
+
+            $pageToken = $data->nextPageToken;
+        } while ($pageToken !== null);
+
+        return $content;
     }
 }

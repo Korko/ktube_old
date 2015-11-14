@@ -5,6 +5,7 @@ namespace Korko\kTube\Http\Controllers;
 use Illuminate\Http\Request;
 use Korko\kTube\Http\Requests;
 use Korko\kTube\Http\Controllers\Controller;
+use Korko\kTube\Playlist;
 
 class PlaylistController extends Controller
 {
@@ -16,6 +17,7 @@ class PlaylistController extends Controller
     public function index()
     {
         $this->dispatch(new \Korko\kTube\Jobs\RefreshPlaylists\RefreshAllPlaylists());
+	dd(Playlist::all());
     }
 
     /**
