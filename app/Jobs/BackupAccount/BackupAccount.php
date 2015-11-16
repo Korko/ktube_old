@@ -2,7 +2,6 @@
 
 namespace Korko\kTube\Jobs\BackupAccount;
 
-use Carbon\Carbon;
 use DateTime;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;

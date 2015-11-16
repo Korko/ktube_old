@@ -68,19 +68,18 @@ try {
      * Save those playlists (removes the duplicates)
      * @param  Account    $account   [description]
      * @param  Collection $playlists [description]
-     * @return [type]                [description]
      */
     protected function savePlaylists(Account $account, Collection $playlists)
     {
-        $playlists = new Collection(array_diff_key(
+        $newPlaylists = array_diff_key(
             $playlists->keyBy('playlist_id')->all(),
             Playlist::where('account_id', $account->id)
                 ->whereIn('playlist_id', $playlists->pluck('playlist_id')->all())
                 ->get(['playlist_id'])->keyBy('playlist_id')->all()
-        ));
+        );
 
-        if (!$playlists->isEmpty()) {
-            Playlist::insert($playlists->toArray());
+        if ($newPlaylists !== array()) {
+            Playlist::insert($newPlaylists);
         }
     }
 }
