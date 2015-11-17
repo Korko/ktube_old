@@ -6,15 +6,15 @@ use DateTime;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Korko\kTube\Exceptions\InvalidProviderException;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\User;
 use Log;
 
 class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels, DispatchesJobs;
+    use SerializesModels, DispatchesJobs;
 
     /**
      * The name of the queue the job should be sent to.
@@ -42,9 +42,9 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
 
         foreach ($accounts as $account) {
             try {
-                $this->dispatch(RefreshPlaylists::getInstance($account, $this->backupDate));
-            } catch (Exception $e) {
-                //                Log::error($e->getMessage(), ['account' => $account]);
+                $this->dispatch(BackupAccount::getInstance($account, $this->backupDate));
+            } catch(InvalidProviderException $e) {
+//                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

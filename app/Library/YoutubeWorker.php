@@ -8,47 +8,55 @@ class YoutubeWorker
 {
     private $api;
 
-    public function __construct($accessToken)
+    public function __construct($accessToken = null)
     {
         $this->api = YoutubeLib::getApi($accessToken);
     }
 
-    public function getPlaylistsCursor()
+    public function getPlaylistsCursor(Array $filters)
     {
-        return $this->allPagesCursor(function($pageToken) {
+        return $this->allPagesCursor(function($pageToken) use($filters) {
             return $this->api->playlists->listPlaylists('snippet', [
-                'mine'       => true,
                 'maxResults' => 50,
                 'pageToken'  => $pageToken
-            ]);
+            ] + $filters);
         });
     }
 
-    public function getPlaylistItemsCursor($playlistId)
+    public function getPlaylistItemsCursor(Array $filters)
     {
-        return $this->allPagesCursor(function($pageToken) use ($playlistId) {
+        return $this->allPagesCursor(function($pageToken) use ($filters) {
             return $this->api->playlistItems->listPlaylistItems('snippet', [
-                'playlistId' => $playlistId,
                 'maxResults' => 50,
                 'pageToken'  => $pageToken
-            ]);
+            ] + $filters);
         });
     }
 
-    public function getChannel($channelId)
+    public function getSearchCursor(Array $filters)
     {
-        $data = $this->api->channels->listChannels('snippet', [
-            'id' => $channelId
-        ]);
-
-        if(count($data->items) === 0) {
-            throw new Exception('Cannot find channel '.$channelId);
-        }
-
-        return $data->items[0];
+        return $this->allPagesCursor(function($pageToken) use ($filters) {
+            return $this->api->search->listSearch('snippet', [
+                'order'      => 'date',
+                'safeSearch' => 'none',
+                'type'       => 'video',
+                'maxResults' => 50,
+                'pageToken'  => $pageToken
+            ] + $filters);
+        });
     }
 
-    public function getChannelsCursor()
+    public function getChannelsCursor(Array $filters)
+    {
+        return $this->allPagesCursor(function($pageToken) use ($filters) {
+            return $this->api->channels->listChannels('snippet', [
+                'maxResults' => 50,
+                'pageToken'  => $pageToken
+            ] + $filters);
+        });
+    }
+
+    public function getSubscriptionsCursor()
     {
         return $this->allPagesCursor(function($pageToken) {
             return $this->api->subscriptions->listSubscriptions('snippet', [

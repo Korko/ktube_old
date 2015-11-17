@@ -32,17 +32,14 @@ class YoutubeApiConnected extends YoutubeApi
     {
         $playlists = new Collection();
 
-        $cursor = $this->worker->getPlaylistsCursor();
+        $cursor = $this->worker->getPlaylistsCursor(['mine' => true]);
 
         foreach($cursor as $item) {
             $playlist = new Playlist([
+                'accoun_id'   => $this->account->id,
                 'playlist_id' => $item->id,
                 'name'        => $item->snippet->title
             ]);
-
-            $playlist->account = $this->account;
-
-            $playlist->videos = $this->getVideosByPlaylist($playlist->playlist_id);
 
             $playlists[] = $playlist;
         }
@@ -54,15 +51,14 @@ class YoutubeApiConnected extends YoutubeApi
     {
         $channels = new Collection();
 
-        $cursor = $this->worker->getChannelsCursor();
+        $cursor = $this->worker->getSubscriptionsCursor();
 
         foreach ($cursor as $item) {
             $channel = new Channel([
+                'site_id'    => $this->site->id,
                 'channel_id' => $item->snippet->resourceId->channelId,
                 'name'       => $item->snippet->title
             ]);
-
-            $channel->site = $this->site;
 
             $channels[] = $channel;
         }

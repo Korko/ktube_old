@@ -29,24 +29,46 @@ class YoutubeApi
 
     protected function getSite()
     {
-        return Site::where('provider', 'google')->findOrFail();
+        return Site::where('provider', 'google')->firstOrFail();
     }
 
     public function getVideosByPlaylist($playlistId)
     {
         $videos = new Collection();
 
-        $cursor = $this->worker->getPlaylistItemsCursor($playlistId);
+        $cursor = $this->worker->getPlaylistItemsCursor(['playlistId' => $playlistId]);
 
         foreach($cursor as $item) {
+            $channel = $this->getChannelById($item->snippet->channelId);//TODO cascading add
+
             $video = new Video([
+                'channel_id'   => $channel->id,
                 'video_id'     => $item->snippet->resourceId->videoId,
                 'name'         => $item->snippet->title,
                 'thumbnail'    => $item->snippet->thumbnails ? $item->snippet->thumbnails->medium->url : null,
                 'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
             ]);
 
-            $video->channel = $this->getChannelById($item->snippet->channelId);
+            $videos[] = $video;
+        }
+
+        return $videos;
+    }
+
+    public function getVideosByChannel(Channel $channel, $publishedAfter = null)
+    {
+        $videos = new Collection();
+
+        $cursor = $this->worker->getSearchCursor(['channelId' => $channel->channel_id, 'publishedAfter' => $publishedAfter]);
+
+        foreach($cursor as $item) {
+            $video = new Video([
+                'channel_id'   => $channel->id,
+                'video_id'     => $item->snippet->resourceId->videoId,
+                'name'         => $item->snippet->title,
+                'thumbnail'    => $item->snippet->thumbnails ? $item->snippet->thumbnails->medium->url : null,
+                'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
+            ]);
 
             $videos[] = $video;
         }
@@ -56,14 +78,19 @@ class YoutubeApi
 
     public function getChannelById($channelId)
     {
-        $item = $this->worker->getChannel($channelId);
+        $cursor = $this->worker->getChannelsCursor(['id' => $channelId]);
+
+        if(!$cursor->valid()) {
+            throw new Exception('Cannot find channel '.$channelId);
+        }
+
+        $item = $cursor->current();
 
         $channel = new Channel([
+            'site_id'    => $this->site->id,
             'channel_id' => $item->id,
             'name'       => $item->snippet->title
         ]);
-
-        $channel->site = $this->site;
 
         return $channel;
     }

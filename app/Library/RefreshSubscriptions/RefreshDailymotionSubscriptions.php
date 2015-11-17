@@ -1,6 +1,6 @@
 <?php
 
-namespace Korko\kTube\Jobs\RefreshSubscriptions;
+namespace Korko\kTube\Library\RefreshSubscriptions;
 
 use Illuminate\Support\Collection;
 use Korko\kTube\Account;
@@ -11,13 +11,13 @@ class RefreshDailymotionSubscriptions extends RefreshSubscriptions
 {
     use DailymotionJob;
 
-    protected function getChannels(Account $account)
+    protected function getChannels()
     {
         $channels = new Collection();
 
-        foreach ($this->getDailymotionRawChannels($account) as $item) {
+        foreach ($this->getDailymotionRawChannels($this->account) as $item) {
             $channels[] = new Channel([
-                'site_id'    => $account->site_id,
+                'site_id'    => $this->account->site_id,
                 'channel_id' => $item['id'],
                 'name'       => $item['screenname'],
             ]);
