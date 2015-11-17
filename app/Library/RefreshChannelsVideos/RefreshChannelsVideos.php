@@ -1,41 +1,27 @@
 <?php
 
-namespace Korko\kTube\Jobs\RefreshVideos;
+namespace Korko\kTube\Library\RefreshChannelsVideos;
 
-use Exception;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Korko\kTube\Channel;
-use Korko\kTube\Jobs\Job;
+use Korko\kTube\Exceptions\InvalidProviderException;
 use Korko\kTube\Video;
 
-abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
+abstract class RefreshChannelsVideos
 {
-    use InteractsWithQueue, SerializesModels;
-
-    /**
-     * The name of the queue the job should be sent to.
-     *
-     * @var string
-     */
-    public $queue = 'videos';
-
     public static function getInstance(Channel $channel)
     {
             switch ($channel->site->provider) {
                 case 'google':
-                    return new RefreshYoutubeVideos($channel);
+                    return new RefreshYoutubeChannelsVideos($channel);
                     break;
 
                 case 'dailymotion':
-                    return new RefreshDailymotionVideos($channel);
+                    return new RefreshDailymotionChannelsVideos($channel);
                     break;
 
                 default:
-                    throw new Exception('Channel provider not managed');
+                    throw new InvalidProviderException('Channel provider not managed');
             }
     }
 
@@ -53,36 +39,36 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $videos = $this->fetchVideos($this->channel);
+        $videos = $this->fetchVideos();
 
         // Now save those videos in DB
-        $this->saveVideos($this->channel, $videos);
+        $this->saveVideos($videos);
 
         // Update the channel with those new data
-        $this->updateChannel($this->channel, $videos);
+        $this->updateChannel($videos);
+
+        return $videos;
     }
 
     /**
      * Fetch new videos from this specific channel
-     * @param  Channel $channel [description]
      * @return Collection       List of new videos to add to this channel
      */
-    abstract protected function fetchVideos(Channel $channel);
+    abstract protected function fetchVideos();
 
     /**
      * Save those videos (removes the duplicates)
-     * @param  Channel    $channel [description]
      * @param  Collection $videos  [description]
-     * @return [type]              [description]
+     * @return void
      */
-    protected function saveVideos(Channel $channel, Collection $videos)
+    protected function saveVideos(Collection $videos)
     {
         $videos
             ->chunk(100)
-            ->each(function ($videos) use ($channel) {
+            ->each(function ($videos) {
                 $videos = new Collection(array_diff_key(
                     $videos->keyBy('video_id')->all(),
-                    Video::where('channel_id', $channel->id)
+                    Video::where('channel_id', $this->channel->id)
                         ->whereIn('video_id', $videos->pluck('video_id')->all())
                         ->get(['video_id'])->keyBy('video_id')->all()
                 ));
@@ -95,11 +81,10 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
 
     /**
      * Update the related channel with the max published date from those videos
-     * @param  Channel    $channel [description]
      * @param  Collection $videos  [description]
-     * @return [type]              [description]
+     * @return void
      */
-    protected function updateChannel(Channel $channel, Collection $videos)
+    protected function updateChannel(Collection $videos)
     {
         // Find the max publication date to limit for next time
         // There can be lag so don't take now as the limit
@@ -109,6 +94,6 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
         }
 
         // Update the channel for next loop
-        $channel->update(['scanned_at' => $maxPublishedDate]);
+        $this->channel->update(['scanned_at' => $maxPublishedDate]);
     }
 }

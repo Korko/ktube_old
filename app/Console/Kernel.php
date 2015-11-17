@@ -20,7 +20,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-
+        \Korko\kTube\Console\Commands\RefreshPlaylists::class,
+        \Korko\kTube\Console\Commands\RefreshSubscriptions::class
     ];
 
     /**
@@ -37,8 +38,12 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             $this->dispatch(new RefreshAllSubscriptions());
-            $this->dispatch(new RefreshAllVideos());
-        })->description('Refresh channels and videos')->cron('*/15 * * * *')->withoutOverlapping();
+            $this->dispatch(new RefreshAllChannelsVideos());
+        })->description('Refresh channels and videos')->cron('*/15 * * * *');
+
+        $schedule->call(function () {
+            $this->dispatch(new RefreshAllPlaylists());
+        })->description('Refresh playlists')->cron('*/15 * * * *');
 
         $schedule->call(function () {
             $this->dispatch(new BackupAllAccounts());

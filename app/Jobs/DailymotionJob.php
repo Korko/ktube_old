@@ -18,7 +18,7 @@ trait DailymotionJob
 
         $client = new Dailymotion();
 
-	$grantType = isset($account) ?
+        $grantType = isset($account) ?
             Dailymotion::GRANT_TYPE_AUTHORIZATION :
             Dailymotion::GRANT_TYPE_CLIENT_CREDENTIALS;
 
