@@ -25,7 +25,7 @@ class Account extends Model
 
     public function playlists()
     {
-        return $this->hasMany(Playlist::class);
+        return $this->belongsToMany(Playlist::class)->withPivot('playlist_site_id');
     }
 
     public function scopeCanRefreshTokens($query)

@@ -1,11 +1,15 @@
 @extends('layout')
 
+@section('title')
+Videos
+@endsection
+
 @section('headers')
 <link href="<< asset('/media/style/home.css') >>" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
-<div class="row" ng-controller="VideoController">
+<div class="row" ng-controller="VideoController" ng-init="init('<< $url >>')">
 	<ul infinite-scroll="videoLoader.nextPage()" infinite-scroll-distance="3" infinite-scroll-disabled="!videoLoader.hasNextPage()">
 		<li ng-repeat="video in videoLoader.videos">
 			<div class="row">

@@ -1,6 +1,6 @@
 <?php
 
-namespace Korko\kTube\Jobs\RefreshChannelsVideos;
+namespace Korko\kTube\Jobs\RefreshVideos;
 
 use Exception;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -12,7 +12,7 @@ use Korko\kTube\Channel;
 use Korko\kTube\Jobs\Job;
 use Log;
 
-class RefreshAllChannelsVideos extends Job implements SelfHandling, ShouldQueue
+class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels, DispatchesJobs;
 
@@ -36,7 +36,7 @@ class RefreshAllChannelsVideos extends Job implements SelfHandling, ShouldQueue
         // For each of these channels, get the last videos uploaded
         foreach ($channels as $channel) {
             try {
-                $this->dispatch(new RefreshChannelsVideos($channel));
+                $this->dispatch(RefreshVideos::getInstance($channel));
             } catch (Exception $e) {
                 Log::error($e->getMessage(), ['channel' => $channel]);
             }

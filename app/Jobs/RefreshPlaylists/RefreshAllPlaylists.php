@@ -35,9 +35,9 @@ class RefreshAllPlaylists extends Job implements SelfHandling, ShouldQueue
         // For each of these accounts, get the playlists
         foreach ($accounts as $account) {
             try {
-                $this->dispatch(RefreshPlaylists::getInstance($account));
-            } catch(InvalidProviderException $e) {
-//                Log::error($e->getMessage(), ['account' => $account]);
+                $this->dispatch(new RefreshPlaylists($account));
+            } catch (InvalidProviderException $e) {
+                //                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

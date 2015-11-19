@@ -22,13 +22,13 @@ class YoutubeLib
     {
         $client = new Google_Client();
 
-        if(isset($accessToken)) {
-	        $client->setAccessToken(json_encode([
-	            'access_token' => $accessToken,
-	            'created' => time(),
-	            'expires_in' => 3600
-	        ]));
-	    }
+        if (isset($accessToken)) {
+            $client->setAccessToken(json_encode([
+                'access_token' => $accessToken,
+                'created' => time(),
+                'expires_in' => 3600
+            ]));
+        }
 
         $client->setDeveloperKey(config('services.youtube.api_key'));
 

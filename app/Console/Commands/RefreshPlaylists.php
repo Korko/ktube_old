@@ -5,6 +5,7 @@ namespace Korko\kTube\Console\Commands;
 use Illuminate\Console\Command;
 use Korko\kTube\Account;
 use Korko\kTube\Library\RefreshPlaylists\RefreshPlaylists as RefreshPlaylistsLibrary;
+use Korko\kTube\Library\RefreshPlaylistsVideos\RefreshPlaylistsVideos as RefreshPlaylistsVideosLibrary;
 
 class RefreshPlaylists extends Command
 {
@@ -33,6 +34,10 @@ class RefreshPlaylists extends Command
 
         $account = Account::findOrFail($accountId);
 
-        RefreshPlaylistsLibrary::getInstance($account)->handle();
+        $playlists = RefreshPlaylistsLibrary::getInstance($account)->handle();
+
+        foreach ($playlists as $playlist) {
+            RefreshPlaylistsVideosLibrary::getInstance($account, $playlist, $playlist->accounts[0]->pivot->playlist_site_id)->handle();
+        }
     }
 }

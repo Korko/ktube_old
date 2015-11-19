@@ -21,7 +21,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('videos.index');
+        return view('videos.index', ['url' => '/videos/all']);
     }
 
     public function all(Request $request)

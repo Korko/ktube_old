@@ -4,8 +4,6 @@ namespace Korko\kTube\Library;
 
 use Illuminate\Support\Collection;
 use Korko\kTube\Account;
-use Korko\kTube\Channel;
-use Korko\kTube\Playlist;
 
 class YoutubeApiConnected extends YoutubeApi
 {
@@ -34,14 +32,31 @@ class YoutubeApiConnected extends YoutubeApi
 
         $cursor = $this->worker->getPlaylistsCursor(['mine' => true]);
 
-        foreach($cursor as $item) {
-            $playlist = new Playlist([
-                'accoun_id'   => $this->account->id,
-                'playlist_id' => $item->id,
-                'name'        => $item->snippet->title
-            ]);
+        foreach ($cursor as $item) {
+            $playlists[] = [
+                'user_id'     => $this->account->user_id,
+                'name'        => $item->snippet->title,
+                'playlist_id' => $item->id
+            ];
+        }
 
-            $playlists[] = $playlist;
+        return $playlists;
+    }
+
+    public function getMySpecialPlaylists()
+    {
+        $playlists = new Collection();
+
+        $cursor = $this->worker->getChannelsCursor(['mine' => true], 'contentDetails');
+
+        foreach ($cursor as $item) {
+            foreach ($item->contentDetails->relatedPlaylists as $name => $playlistId) {
+                $playlists[$name] = [
+                    'user_id'     => $this->account->user_id,
+                    'name'        => $name,
+                    'playlist_id' => $playlistId
+                ];
+            }
         }
 
         return $playlists;
@@ -54,13 +69,11 @@ class YoutubeApiConnected extends YoutubeApi
         $cursor = $this->worker->getSubscriptionsCursor();
 
         foreach ($cursor as $item) {
-            $channel = new Channel([
+            $channels[] = [
                 'site_id'    => $this->site->id,
                 'channel_id' => $item->snippet->resourceId->channelId,
                 'name'       => $item->snippet->title
-            ]);
-
-            $channels[] = $channel;
+            ];
         }
 
         return $channels;

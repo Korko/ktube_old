@@ -11,14 +11,14 @@ abstract class RefreshPlaylists
 {
     public static function getInstance(Account $account)
     {
-            switch ($account->site->provider) {
-                case 'google':
-                    return new RefreshYoutubePlaylists($account);
-                    break;
+        switch ($account->site->provider) {
+            case 'google':
+                return new RefreshYoutubePlaylists($account);
+                break;
 
-                default:
-                    throw new InvalidProviderException('Account provider not managed');
-            }
+            default:
+                throw new InvalidProviderException('Account provider not managed');
+        }
     }
 
     protected $account;
@@ -38,7 +38,7 @@ abstract class RefreshPlaylists
         $playlists = $this->fetchPlaylists();
 
         // Now save those playlists in DB
-        $this->savePlaylists($playlists);
+        $playlists = $this->savePlaylists($playlists);
 
         return $playlists;
     }
@@ -55,15 +55,25 @@ abstract class RefreshPlaylists
      */
     protected function savePlaylists(Collection $playlists)
     {
-        $newPlaylists = array_diff_key(
-            $playlists->keyBy('playlist_id')->all(),
-            Playlist::where('account_id', $this->account->id)
-                ->whereIn('playlist_id', $playlists->pluck('playlist_id')->all())
-                ->get(['playlist_id'])->keyBy('playlist_id')->all()
-        );
+        $accountPlaylists = $this->account->playlists;
 
-        if ($newPlaylists !== array()) {
-            Playlist::insert($newPlaylists);
+        foreach ($playlists as $key => $playlistData) {
+            $playlist = $accountPlaylists->first(function ($key, $accountPlaylist) use($playlistData) {
+                return ($accountPlaylist->pivot->playlist_site_id === $playlistData['playlist_id']);
+            });
+
+            if ($playlist === null) {
+                $playlist = Playlist::create([
+                    'user_id' => $playlistData['user_id'],
+                    'name'    => $playlistData['name'],
+                ]);
+
+                $playlist->accounts()->save($this->account, ['playlist_site_id' => $playlistData['playlist_id']]);
+            }
+
+            $playlists[$key] = $playlist;
         }
+
+        return $playlists;
     }
 }

@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+Profile
+@endsection
+
 @section('content')
 <div class="row">
 	<ul>

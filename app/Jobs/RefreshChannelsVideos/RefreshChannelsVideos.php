@@ -9,7 +9,7 @@ use Korko\kTube\Channel;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\Library\RefreshChannelsVideos\RefreshChannelsVideos as RefreshChannelsVideosLibrary;
 
-abstract class RefreshChannelsVideos extends Job implements SelfHandling, ShouldQueue
+class RefreshChannelsVideos extends Job implements SelfHandling, ShouldQueue
 {
     use SerializesModels;
 

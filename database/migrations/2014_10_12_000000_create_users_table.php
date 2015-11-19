@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->boolean('holidays')->default(false);
-
             $table->rememberToken();
             $table->timestamps();
         });

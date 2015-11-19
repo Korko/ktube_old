@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/videos/all', 'VideoController@all');
 
     Route::get('/playlists/all', 'PlaylistController@index');
+    Route::get('/playlists/{playlist}', 'PlaylistController@show');
+    Route::get('/playlists/all/{playlist}', 'PlaylistController@all');
 });
 
 if (env('APP_ENV') === 'local') {
