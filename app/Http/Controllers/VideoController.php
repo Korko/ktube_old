@@ -6,7 +6,7 @@ use Auth;
 use Hashids;
 use Illuminate\Http\Request;
 use Korko\kTube\Account;
-use Korko\kTube\Http\Controllers\Controller;;
+use Korko\kTube\Http\Controllers\Controller;
 use Korko\kTube\Video;
 
 class VideoController extends Controller
@@ -23,7 +23,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('videos.index');
+        return view('videos.index', ['url' => '/videos/all']);
     }
 
     public function all(Request $request)
@@ -39,19 +39,18 @@ class VideoController extends Controller
             ->orderBy('published_at', 'desc')
             ->limit(21);
 
-        if(!empty($request->has('last'))) {
-
+        if (!empty($request->has('last'))) {
             $last = Hashids::decode($request->get('last'));
             $last = array_pop($last);
 
-            if($last !== NULL) {
+            if ($last !== null) {
                 $req->where('id', '<', $last);
             }
         }
 
         $videos = $req->get();
 
-        foreach($videos as &$video) {
+        foreach ($videos as &$video) {
             $video->hash = Hashids::encode($video->id);
             unset($video->id);
         }

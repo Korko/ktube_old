@@ -36,7 +36,7 @@ class RefreshSubscriptions extends Command
 
         $channels = RefreshSubscriptionsLibrary::getInstance($account)->handle();
 
-        foreach($channels as $channel) {
+        foreach ($channels as $channel) {
             RefreshChannelsVideosLibrary::getInstance($channel)->handle();
         }
     }

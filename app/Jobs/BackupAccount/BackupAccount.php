@@ -10,7 +10,7 @@ use Korko\kTube\Account;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\Library\BackupAccount\BackupAccount as BackupAccountLibrary;
 
-abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue
+class BackupAccount extends Job implements SelfHandling, ShouldQueue
 {
     use SerializesModels;
 

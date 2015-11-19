@@ -18,7 +18,6 @@ class AddSiteProvider extends Migration
             $table->string('provider');
         });
 
-
         Site::where('name', 'google')->update(['name' => 'Youtube', 'provider' => 'google']);
         Site::where('name', 'facebook')->update(['name' => 'Facebook', 'provider' => 'facebook']);
         Site::where('name', 'vimeo')->update(['name' => 'Vimeo', 'provider' => 'vimeo']);

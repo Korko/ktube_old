@@ -4,18 +4,21 @@ myApp.value('appName', 'kTube');
 
 myApp.controller('VideoController', function($scope, VideoLoader) {
 
-	$scope.videoLoader = new VideoLoader();
+	$scope.init = function(url) {
+		$scope.videoLoader = new VideoLoader(url);
+	};
 
 });
 
 myApp.factory('VideoLoader', function($http) {
 
-	var VideoLoader = function() {
+	var VideoLoader = function(url) {
 
 		this.videos = [];
 		this.has_more = false;
 		this.last_video = null;
 		this.lock = false;
+		this.url = url;
 		this.$container = $('#container');
 
 		this.$container.addClass('loading');
@@ -36,7 +39,7 @@ myApp.factory('VideoLoader', function($http) {
 		if (this.lock) return;
 		this.lock = true;
 
-		$http.get('/videos/all?last=' + (last_video || '')).success(function ($data) {
+		$http.get(this.url + '?last=' + (last_video || '')).success(function ($data) {
 
 			this.videos = this.videos.concat($data.data);
 			this.has_more = $data.has_more;

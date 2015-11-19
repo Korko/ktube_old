@@ -18,6 +18,9 @@ class RefreshYoutubePlaylists extends RefreshPlaylists
 
     protected function fetchPlaylists()
     {
-        return $this->yt->getMyPlaylists();
+        $playlists = $this->yt->getMyPlaylists();
+        $playlists[] = $this->yt->getMySpecialPlaylists()['watchLater'];
+
+        return $playlists;
     }
 }

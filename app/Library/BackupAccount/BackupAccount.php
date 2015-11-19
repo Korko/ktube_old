@@ -12,7 +12,7 @@ abstract class BackupAccount
 {
     public static function getInstance(Account $account, DateTime $backupDate)
     {
-            switch ($account->site->provider) {
+        switch ($account->site->provider) {
                 case 'google':
                     return new BackupYoutubeAccount($account, $backupDate);
                     break;

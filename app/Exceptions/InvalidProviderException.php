@@ -2,4 +2,6 @@
 
 namespace Korko\kTube\Exceptions;
 
-class InvalidProviderException extends Exception {}
+class InvalidProviderException extends Exception
+{
+}

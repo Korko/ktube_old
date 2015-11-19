@@ -14,14 +14,11 @@ class CreatePlaylists extends Migration
     {
         Schema::create('playlists', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->integer('account_id')->unsigned();
-            $table->string('playlist_id');
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->timestamps();
 
-            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $table->unique(['account_id', 'playlist_id']);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

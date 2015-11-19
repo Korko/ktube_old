@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->bind('video', function($id) {
+        $router->bind('video', function ($id) {
             $ids = Hashids::decode($id);
 
             return Video::with('channel.site')->findOrFail(reset($ids));

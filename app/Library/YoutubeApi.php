@@ -4,10 +4,6 @@ namespace Korko\kTube\Library;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Korko\kTube\Channel;
-use Korko\kTube\Playlist;
-use Korko\kTube\Site;
-use Korko\kTube\Video;
 
 class YoutubeApi
 {
@@ -38,39 +34,34 @@ class YoutubeApi
 
         $cursor = $this->worker->getPlaylistItemsCursor(['playlistId' => $playlistId]);
 
-        foreach($cursor as $item) {
-            $channel = $this->getChannelById($item->snippet->channelId);//TODO cascading add
+        foreach ($cursor as $item) {
+            $channel = $this->getChannelById($item->snippet->channelId);
 
-            $video = new Video([
-                'channel_id'   => $channel->id,
+            $videos[] = [
+                'channel'   => $channel,
                 'video_id'     => $item->snippet->resourceId->videoId,
                 'name'         => $item->snippet->title,
                 'thumbnail'    => $item->snippet->thumbnails ? $item->snippet->thumbnails->medium->url : null,
                 'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
-            ]);
-
-            $videos[] = $video;
+            ];
         }
 
         return $videos;
     }
 
-    public function getVideosByChannel(Channel $channel, $publishedAfter = null)
+    public function getVideosByChannel($channelId, $publishedAfter = null)
     {
         $videos = new Collection();
 
-        $cursor = $this->worker->getSearchCursor(['channelId' => $channel->channel_id, 'publishedAfter' => $publishedAfter]);
+        $cursor = $this->worker->getSearchCursor(['channelId' => $channelId, 'publishedAfter' => $publishedAfter]);
 
-        foreach($cursor as $item) {
-            $video = new Video([
-                'channel_id'   => $channel->id,
-                'video_id'     => $item->snippet->resourceId->videoId,
+        foreach ($cursor as $item) {
+            $videos[] = [
+                'video_id'     => $item->id->videoId,
                 'name'         => $item->snippet->title,
                 'thumbnail'    => $item->snippet->thumbnails ? $item->snippet->thumbnails->medium->url : null,
                 'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
-            ]);
-
-            $videos[] = $video;
+            ];
         }
 
         return $videos;
@@ -80,18 +71,16 @@ class YoutubeApi
     {
         $cursor = $this->worker->getChannelsCursor(['id' => $channelId]);
 
-        if(!$cursor->valid()) {
+        if (!$cursor->valid()) {
             throw new Exception('Cannot find channel '.$channelId);
         }
 
         $item = $cursor->current();
 
-        $channel = new Channel([
+        return [
             'site_id'    => $this->site->id,
             'channel_id' => $item->id,
             'name'       => $item->snippet->title
-        ]);
-
-        return $channel;
+        ];
     }
 }

@@ -20,7 +20,6 @@ class AddVideoThumbnail extends Migration
             $table->string('thumbnail')->nullable();
         });
 
-
         Video::fromSite('google')
           ->update(['thumbnail' => new Expression('CONCAT("http://img.youtube.com/vi/", video_id, "/mqdefault.jpg")')]);
     }

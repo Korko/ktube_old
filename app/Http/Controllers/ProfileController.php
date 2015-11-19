@@ -4,7 +4,7 @@ namespace Korko\kTube\Http\Controllers;
 
 use Auth;
 use Korko\kTube\Account;
-use Korko\kTube\Http\Controllers\Controller;;
+use Korko\kTube\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {

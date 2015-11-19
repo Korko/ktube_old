@@ -11,7 +11,7 @@ abstract class RefreshSubscriptions
 {
     public static function getInstance(Account $account)
     {
-            switch ($account->site->provider) {
+        switch ($account->site->provider) {
                 case 'google':
                     return new RefreshYoutubeSubscriptions($account);
                     break;
@@ -54,7 +54,7 @@ abstract class RefreshSubscriptions
     {
         $channels = $channels
             ->chunk(200)
-            ->map(function($channels) {
+            ->map(function ($channels) {
                 return $this->findOrCreate($channels);
             })
             ->collapse();

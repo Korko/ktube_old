@@ -9,7 +9,7 @@ use Korko\kTube\Account;
 use Korko\kTube\Jobs\Job;
 use Korko\kTube\Library\RefreshSubscriptions\RefreshSubscriptions as RefreshSubscriptionsLibrary;
 
-abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQueue
+class RefreshSubscriptions extends Job implements SelfHandling, ShouldQueue
 {
     use SerializesModels;
 

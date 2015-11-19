@@ -42,9 +42,9 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
 
         foreach ($accounts as $account) {
             try {
-                $this->dispatch(BackupAccount::getInstance($account, $this->backupDate));
-            } catch(InvalidProviderException $e) {
-//                Log::error($e->getMessage(), ['account' => $account]);
+                $this->dispatch(new BackupAccount($account, $this->backupDate));
+            } catch (InvalidProviderException $e) {
+                //                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

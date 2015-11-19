@@ -33,9 +33,9 @@ class RefreshAllSubscriptions extends Job implements SelfHandling, ShouldQueue
 
         foreach ($accounts as $account) {
             try {
-                $this->dispatch(RefreshSubscriptions::getInstance($account));
-            } catch(InvalidProviderException $e) {
-//                Log::error($e->getMessage(), ['account' => $account]);
+                $this->dispatch(new RefreshSubscriptions($account));
+            } catch (InvalidProviderException $e) {
+                //                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

@@ -1,28 +1,28 @@
 <?php
 
-namespace Korko\kTube\Library\RefreshChannelsVideos;
+namespace Korko\kTube\Library\RefreshVideos;
 
 use Illuminate\Support\Collection;
 use Korko\kTube\Channel;
 use Korko\kTube\Exceptions\InvalidProviderException;
 use Korko\kTube\Video;
 
-abstract class RefreshChannelsVideos
+abstract class RefreshVideos
 {
     public static function getInstance(Channel $channel)
     {
         switch ($channel->site->provider) {
-            case 'google':
-                return new RefreshYoutubeChannelsVideos($channel);
-                break;
+                case 'google':
+                    return new RefreshYoutubeVideos($channel);
+                    break;
 
-            case 'dailymotion':
-                return new RefreshDailymotionChannelsVideos($channel);
-                break;
+                case 'dailymotion':
+                    return new RefreshDailymotionVideos($channel);
+                    break;
 
-            default:
-                throw new InvalidProviderException('Channel provider not managed');
-        }
+                default:
+                    throw new InvalidProviderException('Channel provider not managed');
+            }
     }
 
     protected $channel;
@@ -46,8 +46,6 @@ abstract class RefreshChannelsVideos
 
         // Update the channel with those new data
         $this->updateChannel($videos);
-
-        return $videos;
     }
 
     /**
@@ -62,7 +60,7 @@ abstract class RefreshChannelsVideos
      * @return void
      */
     protected function saveVideos(Collection $videos)
-    {
+    {//TODO those videos are not instances of Channel but simple arrays and channel_id is not defined
         $videos
             ->chunk(100)
             ->each(function ($videos) {

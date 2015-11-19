@@ -7,14 +7,14 @@ use Korko\kTube\Library\YoutubeApiConnected;
 
 class RefreshYoutubeSubscriptions extends RefreshSubscriptions
 {
-	private $yt;
+    private $yt;
 
-	public function __construct(Account $account)
-	{
-		$this->yt = new YoutubeApiConnected($account);
+    public function __construct(Account $account)
+    {
+        $this->yt = new YoutubeApiConnected($account);
 
-		parent::__construct($account);
-	}
+        parent::__construct($account);
+    }
 
     protected function getChannels()
     {
