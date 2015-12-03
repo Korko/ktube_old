@@ -37,6 +37,7 @@
             <div class="mastfoot">
                 <div class="inner">
                     <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    <p>Icons by <a href="http://www.iconarchive.com/artist/limav.html">limav</a></p>
                 </div>
             </div>
 
