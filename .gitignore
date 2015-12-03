@@ -3,3 +3,4 @@
 .env
 *.sublime-project
 *.sublime-workspace
+/storage/framework/schedule-*
