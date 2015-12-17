@@ -16,7 +16,7 @@ class SitesTableSeeder extends Seeder
         Site::insert([
             ['name' => 'Youtube', 'provider' => 'google'],
             ['name' => 'Dailymotion', 'provider' => 'dailymotion'],
-            ['name' => 'Vimeo', 'provider' => 'vimeo']
+            ['name' => 'Vimeo', 'provider' => 'vimeo'],
         ]);
     }
 }

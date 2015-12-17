@@ -43,8 +43,8 @@ class BackupAllAccounts extends Job implements SelfHandling, ShouldQueue
         foreach ($accounts as $account) {
             try {
                 $this->dispatch(RefreshPlaylists::getInstance($account, $this->backupDate));
-            } catch(Exception $e) {
-//                Log::error($e->getMessage(), ['account' => $account]);
+            } catch (Exception $e) {
+                //                Log::error($e->getMessage(), ['account' => $account]);
             }
         }
     }

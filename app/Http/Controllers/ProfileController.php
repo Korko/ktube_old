@@ -3,8 +3,6 @@
 namespace Korko\kTube\Http\Controllers;
 
 use Auth;
-use Korko\kTube\Account;
-use Korko\kTube\Http\Controllers\Controller;;
 
 class ProfileController extends Controller
 {
@@ -18,7 +16,7 @@ class ProfileController extends Controller
         $accounts = Auth::user()->accounts()->with('site')->get();
 
         return view('profile', [
-            'accounts' => $accounts
+            'accounts' => $accounts,
         ]);
     }
 }

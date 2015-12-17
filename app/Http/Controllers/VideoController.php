@@ -5,8 +5,6 @@ namespace Korko\kTube\Http\Controllers;
 use Auth;
 use Hashids;
 use Illuminate\Http\Request;
-use Korko\kTube\Account;
-use Korko\kTube\Http\Controllers\Controller;;
 use Korko\kTube\Video;
 
 class VideoController extends Controller
@@ -39,39 +37,39 @@ class VideoController extends Controller
             ->orderBy('published_at', 'desc')
             ->limit(21);
 
-        if(!empty($request->has('last'))) {
-
+        if (!empty($request->has('last'))) {
             $last = Hashids::decode($request->get('last'));
             $last = array_pop($last);
 
-            if($last !== NULL) {
+            if ($last !== null) {
                 $req->where('id', '<', $last);
             }
         }
 
         $videos = $req->get();
 
-        foreach($videos as &$video) {
+        foreach ($videos as &$video) {
             $video->hash = Hashids::encode($video->id);
             unset($video->id);
         }
 
         return [
-            'data' => $videos->slice(0, 20),
-            'has_more' => isset($videos[20]) // If the 21's exists, there's more
+            'data'     => $videos->slice(0, 20),
+            'has_more' => isset($videos[20]), // If the 21's exists, there's more
         ];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Video  $video
+     * @param Video $video
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Video $video)
     {
         return view('videos.show', [
-            'video' => $video
+            'video' => $video,
         ]);
     }
 }

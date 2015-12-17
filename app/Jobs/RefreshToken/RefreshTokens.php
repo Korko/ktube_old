@@ -33,9 +33,9 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue
         $accounts = Account::whereRaw('TIMESTAMPDIFF(MINUTE, NOW(), expires_at) <= 5')->canRefreshTokens()->with('site')->get();
 
         foreach ($accounts as $account) {
-	    try {
+            try {
                 $this->refreshToken($account);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 Log::warning('Cannot refresh token for account '.$account->id.' (provider '.$account->site->provider.')');
             }
         }
@@ -47,7 +47,7 @@ class RefreshTokens extends Job implements SelfHandling, ShouldQueue
 
         $account->update([
             'access_token' => $token->accessToken,
-            'expires_at'   => Carbon::now()->addSeconds($token->expiresIn)
+            'expires_at'   => Carbon::now()->addSeconds($token->expiresIn),
         ]);
     }
 }

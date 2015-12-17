@@ -19,7 +19,7 @@ class Channel extends Model
 
     public function accounts()
     {
-        return $this->belongsToMany(Channel::class, 'account_subscriptions');
+        return $this->belongsToMany(self::class, 'account_subscriptions');
     }
 
     public function site()

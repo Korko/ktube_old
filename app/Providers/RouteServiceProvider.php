@@ -3,8 +3,8 @@
 namespace Korko\kTube\Providers;
 
 use Hashids;
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 use Korko\kTube\Video;
 
 class RouteServiceProvider extends ServiceProvider
@@ -21,12 +21,13 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function boot(Router $router)
     {
-        $router->bind('video', function($id) {
+        $router->bind('video', function ($id) {
             $ids = Hashids::decode($id);
 
             return Video::with('channel.site')->findOrFail(reset($ids));
@@ -38,7 +39,8 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function map(Router $router)

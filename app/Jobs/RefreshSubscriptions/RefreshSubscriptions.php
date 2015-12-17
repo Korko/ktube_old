@@ -25,7 +25,7 @@ abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQ
 
     public static function getInstance(Account $account)
     {
-            switch ($account->site->provider) {
+        switch ($account->site->provider) {
                 case 'google':
                     return new RefreshYoutubeSubscriptions($account);
                     break;
@@ -66,7 +66,7 @@ abstract class RefreshSubscriptions extends Job implements SelfHandling, ShouldQ
     {
         $channels = $channels
             ->chunk(200)
-            ->map(function($channels) use ($account) {
+            ->map(function ($channels) use ($account) {
                 return $this->findOrCreate($account, $channels);
             })
             ->collapse();

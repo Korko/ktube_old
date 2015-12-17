@@ -6,9 +6,8 @@ use Blade;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\ServiceProvider;
 use Korko\kTube\Account;
-use Korko\kTube\Channel;
-use Korko\kTube\Jobs\RefreshVideos\RefreshVideos;
 use Korko\kTube\Jobs\RefreshSubscriptions\RefreshSubscriptions;
+use Korko\kTube\Jobs\RefreshVideos\RefreshVideos;
 
 class AppServiceProvider extends ServiceProvider
 {

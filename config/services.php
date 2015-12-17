@@ -15,24 +15,24 @@ return [
     */
 
     'google' => [
-        'client_id' => env('YOUTUBE_KEY'),
+        'client_id'     => env('YOUTUBE_KEY'),
         'client_secret' => env('YOUTUBE_SECRET'),
-        'redirect' => env('YOUTUBE_REDIRECT_URI')
+        'redirect'      => env('YOUTUBE_REDIRECT_URI'),
     ],
 
     'vimeo' => [
-        'client_id' => env('VIMEO_KEY'),
+        'client_id'     => env('VIMEO_KEY'),
         'client_secret' => env('VIMEO_SECRET'),
-        'redirect' => env('VIMEO_REDIRECT_URI')
+        'redirect'      => env('VIMEO_REDIRECT_URI'),
     ],
 
     'dailymotion' => [
-        'client_id' => env('DAILYMOTION_KEY'),
+        'client_id'     => env('DAILYMOTION_KEY'),
         'client_secret' => env('DAILYMOTION_SECRET'),
-        'redirect' => env('DAILYMOTION_REDIRECT_URI')
+        'redirect'      => env('DAILYMOTION_REDIRECT_URI'),
     ],
 
     'youtube' => [
-        'api_key' => env('YOUTUBE_API_KEY')
-    ]
+        'api_key' => env('YOUTUBE_API_KEY'),
+    ],
 ];
