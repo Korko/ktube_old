@@ -3,7 +3,6 @@
 namespace Korko\kTube;
 
 use Illuminate\Database\Eloquent\Model;
-use Korko\kTube\User;
 
 class Account extends Model
 {
@@ -26,7 +25,7 @@ class Account extends Model
 
     public function scopeCanRefreshTokens($query)
     {
-        return $query->whereHas('site', function($query) {
+        return $query->whereHas('site', function ($query) {
             return $query->whereNotIn('provider', ['vimeo']);
         });
     }

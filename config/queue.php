@@ -37,8 +37,8 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'table' => 'jobs',
-            'queue' => 'tokens,channels,videos,playlists',
+            'table'  => 'jobs',
+            'queue'  => 'tokens,channels,videos,playlists',
             'expire' => 60,
         ],
 
@@ -67,10 +67,10 @@ return [
         ],
 
         'redis' => [
-            'driver' => 'redis',
+            'driver'     => 'redis',
             'connection' => 'default',
-            'queue'  => 'default',
-            'expire' => 60,
+            'queue'      => 'default',
+            'expire'     => 60,
         ],
 
     ],

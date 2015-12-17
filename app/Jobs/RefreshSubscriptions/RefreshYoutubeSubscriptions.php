@@ -2,10 +2,6 @@
 
 namespace Korko\kTube\Jobs\RefreshSubscriptions;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Korko\kTube\Account;
 use Korko\kTube\Channel;
@@ -23,7 +19,7 @@ class RefreshYoutubeSubscriptions extends RefreshSubscriptions
             $channels[] = new Channel([
                 'site_id'    => $account->site_id,
                 'channel_id' => $item->snippet->resourceId->channelId,
-                'name'       => $item->snippet->title
+                'name'       => $item->snippet->title,
             ]);
         }
 
@@ -40,7 +36,7 @@ class RefreshYoutubeSubscriptions extends RefreshSubscriptions
             $items = $api->subscriptions->listSubscriptions('snippet', [
                 'mine'       => 'true',
                 'maxResults' => 50,
-                'pageToken'  => $pageToken
+                'pageToken'  => $pageToken,
             ]);
 
             foreach ($items as $item) {

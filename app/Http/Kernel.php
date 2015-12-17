@@ -26,7 +26,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Korko\kTube\Http\Middleware\Authenticate::class,
+        'auth'  => \Korko\kTube\Http\Middleware\Authenticate::class,
         'guest' => \Korko\kTube\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

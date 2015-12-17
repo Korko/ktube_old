@@ -7,8 +7,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Korko\kTube\Jobs\BackupAccount\BackupAllAccounts;
 use Korko\kTube\Jobs\RefreshSubscriptions\RefreshAllSubscriptions;
-use Korko\kTube\Jobs\RefreshVideos\RefreshAllVideos;
 use Korko\kTube\Jobs\RefreshToken\RefreshTokens;
+use Korko\kTube\Jobs\RefreshVideos\RefreshAllVideos;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,7 +26,8 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)

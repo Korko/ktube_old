@@ -15,14 +15,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
             'SocialiteProviders\Dailymotion\DailymotionExtendSocialite@handle',
-            'SocialiteProviders\Vimeo\VimeoExtendSocialite@handle'
-        ]
+            'SocialiteProviders\Vimeo\VimeoExtendSocialite@handle',
+        ],
     ];
 
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param \Illuminate\Contracts\Events\Dispatcher $events
+     *
      * @return void
      */
     public function boot(DispatcherContract $events)

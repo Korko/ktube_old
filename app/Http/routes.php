@@ -28,7 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/accounts', 'AccountsController@index');
     Route::get('/profile', 'ProfileController@index');
 
-
     Route::get('/videos/all', 'VideoController@all');
 });
 

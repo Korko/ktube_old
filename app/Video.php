@@ -19,8 +19,8 @@ class Video extends Model
 
     public function scopeFromSite($query, $provider)
     {
-        return $query->whereHas('channel', function($query) use ($provider) {
-            return $query->whereHas('site', function($query) use ($provider) {
+        return $query->whereHas('channel', function ($query) use ($provider) {
+            return $query->whereHas('site', function ($query) use ($provider) {
                 return $query->where('provider', $provider);
             });
         });

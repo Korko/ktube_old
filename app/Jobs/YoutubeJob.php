@@ -9,8 +9,10 @@ use Korko\kTube\Account;
 trait YoutubeJob
 {
     /**
-     * Get a fresh Youtube API object
-     * @param  Account|null            $account
+     * Get a fresh Youtube API object.
+     *
+     * @param Account|null $account
+     *
      * @return Google_Service_YouTube
      */
     protected function getApi(Account $account = null)
@@ -24,8 +26,8 @@ trait YoutubeJob
         if (isset($account)) {
             $client->setAccessToken(json_encode([
                 'access_token' => $account->access_token,
-                'created' => time(),
-                'expires_in' => 3600
+                'created'      => time(),
+                'expires_in'   => 3600,
             ]));
         }
 
