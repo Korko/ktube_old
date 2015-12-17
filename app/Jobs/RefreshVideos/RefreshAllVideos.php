@@ -37,7 +37,7 @@ class RefreshAllVideos extends Job implements SelfHandling, ShouldQueue
         foreach ($channels as $channel) {
             try {
                 $this->dispatch(RefreshVideos::getInstance($channel));
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 Log::error($e->getMessage(), ['channel' => $channel]);
             }
         }

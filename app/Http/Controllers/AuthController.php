@@ -5,7 +5,6 @@ namespace Korko\kTube\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
 use Korko\kTube\Account;
-use Korko\kTube\Http\Controllers\Controller;
 use Korko\kTube\Site;
 use Korko\kTube\User;
 use Socialite;
@@ -60,18 +59,18 @@ class AuthController extends Controller
         $site = Site::where('provider', $provider)->firstOrFail();
 
         $account = Account::firstOrNew([
-            'site_id' => $site->id,
-            'account_id' => $userData->id
+            'site_id'    => $site->id,
+            'account_id' => $userData->id,
         ]);
 
         $user = $this->getAuthUser($account, $userData);
 
         $account->fill([
-            'user_id' => $user->id,
-            'name' => $userData->name ?: $userData->nickname,
-            'access_token' => $userData->token,
+            'user_id'       => $user->id,
+            'name'          => $userData->name ?: $userData->nickname,
+            'access_token'  => $userData->token,
             'refresh_token' => $userData->refreshToken,
-            'expires_at' => Carbon::now()->addSeconds($userData->tokenExpiresIn)
+            'expires_at'    => Carbon::now()->addSeconds($userData->tokenExpiresIn),
         ])->save();
 
         return $account;
@@ -92,11 +91,11 @@ class AuthController extends Controller
     protected function findOrCreateAccountUser($account, $userData)
     {
         // Then tries to get the user from the account
-        if (! isset($account->user_id)) {
+        if (!isset($account->user_id)) {
             // If it's a new account, then create a new user
             $user = User::create([
-                'name' => $userData->name ?: $userData->nickname,
-                'email' => $userData->email
+                'name'  => $userData->name ?: $userData->nickname,
+                'email' => $userData->email,
             ]);
         } else {
             $user = $account->user()->first();

@@ -2,7 +2,6 @@
 
 namespace Korko\kTube\Jobs\BackupAccount;
 
-use Carbon\Carbon;
 use DateTime;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,7 +25,7 @@ abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue
 
     public static function getInstance(Account $account, DateTime $backupDate)
     {
-            switch ($account->site->provider) {
+        switch ($account->site->provider) {
                 case 'google':
                     return new BackupYoutubeAccount($account, $backupDate);
                     break;
@@ -63,9 +62,11 @@ abstract class BackupAccount extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * Get videos published yesterday
-     * @param  Collection $channels List of channels from which get videos
-     * @return Collection           List of videos of these channels published yesterday
+     * Get videos published yesterday.
+     *
+     * @param Collection $channels List of channels from which get videos
+     *
+     * @return Collection List of videos of these channels published yesterday
      */
     protected function getVideos(Collection $channels)
     {

@@ -38,9 +38,9 @@ return [
     'connections' => [
 
         'main' => [
-            'salt' => '59f2vft66aMoryqMv0TcezA3ELVWgHNp',
-            'length' => 6,
-            'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+            'salt'     => '59f2vft66aMoryqMv0TcezA3ELVWgHNp',
+            'length'   => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
         ],
 
     ],

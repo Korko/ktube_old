@@ -3,10 +3,10 @@
 namespace Korko\kTube\Jobs\RefreshToken;
 
 use Carbon\Carbon;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Korko\kTube\Account;
 use Korko\kTube\Jobs\Job;
 use Socialite;
@@ -21,8 +21,9 @@ class RefreshToken extends Job implements SelfHandling, ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  string  $provider
-     * @param  string  $token
+     * @param string $provider
+     * @param string $token
+     *
      * @return void
      */
     public function __construct($provider, $token)
@@ -44,7 +45,7 @@ class RefreshToken extends Job implements SelfHandling, ShouldQueue
             ->with('access_token', $this->token)
             ->update([
                 'access_token' => $token->accessToken,
-                'expires_at' => Carbon::now()->addSeconds($token->expiresIn)
+                'expires_at'   => Carbon::now()->addSeconds($token->expiresIn),
             ]);
     }
 }

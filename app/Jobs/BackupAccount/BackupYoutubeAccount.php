@@ -11,8 +11,8 @@ use Google_Service_YouTube_PlaylistSnippet;
 use Google_Service_YouTube_PlaylistStatus;
 use Google_Service_YouTube_ResourceId;
 use Korko\kTube\Account;
-use Korko\kTube\Video;
 use Korko\kTube\Jobs\YoutubeJob;
+use Korko\kTube\Video;
 use Log;
 
 class BackupYoutubeAccount extends BackupAccount
@@ -78,7 +78,7 @@ class BackupYoutubeAccount extends BackupAccount
         $playlistItem = new Google_Service_YouTube_PlaylistItem();
         $playlistItem->setSnippet($playlistItemSnippet);
         $playlistItemResponse = $api->playlistItems->insert(
-            'snippet,contentDetails', $playlistItem, array()
+            'snippet,contentDetails', $playlistItem, []
         );
     }
 }

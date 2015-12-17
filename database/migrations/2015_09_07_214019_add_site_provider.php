@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Query\Expression;
 use Korko\kTube\Site;
@@ -17,7 +16,6 @@ class AddSiteProvider extends Migration
         Schema::table('sites', function ($table) {
             $table->string('provider');
         });
-
 
         Site::where('name', 'google')->update(['name' => 'Youtube', 'provider' => 'google']);
         Site::where('name', 'facebook')->update(['name' => 'Facebook', 'provider' => 'facebook']);

@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Query\Expression;
-use Korko\kTube\Site;
-use Korko\kTube\Channel;
 use Korko\kTube\Video;
 
 class AddVideoThumbnail extends Migration
@@ -19,7 +16,6 @@ class AddVideoThumbnail extends Migration
         Schema::table('videos', function ($table) {
             $table->string('thumbnail')->nullable();
         });
-
 
         Video::fromSite('google')
           ->update(['thumbnail' => new Expression('CONCAT("http://img.youtube.com/vi/", video_id, "/mqdefault.jpg")')]);

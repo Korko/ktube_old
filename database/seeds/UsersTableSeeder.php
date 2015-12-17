@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 foreach ($sites->random(rand(2, $sites->count())) as $site) {
                     $account = factory(Account::class)->create([
                         'site_id' => $site->id,
-                        'user_id' => $user->id
+                        'user_id' => $user->id,
                     ]);
 
                     $channels = Channel::orderBy(DB::raw('RAND()'))
