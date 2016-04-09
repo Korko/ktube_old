@@ -41,8 +41,9 @@ abstract class RefreshChannelsVideos
     {
         $videos = $this->fetchVideos();
 
-        $videos = $videos->map(function($video) {
+        $videos = $videos->map(function ($video) {
             $video['channel_id'] = $this->channel->id;
+
             return $video;
         });
 
