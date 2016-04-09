@@ -12,17 +12,17 @@ abstract class RefreshVideos
     public static function getInstance(Channel $channel)
     {
         switch ($channel->site->provider) {
-                case 'google':
-                    return new RefreshYoutubeVideos($channel);
-                    break;
+            case 'google':
+                return new RefreshYoutubeVideos($channel);
+                break;
 
-                case 'dailymotion':
-                    return new RefreshDailymotionVideos($channel);
-                    break;
+            case 'dailymotion':
+                return new RefreshDailymotionVideos($channel);
+                break;
 
-                default:
-                    throw new InvalidProviderException('Channel provider not managed');
-            }
+            default:
+                throw new InvalidProviderException('Channel provider not managed');
+        }
     }
 
     protected $channel;

@@ -12,17 +12,17 @@ abstract class RefreshSubscriptions
     public static function getInstance(Account $account)
     {
         switch ($account->site->provider) {
-                case 'google':
-                    return new RefreshYoutubeSubscriptions($account);
-                    break;
+            case 'google':
+                return new RefreshYoutubeSubscriptions($account);
+                break;
 
-                case 'dailymotion':
-                    return new RefreshDailymotionSubscriptions($account);
-                    break;
+            case 'dailymotion':
+                return new RefreshDailymotionSubscriptions($account);
+                break;
 
-                default:
-                    throw new InvalidProviderException('Account provider not managed');
-            }
+            default:
+                throw new InvalidProviderException('Account provider not managed');
+        }
     }
 
     protected $account;
