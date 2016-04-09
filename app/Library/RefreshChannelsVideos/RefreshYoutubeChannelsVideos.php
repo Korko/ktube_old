@@ -20,6 +20,6 @@ class RefreshYoutubeChannelsVideos extends RefreshChannelsVideos
     {
         $publishedAfter = $this->channel->scanned_at->setTimezone('UTC')->toRfc3339String();
 
-        return $this->yt->getVideosByChannel($this->channel, $publishedAfter);
+        return $this->yt->getVideosByChannel($this->channel->channel_id, $publishedAfter);
     }
 }

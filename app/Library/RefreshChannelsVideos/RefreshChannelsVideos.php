@@ -41,6 +41,11 @@ abstract class RefreshChannelsVideos
     {
         $videos = $this->fetchVideos();
 
+        $videos = $videos->map(function($video) {
+            $video['channel_id'] = $this->channel->id;
+            return $video;
+        });
+
         // Now save those videos in DB
         $this->saveVideos($videos);
 
@@ -95,7 +100,7 @@ abstract class RefreshChannelsVideos
         // There can be lag so don't take now as the limit
         $maxPublishedDate = null;
         foreach ($videos as $video) {
-            $maxPublishedDate = $maxPublishedDate ? $maxPublishedDate->max($video->published_at) : $video->published_at;
+            $maxPublishedDate = $maxPublishedDate ? $maxPublishedDate->max($video['published_at']) : $video['published_at'];
         }
 
         // Update the channel for next loop
