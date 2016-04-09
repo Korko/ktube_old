@@ -4,7 +4,7 @@ namespace Korko\kTube\Library;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Site;
+use Korko\kTube\Site;
 
 class YoutubeApi
 {
