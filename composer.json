@@ -19,7 +19,8 @@
         "google/apiclient": "1.0.*@dev",
         "dailymotion/sdk": "dev-master",
         "vinkla/hashids": "^2.0@dev",
-        "spatie/laravel-backup": "dev-master"
+        "spatie/laravel-backup": "dev-master",
+        "league/statsd": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.6@dev",

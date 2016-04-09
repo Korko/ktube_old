@@ -144,6 +144,7 @@ return [
         Vinkla\Hashids\HashidsServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        League\StatsD\Laravel5\Provider\StatsdServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -198,6 +199,7 @@ return [
         'Schema'    => Illuminate\Support\Facades\Schema::class,
         'Session'   => Illuminate\Support\Facades\Session::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Statsd'    => League\StatsD\Laravel5\Facade\StatsdFacade::class,
         'Storage'   => Illuminate\Support\Facades\Storage::class,
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
