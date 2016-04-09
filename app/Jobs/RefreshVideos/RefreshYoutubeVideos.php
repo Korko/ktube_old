@@ -5,8 +5,8 @@ namespace Korko\kTube\Jobs\RefreshVideos;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Korko\kTube\Channel;
-use Korko\kTube\Video;
 use Korko\kTube\Jobs\YoutubeJob;
+use Korko\kTube\Video;
 
 class RefreshYoutubeVideos extends RefreshVideos
 {
@@ -28,7 +28,7 @@ class RefreshYoutubeVideos extends RefreshVideos
                 'type'           => 'video',
                 'publishedAfter' => $channel->scanned_at->setTimezone('UTC')->toRfc3339String(),
                 'maxResults'     => 50,
-                'pageToken'      => $pageToken
+                'pageToken'      => $pageToken,
             ]);
 
             foreach ($items as $item) {
@@ -48,7 +48,7 @@ class RefreshYoutubeVideos extends RefreshVideos
             'video_id'     => $item->id->videoId,
             'name'         => $item->snippet->title,
             'thumbnail'    => $item->snippet->thumbnails->getMedium()->url,
-            'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
+            'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get()),
         ]);
     }
 }

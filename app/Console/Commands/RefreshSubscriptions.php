@@ -4,8 +4,8 @@ namespace Korko\kTube\Console\Commands;
 
 use Illuminate\Console\Command;
 use Korko\kTube\Account;
-use Korko\kTube\Library\RefreshSubscriptions\RefreshSubscriptions as RefreshSubscriptionsLibrary;
 use Korko\kTube\Library\RefreshChannelsVideos\RefreshChannelsVideos as RefreshChannelsVideosLibrary;
+use Korko\kTube\Library\RefreshSubscriptions\RefreshSubscriptions as RefreshSubscriptionsLibrary;
 
 class RefreshSubscriptions extends Command
 {

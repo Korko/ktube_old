@@ -10,6 +10,7 @@ class RefreshYoutubePlaylists extends RefreshPlaylists
     protected function fetchPlaylists(Account $account)
     {
         $yt = new YoutubeApiConnected($account);
+
         return $yt->getMyPlaylists();
     }
 }

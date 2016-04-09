@@ -49,14 +49,17 @@ abstract class RefreshVideos
     }
 
     /**
-     * Fetch new videos from this specific channel
-     * @return Collection       List of new videos to add to this channel
+     * Fetch new videos from this specific channel.
+     *
+     * @return Collection List of new videos to add to this channel
      */
     abstract protected function fetchVideos();
 
     /**
-     * Save those videos (removes the duplicates)
-     * @param  Collection $videos  [description]
+     * Save those videos (removes the duplicates).
+     *
+     * @param Collection $videos [description]
+     *
      * @return void
      */
     protected function saveVideos(Collection $videos)
@@ -78,8 +81,10 @@ abstract class RefreshVideos
     }
 
     /**
-     * Update the related channel with the max published date from those videos
-     * @param  Collection $videos  [description]
+     * Update the related channel with the max published date from those videos.
+     *
+     * @param Collection $videos [description]
+     *
      * @return void
      */
     protected function updateChannel(Collection $videos)

@@ -5,8 +5,8 @@ namespace Korko\kTube\Library\RefreshVideos;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Korko\kTube\Channel;
-use Korko\kTube\Video;
 use Korko\kTube\Jobs\DailymotionJob;
+use Korko\kTube\Video;
 
 class RefreshDailymotionVideos extends RefreshVideos
 {
@@ -26,7 +26,7 @@ class RefreshDailymotionVideos extends RefreshVideos
                 'sort'           => 'recent',
                 'created_after'  => $this->channel->scanned_at->setTimezone('UTC')->toRfc3339String(),
                 'limit'          => 50,
-                'page'           => ++$page
+                'page'           => ++$page,
             ]);
 
             foreach ($data['list'] as $item) {
@@ -44,7 +44,7 @@ class RefreshDailymotionVideos extends RefreshVideos
             'video_id'     => $item['id'],
             'name'         => $item['title'],
             'thumbnail'    => $item['thumbnail_180_url'],
-            'published_at' => Carbon::createFromTimeStamp($item['created_time'])->setTimezone(date_default_timezone_get())
+            'published_at' => Carbon::createFromTimeStamp($item['created_time'])->setTimezone(date_default_timezone_get()),
         ]);
     }
 }

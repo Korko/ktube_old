@@ -14,8 +14,10 @@ use Google_Service_YouTube_ResourceId;
 class YoutubeLib
 {
     /**
-     * Get a fresh Youtube API object
-     * @param  String|null $accessToken
+     * Get a fresh Youtube API object.
+     *
+     * @param string|null $accessToken
+     *
      * @return Google_Service_YouTube
      */
     public static function getApi($accessToken = null)
@@ -25,8 +27,8 @@ class YoutubeLib
         if (isset($accessToken)) {
             $client->setAccessToken(json_encode([
                 'access_token' => $accessToken,
-                'created' => time(),
-                'expires_in' => 3600
+                'created'      => time(),
+                'expires_in'   => 3600,
             ]));
         }
 

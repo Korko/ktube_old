@@ -8,7 +8,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Korko\kTube\Jobs\BackupAccount\BackupAllAccounts;
 use Korko\kTube\Jobs\RefreshSubscriptions\RefreshAllSubscriptions;
 use Korko\kTube\Jobs\RefreshToken\RefreshTokens;
-use Korko\kTube\Jobs\RefreshVideos\RefreshAllVideos;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,7 +20,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \Korko\kTube\Console\Commands\RefreshPlaylists::class,
-        \Korko\kTube\Console\Commands\RefreshSubscriptions::class
+        \Korko\kTube\Console\Commands\RefreshSubscriptions::class,
     ];
 
     /**
