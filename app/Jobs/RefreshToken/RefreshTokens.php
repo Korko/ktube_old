@@ -2,8 +2,8 @@
 
 namespace Korko\kTube\Jobs\RefreshToken;
 
-use Exception;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

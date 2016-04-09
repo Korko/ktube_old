@@ -8,7 +8,7 @@ use Korko\kTube\Library\YoutubeApiConnected;
 class RefreshYoutubePlaylists extends RefreshPlaylists
 {
     private $yt;
-    
+
     public function __construct(Account $account)
     {
         $this->yt = new YoutubeApiConnected($account);

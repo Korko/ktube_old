@@ -36,7 +36,7 @@ class YoutubeApiConnected extends YoutubeApi
             $playlists[] = [
                 'user_id'     => $this->account->user_id,
                 'name'        => $item->snippet->title,
-                'playlist_id' => $item->id
+                'playlist_id' => $item->id,
             ];
         }
 
@@ -54,7 +54,7 @@ class YoutubeApiConnected extends YoutubeApi
                 $playlists[$name] = [
                     'user_id'     => $this->account->user_id,
                     'name'        => $name,
-                    'playlist_id' => $playlistId
+                    'playlist_id' => $playlistId,
                 ];
             }
         }
@@ -72,14 +72,14 @@ class YoutubeApiConnected extends YoutubeApi
             $channels[] = [
                 'site_id'    => $this->site->id,
                 'channel_id' => $item->snippet->resourceId->channelId,
-                'name'       => $item->snippet->title
+                'name'       => $item->snippet->title,
             ];
         }
 
         return $channels;
     }
 
-    public function addPlaylist($name, $videos = array())
+    public function addPlaylist($name, $videos = [])
     {
         $item = $this->worker->addPlaylist($title);
 

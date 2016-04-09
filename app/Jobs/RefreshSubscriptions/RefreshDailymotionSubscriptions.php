@@ -2,10 +2,6 @@
 
 namespace Korko\kTube\Jobs\RefreshSubscriptions;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Korko\kTube\Account;
 use Korko\kTube\Channel;
@@ -23,7 +19,7 @@ class RefreshDailymotionSubscriptions extends RefreshSubscriptions
             $channels[] = new Channel([
                 'site_id'    => $account->site_id,
                 'channel_id' => $item['id'],
-                'name'       => $item['screenname']
+                'name'       => $item['screenname'],
             ]);
         }
 
@@ -40,7 +36,7 @@ class RefreshDailymotionSubscriptions extends RefreshSubscriptions
             $data = $api->get('/user/me/following', [
                 'fields' => 'id,screenname',
                 'limit'  => 50,
-                'page'   => ++$page
+                'page'   => ++$page,
             ]);
 
             foreach ($data['list'] as $item) {

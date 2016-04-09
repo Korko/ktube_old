@@ -12,6 +12,7 @@ class BackupYoutubeAccount extends BackupAccount
     protected function createPlaylist(Account $account, $title, $videos)
     {
         $yt = new YoutubeApiConnected($account);
+
         return $yt->addPlaylist($title, $videos);
     }
 }

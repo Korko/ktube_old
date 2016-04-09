@@ -10,6 +10,7 @@ class RefreshYoutubeSubscriptions extends RefreshSubscriptions
     protected function getChannels(Account $account)
     {
         $yt = new YoutubeApiConnected($account);
+
         return $yt->getMySubscriptions();
     }
 }

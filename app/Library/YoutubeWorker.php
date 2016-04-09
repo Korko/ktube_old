@@ -13,27 +13,27 @@ class YoutubeWorker
         $this->api = YoutubeLib::getApi($accessToken);
     }
 
-    public function getPlaylistsCursor(Array $filters, $select = 'snippet')
+    public function getPlaylistsCursor(array $filters, $select = 'snippet')
     {
         return $this->allPagesCursor(function ($pageToken) use ($select, $filters) {
             return $this->api->playlists->listPlaylists($select, [
                 'maxResults' => 50,
-                'pageToken'  => $pageToken
+                'pageToken'  => $pageToken,
             ] + $filters);
         });
     }
 
-    public function getPlaylistItemsCursor(Array $filters, $select = 'snippet')
+    public function getPlaylistItemsCursor(array $filters, $select = 'snippet')
     {
         return $this->allPagesCursor(function ($pageToken) use ($select, $filters) {
             return $this->api->playlistItems->listPlaylistItems($select, [
                 'maxResults' => 50,
-                'pageToken'  => $pageToken
+                'pageToken'  => $pageToken,
             ] + $filters);
         });
     }
 
-    public function getSearchCursor(Array $filters, $select = 'snippet')
+    public function getSearchCursor(array $filters, $select = 'snippet')
     {
         return $this->allPagesCursor(function ($pageToken) use ($select, $filters) {
             return $this->api->search->listSearch($select, [
@@ -41,28 +41,28 @@ class YoutubeWorker
                 'safeSearch' => 'none',
                 'type'       => 'video',
                 'maxResults' => 50,
-                'pageToken'  => $pageToken
+                'pageToken'  => $pageToken,
             ] + $filters);
         });
     }
 
-    public function getChannelsCursor(Array $filters, $select = 'snippet')
+    public function getChannelsCursor(array $filters, $select = 'snippet')
     {
         return $this->allPagesCursor(function ($pageToken) use ($select, $filters) {
             return $this->api->channels->listChannels($select, [
                 'maxResults' => 50,
-                'pageToken'  => $pageToken
+                'pageToken'  => $pageToken,
             ] + $filters);
         });
     }
 
     public function getSubscriptionsCursor($select = 'snippet')
     {
-        return $this->allPagesCursor(function ($pageToken) use($select) {
+        return $this->allPagesCursor(function ($pageToken) use ($select) {
             return $this->api->subscriptions->listSubscriptions($select, [
                 'mine'       => 'true',
                 'maxResults' => 50,
-                'pageToken'  => $pageToken
+                'pageToken'  => $pageToken,
             ]);
         });
     }

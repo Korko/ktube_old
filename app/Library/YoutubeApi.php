@@ -38,11 +38,11 @@ class YoutubeApi
             $channel = $this->getChannelById($item->snippet->channelId);
 
             $videos[] = [
-                'channel'   => $channel,
+                'channel'      => $channel,
                 'video_id'     => $item->snippet->resourceId->videoId,
                 'name'         => $item->snippet->title,
                 'thumbnail'    => $item->snippet->thumbnails ? $item->snippet->thumbnails->medium->url : null,
-                'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
+                'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get()),
             ];
         }
 
@@ -60,7 +60,7 @@ class YoutubeApi
                 'video_id'     => $item->id->videoId,
                 'name'         => $item->snippet->title,
                 'thumbnail'    => $item->snippet->thumbnails ? $item->snippet->thumbnails->medium->url : null,
-                'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get())
+                'published_at' => Carbon::parse($item->snippet->publishedAt)->setTimezone(date_default_timezone_get()),
             ];
         }
 
@@ -80,7 +80,7 @@ class YoutubeApi
         return [
             'site_id'    => $this->site->id,
             'channel_id' => $item->id,
-            'name'       => $item->snippet->title
+            'name'       => $item->snippet->title,
         ];
     }
 }

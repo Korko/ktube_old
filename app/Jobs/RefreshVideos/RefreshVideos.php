@@ -63,17 +63,21 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * Fetch new videos from this specific channel
-     * @param  Channel $channel [description]
-     * @return Collection       List of new videos to add to this channel
+     * Fetch new videos from this specific channel.
+     *
+     * @param Channel $channel [description]
+     *
+     * @return Collection List of new videos to add to this channel
      */
     abstract protected function fetchVideos(Channel $channel);
 
     /**
-     * Save those videos (removes the duplicates)
-     * @param  Channel    $channel [description]
-     * @param  Collection $videos  [description]
-     * @return [type]              [description]
+     * Save those videos (removes the duplicates).
+     *
+     * @param Channel    $channel [description]
+     * @param Collection $videos  [description]
+     *
+     * @return [type] [description]
      */
     protected function saveVideos(Channel $channel, Collection $videos)
     {
@@ -94,10 +98,12 @@ abstract class RefreshVideos extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * Update the related channel with the max published date from those videos
-     * @param  Channel    $channel [description]
-     * @param  Collection $videos  [description]
-     * @return [type]              [description]
+     * Update the related channel with the max published date from those videos.
+     *
+     * @param Channel    $channel [description]
+     * @param Collection $videos  [description]
+     *
+     * @return [type] [description]
      */
     protected function updateChannel(Channel $channel, Collection $videos)
     {

@@ -49,9 +49,11 @@ abstract class BackupAccount
     }
 
     /**
-     * Get videos published yesterday
-     * @param  Collection $channels List of channels from which get videos
-     * @return Collection           List of videos of these channels published yesterday
+     * Get videos published yesterday.
+     *
+     * @param Collection $channels List of channels from which get videos
+     *
+     * @return Collection List of videos of these channels published yesterday
      */
     protected function getVideos(Collection $channels)
     {
