@@ -79,7 +79,7 @@ class YoutubeApiConnected extends YoutubeApi
         return $channels;
     }
 
-    public function addPlaylist($name, $videos = [])
+    public function addPlaylist($title, $videos = [])
     {
         $item = $this->worker->addPlaylist($title);
 
