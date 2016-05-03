@@ -2,6 +2,7 @@
 
 namespace Korko\kTube\Library\BackupAccount;
 
+use DateTime;
 use Korko\kTube\Account;
 use Korko\kTube\Library\YoutubeApiConnected;
 
