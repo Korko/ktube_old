@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        \Korko\kTube\Console\Commands\BackupAccount::class,
         \Korko\kTube\Console\Commands\RefreshPlaylists::class,
         \Korko\kTube\Console\Commands\RefreshSubscriptions::class,
     ];
