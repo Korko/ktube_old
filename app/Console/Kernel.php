@@ -6,6 +6,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Korko\kTube\Jobs\BackupAccount\BackupAllAccounts;
+use Korko\kTube\Jobs\RefreshChannelsVideos\RefreshAllChannelsVideos;
+use Korko\kTube\Jobs\RefreshPlaylists\RefreshAllPlaylists;
 use Korko\kTube\Jobs\RefreshSubscriptions\RefreshAllSubscriptions;
 use Korko\kTube\Jobs\RefreshToken\RefreshTokens;
 
