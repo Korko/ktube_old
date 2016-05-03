@@ -13,13 +13,13 @@ abstract class BackupAccount
     public static function getInstance(Account $account, DateTime $backupDate)
     {
         switch ($account->site->provider) {
-                case 'google':
-                    return new BackupYoutubeAccount($account, $backupDate);
-                    break;
+            case 'google':
+                return new BackupYoutubeAccount($account, $backupDate);
+                break;
 
-                default:
-                    throw new InvalidProviderException('Account provider not managed');
-            }
+            default:
+                throw new InvalidProviderException('Account provider not managed');
+        }
     }
 
     protected $account;
