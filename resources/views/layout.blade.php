@@ -11,10 +11,10 @@
 
 		<title>kTube - @yield('title', 'Home')</title>
 
-		<link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<link href="<< asset('media/style/app.css') >>" rel="stylesheet" type="text/css">
-		<link href="<< asset('media/style/loading.css') >>" rel="stylesheet" type="text/css">
+		@section('styles')
+			<link href="<< elixir('css/main.css') >>" rel="stylesheet" type="text/css">
+			<link href="<< elixir('css/app.css') >>" rel="stylesheet" type="text/css">
+		@show
 
 		@yield('headers')
 
@@ -81,10 +81,8 @@
 				.add("MomentJS", "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js")
 				.add("jQuery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js")
 				.add("Bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js", ["jQuery"])
-				.add("Angular", "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js")
-				.add("Angular-InfiniteScroll", "https://cdnjs.cloudflare.com/ajax/libs/ngInfiniteScroll/1.2.1/ng-infinite-scroll.js", ["jQuery", "Angular"])
-				.add("Angular-Bootstrap", "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap.js", ["Angular", "Bootstrap"])
-				.add("App", "<< asset('media/js/app.js') >>", ["Angular", "MomentJS", "Angular-InfiniteScroll"])
+				.add("VueJS", "http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js")
+				.add("App", "<< asset('media/js/app.js') >>", ["VueJS", "MomentJS"])
 				.add("Script", "<< asset('media/js/script.js') >>", ["jQuery", "MomentJS"])
 				.init();
 		</script>

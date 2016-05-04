@@ -1,7 +1,8 @@
 @extends('layout')
 
-@section('headers')
-<link href="<< asset('/media/style/cover.css') >>" rel="stylesheet" type="text/css">
+@section('styles')
+<link href="<< elixir('css/main.css') >>" rel="stylesheet" type="text/css">
+<link href="<< elixir('css/cover.css') >>" rel="stylesheet" type="text/css">
 @endsection
 
 @section('body')
