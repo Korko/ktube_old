@@ -3,7 +3,6 @@
 namespace Korko\kTube\Http\Controllers;
 
 use Auth;
-use Carbon\Carbon;
 use Korko\kTube\Account;
 use Korko\kTube\Site;
 use Korko\kTube\User;
@@ -25,7 +24,7 @@ class AuthController extends Controller
 
         $socialite = Socialite::with($provider);
 
-        if($provider === 'google') {
+        if ($provider === 'google') {
             $socialite->with(['scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl']);
         }
 
