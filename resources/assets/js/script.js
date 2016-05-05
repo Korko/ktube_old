@@ -5,3 +5,11 @@
 	});
 	setTimeout(update_time, 1000);
 })();
+
+function getVideos(resolve) {
+        jQuery.ajax({
+                url: "/videos/all",
+        }).done(function(ajax) {
+                resolve(ajax.data);
+        })
+}

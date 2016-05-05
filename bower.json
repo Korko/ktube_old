@@ -1,0 +1,13 @@
+{
+  "name": "ktube",
+  "description": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "vue": "^1.0.0",
+    "vue-router": "~0.7.0",
+    "jquery": "^2.0.0",
+    "moment": "^2.0.0",
+    "bootstrap": "^3.0.0"
+  }
+}

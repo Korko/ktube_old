@@ -1,49 +1,33 @@
-.row li {
-	list-style: none;
-	padding: 10px 0;
-}
-
-.video-thumbnail {
-	float: left;
-	width: 350px;
-}
-
-.video-data {
-	float: left;
-	clear: right;
-}
-
-.video_thumbnail {
-        width: 100px;
-        height: 100px;
-        display: inline-block;
-}
-
 .cssload-triangles {
-        display: none;
+	display: none;
 }
 
-[ng-cloak], #container.loading {
-  display: none !important;
+[v-cloak], #container.loading {
+	display: none !important;
 }
 
-[ng-cloak] + .cssload-triangles, #container.loading + .cssload-triangles {
-        display: block;
+[v-cloak] + .cssload-triangles, #container.loading + .cssload-triangles {
+	display: block;
 }
 
 .glyphicon-refresh-animate {
-    -animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
+	-animation: spin 1s infinite linear;
+	-webkit-animation: spin2 1s infinite linear;
 }
 
 @-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg);}
-    to { -webkit-transform: rotate(360deg);}
+	from { -webkit-transform: rotate(0deg);}
+	to { -webkit-transform: rotate(360deg);}
 }
 
 @keyframes spin {
-    from { transform: scale(1) rotate(0deg);}
-    to { transform: scale(1) rotate(360deg);}
+	from { transform: scale(1) rotate(0deg);}
+	to { transform: scale(1) rotate(360deg);}
+}
+
+#video-list li {
+	list-style: none;
+	padding: 10px 0;
 }
 
 .cssload-triangles {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ktube" id="ng-app">
+<html lang="en">
 	<head>
 	@section('head')
 		<meta charset="utf-8">
@@ -25,7 +25,7 @@
 		<![endif]-->
 	@show
 	</head>
-	<body>
+	<body id="root">
 	@section('body')
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -57,8 +57,8 @@
 			</div>
 		</nav>
 
-		<div id="container" class="container-fluid" ng-cloak>
-			@yield('content')
+		<div id="container" class="container-fluid" :class="{'loading': loading}" v-cloak>
+			<router-view></router-view>
 		</div>
 
 		<div class="cssload-triangles">
@@ -74,17 +74,7 @@
 		</div>
 	@show
 
-		<script src="<< asset('media/js/dependencies.js') >>"></script>
-		<script type="text/javascript">
-			window.name = 'NG_DEFER_BOOTSTRAP! ' + window.name;
-			Dependencies
-				.add("MomentJS", "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js")
-				.add("jQuery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js")
-				.add("Bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js", ["jQuery"])
-				.add("VueJS", "http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js")
-				.add("App", "<< asset('media/js/app.js') >>", ["VueJS", "MomentJS"])
-				.add("Script", "<< asset('media/js/script.js') >>", ["jQuery", "MomentJS"])
-				.init();
-		</script>
+		<script src="<< elixir('js/vendor.js') >>"></script>
+		<script src="<< elixir('js/app.js') >>"></script>
 	</body>
 </html>
