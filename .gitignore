@@ -6,3 +6,4 @@
 /storage/framework/schedule-*
 /resources/assets/vendor
 /public/build
+sftp-config.json
