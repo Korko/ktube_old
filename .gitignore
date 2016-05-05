@@ -5,3 +5,4 @@
 *.sublime-workspace
 /storage/framework/schedule-*
 /resources/assets/vendor
+/public/build

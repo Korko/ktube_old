@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    protected $fillable = ['user_id', 'site_id', 'account_id', 'name', 'access_token', 'refresh_token', 'expires_at'];
+    protected $fillable = ['user_id', 'site_id', 'account_id', 'name', 'access_token'];
 
     public function user()
     {
@@ -26,12 +26,5 @@ class Account extends Model
     public function playlists()
     {
         return $this->belongsToMany(Playlist::class)->withPivot('playlist_site_id');
-    }
-
-    public function scopeCanRefreshTokens($query)
-    {
-        return $query->whereHas('site', function ($query) {
-            return $query->whereNotIn('provider', ['vimeo']);
-        });
     }
 }

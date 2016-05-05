@@ -17,6 +17,7 @@ class SitesTableSeeder extends Seeder
             ['name' => 'Youtube', 'provider' => 'google'],
             ['name' => 'Dailymotion', 'provider' => 'dailymotion'],
             ['name' => 'Vimeo', 'provider' => 'vimeo'],
+            ['name' => 'Facebook', 'provider' => 'facebook'],
         ]);
     }
 }

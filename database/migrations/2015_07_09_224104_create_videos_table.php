@@ -16,6 +16,7 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->string('video_id');
             $table->string('name');
+            $table->string('thumbnail')->nullable();
             $table->integer('channel_id')->unsigned();
             $table->timestamp('published_at');
 

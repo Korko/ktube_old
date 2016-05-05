@@ -25,10 +25,8 @@ class AuthController extends Controller
 
         $socialite = Socialite::with($provider);
 
-        if ($provider === 'google') {
-            $socialite
-                ->asOffline()
-                ->addScope('https://www.googleapis.com/auth/youtube.force-ssl');
+        if($provider === 'google') {
+            $socialite->with(['scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl']);
         }
 
         return $socialite->redirect();
@@ -69,8 +67,6 @@ class AuthController extends Controller
             'user_id'       => $user->id,
             'name'          => $userData->name ?: $userData->nickname,
             'access_token'  => $userData->token,
-            'refresh_token' => $userData->refreshToken,
-            'expires_at'    => Carbon::now()->addSeconds($userData->tokenExpiresIn),
         ])->save();
 
         return $account;

@@ -33,6 +33,12 @@ return [
     ],
 
     'youtube' => [
-        'api_key' => env('YOUTUBE_API_KEY'),
+        'api_key'       => env('YOUTUBE_API_KEY'),
+    ],
+
+    'facebook' => [
+        'client_id'     => env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect'      => env('FACEBOOK_REDIRECT_URI')
     ],
 ];

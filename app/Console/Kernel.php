@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
         \Korko\kTube\Console\Commands\BackupAccount::class,
         \Korko\kTube\Console\Commands\RefreshPlaylists::class,
         \Korko\kTube\Console\Commands\RefreshSubscriptions::class,
+        \Korko\kTube\Console\Commands\RefreshAccountToken::class
     ];
 
     /**
@@ -35,21 +36,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            $this->dispatch(new RefreshTokens());
-        })->description('Refresh tokens')->everyMinute();
 
-        $schedule->call(function () {
-            $this->dispatch(new RefreshAllSubscriptions());
-            $this->dispatch(new RefreshAllChannelsVideos());
-        })->description('Refresh channels and videos')->cron('*/15 * * * *');
-
-        $schedule->call(function () {
-            $this->dispatch(new RefreshAllPlaylists());
-        })->description('Refresh playlists')->cron('*/15 * * * *');
-
-        $schedule->call(function () {
-            $this->dispatch(new BackupAllAccounts());
-        })->description('Backups yesterday\'s videos for users in holidays')->dailyAt('12:00');
     }
 }

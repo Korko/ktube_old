@@ -31,6 +31,7 @@
                         <a href="/auth/login/dailymotion" class="disabled"><img src="/media/images/Dailymotion.png" width="100" height="100" /></a>
                         <a href="/auth/login/vimeo" class="disabled"><img src="/media/images/Vimeo.png" width="100" height="100" /></a>
                         <a href="/auth/login/google"><img src="/media/images/Youtube.png" width="100" height="100" /></a>
+                        <a href="/auth/login/facebook"><img src="/media/images/Facebook.png" width="100" height="100" /></a>
                     </div>
                 </p>
             </div>

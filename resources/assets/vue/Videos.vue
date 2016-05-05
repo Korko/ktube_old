@@ -1,5 +1,10 @@
 <template>
-        <div id="video-list" class="row">
+        <div class="row" v-if="!videos.length">
+                Lors de la première connexion, il n'y a encore rien, cela va venir, le temps de récupérer vos abonnements et vidéos associées.
+        </div>
+
+        <div id="video-list" class="row" v-if="videos.length">
+
                 <ul>
                         <li v-for="video in videos">
                                 <div class="row">
@@ -36,7 +41,7 @@ export default {
 				this.$root.loading = false;
 				this.videos = this.videos.concat($data.data);
 				this.has_more = $data.has_more;
-				this.last_video = this.videos[this.videos.length - 1].hash;
+				this.last_video = this.videos.length ? this.videos[this.videos.length - 1].hash : null;
 				this.lock = false;
 
 			}.bind(this));
@@ -51,7 +56,7 @@ export default {
                 return {
 			has_more: false,
 			last_video: null,
-			lock: true,
+			lock: false,
                         videos: []
                 };
         }

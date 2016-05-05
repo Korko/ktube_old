@@ -32,8 +32,6 @@ $factory->define(Korko\kTube\Account::class, function ($faker) {
         //'user_id' => $user->id,
         'name'          => $faker->name,
         'access_token'  => str_random(10),
-        'refresh_token' => null,
-        'expires_at'    => Carbon\Carbon::now(),
     ];
 });
 

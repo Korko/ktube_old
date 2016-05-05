@@ -44,6 +44,7 @@
 						<li><a href="#">Settings</a></li>
 						<li><a href="/profile">Profile</a></li>
 						<li><a href="#">Help</a></li>
+						<li><a href="/auth/logout">Logout</a></li>
 					</ul>
 					<form class="navbar-form navbar-right">
 						<input type="text" class="form-control" placeholder="Search...">

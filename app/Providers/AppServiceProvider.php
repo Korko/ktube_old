@@ -23,11 +23,11 @@ class AppServiceProvider extends ServiceProvider
         // If Queue connection is sync, it may fail due to race condition
         if (config('queue.default') !== 'sync') {
             Account::created(function (Account $account) {
-                $this->dispatch(RefreshSubscriptions::getInstance($account));
+                $this->dispatch(new RefreshSubscriptions($account));
 
                 $channels = $account->channels;
                 foreach ($channels as $channel) {
-                    $this->dispatch(RefreshVideos::getInstance($channel));
+                    $this->dispatch(new RefreshVideos($channel));
                 }
             });
         }
