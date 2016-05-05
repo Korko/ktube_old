@@ -25,7 +25,8 @@ class VideoController extends Controller
     }
 
     public function all(Request $request)
-    {sleep(5);
+    {
+        sleep(5);
         $channels = Auth::user()->accounts()
             ->select('id')
             ->with('channels')->get()
