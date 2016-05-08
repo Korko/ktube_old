@@ -2,10 +2,8 @@
 
 namespace Korko\kTube\Listeners;
 
-use Korko\kTube\Events\NewVideo;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Redis;
+use Korko\kTube\Events\NewVideo;
 
 class BroadcastNewVideo
 {
@@ -22,7 +20,8 @@ class BroadcastNewVideo
     /**
      * Handle the event.
      *
-     * @param  NewVideo  $event
+     * @param NewVideo $event
+     *
      * @return void
      */
     public function handle(NewVideo $event)
@@ -32,17 +31,18 @@ class BroadcastNewVideo
 
         // Ok so there's a new video, for each connected users, check if it may interest them
         $interestedUsers = $this->getInterestedUsers($video);
-        foreach($interestedUsers as $user) {
+        foreach ($interestedUsers as $user) {
             $redis->publish('new_video', ['user' => $user->id, 'video' => $video]);
         }
     }
 
     /**
      * Get a list of users who may be interested by a specific video.
-     * Limit those users to connected ones
+     * Limit those users to connected ones.
      *
-     * @param  Video  $video [description]
-     * @return array         List of connected users interested by this video
+     * @param Video $video [description]
+     *
+     * @return array List of connected users interested by this video
      */
     protected function getInterestedUsers(Video $video)
     {
