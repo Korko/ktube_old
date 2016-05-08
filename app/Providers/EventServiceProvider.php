@@ -13,9 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'SocialiteProviders\Manager\SocialiteWasCalled' => [
-            'SocialiteProviders\Dailymotion\DailymotionExtendSocialite@handle',
-            'SocialiteProviders\Vimeo\VimeoExtendSocialite@handle',
+        'Korko\kTube\Events\NewVideo' => [
+            'Korko\kTube\Listeners\BroadcastNewVideo',
         ],
     ];
 
