@@ -2,6 +2,7 @@
 
 namespace Korko\kTube;
 
+use Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
@@ -24,5 +25,13 @@ class Video extends Model
                 return $query->where('provider', $provider);
             });
         });
+    }
+
+    public function scopeByHash($query, $hash)
+    {
+        $ids = Hashids::decode($hash);
+        $id = array_pop($ids);
+
+        return $query->find($id);
     }
 }

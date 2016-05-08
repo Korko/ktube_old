@@ -10342,17 +10342,22 @@ exports.insert = function (css) {
 
 Vue.config.devtools = true;
 
-var VideosComponent = require('../vue/Videos.vue');
-
 Vue.filter('fromNow', function (value) {
 	return moment(value, 'YYYY-MM-DD HH:mm:ss').fromNow();
 });
 
+var Foo = Vue.extend({
+	template: '<p>This is foo!</p>'
+});
+
 var router = new VueRouter();
 router.map({
+	'/': {
+		component: Foo
+	},
 	'/videos': {
 		component: function component(resolve) {
-			resolve(VideosComponent);
+			resolve(require('../vue/Videos.vue'));
 		}
 	}
 });
@@ -10360,7 +10365,9 @@ router.map({
 var App = Vue.extend({
 	data: function data() {
 		return {
-			loading: false
+			loading: false,
+			title: "Home",
+			store: {}
 		};
 	}
 });
@@ -10390,40 +10397,92 @@ var __vueify_style__ = require("vueify-insert-css").insert("\n        .video-thu
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+        value: true
 });
 exports.default = {
-	methods: {
-		loadPage: function loadPage(last_video) {
-			if (this.lock) return;
-			this.lock = true;
+        keepAlive: true, // Seems useless....
+        canReuse: true, // Seems useless....
+        route: {
+                activate: function activate() {
+                        // Considere we are globally loading when displaying this page
+                        this.$root.loading = true;
 
-			$.ajax('/videos/all?last=' + (last_video || '')).success(function ($data) {
+                        // Change the title
+                        this.$root.title = "Videos";
+                },
+                data: function data() {
+                        setTimeout(function () {
+                                this.getMoreVideos();
+                        }.bind(this), 10);
 
-				this.$root.loading = false;
-				this.videos = this.videos.concat($data.data);
-				this.has_more = $data.has_more;
-				this.last_video = this.videos[this.videos.length - 1].hash;
-				this.lock = false;
-			}.bind(this));
-		},
-		nextPage: function nextPage() {
-			this.has_more && this.loadPage(this.last_video);
-		}
-	},
-	data: function data() {
-		this.$root.loading = true;
-		this.loadPage();
-		return {
-			has_more: false,
-			last_video: null,
-			lock: true,
-			videos: []
-		};
-	}
+                        // Every 5 minutes, ask the server if there's new messages
+                        setInterval(function () {
+                                this.checkNewVideos();
+                        }.bind(this), 5 * 60 * 1000);
+
+                        return {
+                                has_more: false,
+                                lock: false,
+                                new_videos: [],
+                                videos: []
+                        };
+                }
+        },
+        methods: {
+                getMoreVideos: function getMoreVideos(last_video) {
+                        // If we are alreay getting next page, don't request more
+                        if (this.lock) return;
+
+                        // Lock for further calls while we handle this one
+                        this.lock = true;
+
+                        $.ajax('/videos/all?last=' + (last_video || '')).success(function ($data) {
+                                // In case of the first call of the page, the root will be loading do stop it
+                                this.$root.loading = false;
+
+                                // Add the new videos at the end
+                                this.videos = this.videos.concat($data.data);
+
+                                // The server will say if there's more videos after those
+                                this.has_more = $data.has_more;
+
+                                // Allow further calls
+                                this.lock = false;
+                        }.bind(this));
+                },
+                nextPage: function nextPage() {
+                        // Determine what is the last video listed to get those after this one
+                        var last_video = this.videos.length ? this.videos[this.videos.length - 1].hash : null;
+
+                        // Ask the server
+                        this.getMoreVideos(last_video);
+                },
+                getNewVideos: function getNewVideos(first_video) {
+                        $.ajax('/videos/all?first=' + (first_video || '')).success(function ($data) {
+                                // Add the new videos at the very first in the list of new videos
+                                this.new_videos = $data.data.concat(this.new_videos);
+                        }.bind(this));
+                },
+                checkNewVideos: function checkNewVideos() {
+                        // Determine what is the first video listed to get those before this one
+                        var first_video = null;
+                        if (this.new_videos.length) {
+                                first_video = this.new_videos[0].hash;
+                        } else if (this.videos.length) {
+                                first_video = this.videos[0].hash;
+                        }
+
+                        // Ask the server
+                        this.getNewVideos(first_video);
+                },
+                appendNewVideos: function appendNewVideos() {
+                        this.videos = this.new_videos.concat(this.videos);
+                        this.new_videos = [];
+                }
+        }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n        <div id=\"video-list\" class=\"row\">\n                <ul>\n                        <li v-for=\"video in videos\">\n                                <div class=\"row\">\n                                        <div class=\"video-thumbnail\">\n                                                <img :src=\"video.thumbnail\">\n                                        </div>\n                                        <div class=\"video-data\">\n                                                <h3><a href=\"/video/{{ video.hash }}\">{{ video.name }}</a></h3>\n                                                <span class=\"author small em\">by {{ video.channel.name }}</span>\n                                                <span data-date=\"{{ video.published_at }}\" class=\"small em timer\">{{ video.published_at | fromNow }}</span>\n                                                <span class=\"small em\">in {{ video.channel.site.name }}</span>\n                                        </div>\n                                </div>\n                        </li>\n                </ul>\n\n                <nav>\n                        <button type=\"button\" class=\"btn btn-primary btn-lg\" :disabled=\"has_more ? false : true\" v-on:click=\"nextPage\">\n                                <span class=\"glyphicon\" :class=\"{'glyphicon-refresh': lock, 'glyphicon-refresh-animate': lock, 'glyphicon-triangle-bottom': !lock}\" aria-hidden=\"true\"></span> More\n                        </button>\n                </nav>\n        </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n        <div class=\"row\" v-if=\"!videos.length\">\n                Lors de la première connexion, il n'y a encore rien, cela va venir, le temps de récupérer vos abonnements et vidéos associées.\n        </div>\n\n        <div id=\"new-videos-list\" class=\"row\" v-if=\"new_videos.length\">\n                <a v-click=\"appendNewVideos\">{{ new_videos.length }} nouvelles vidéos</a>\n        </div>\n        <div id=\"video-list\" class=\"row\" v-if=\"videos.length\">\n\n                <ul>\n                        <li v-for=\"video in videos\">\n                                <div class=\"row\">\n                                        <div class=\"video-thumbnail\">\n                                                <img :src=\"video.thumbnail\">\n                                        </div>\n                                        <div class=\"video-data\">\n                                                <h3><a href=\"/video/{{ video.hash }}\">{{ video.name }}</a></h3>\n                                                <span class=\"author small em\">by {{ video.channel.name }}</span>\n                                                <span data-date=\"{{ video.published_at }}\" class=\"small em timer\">{{ video.published_at | fromNow }}</span>\n                                                <span class=\"small em\">in {{ video.channel.site.name }}</span>\n                                        </div>\n                                </div>\n                        </li>\n                </ul>\n\n                <nav>\n                        <button type=\"button\" class=\"btn btn-primary btn-lg\" :disabled=\"has_more ? false : true\" v-on:click=\"nextPage\">\n                                <span class=\"glyphicon\" :class=\"{'glyphicon-refresh': lock, 'glyphicon-refresh-animate': lock, 'glyphicon-triangle-bottom': !lock}\" aria-hidden=\"true\"></span> More\n                        </button>\n                </nav>\n        </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

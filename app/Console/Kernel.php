@@ -31,5 +31,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->call(function () {
+            $this->dispatch(new \Korko\kTube\Jobs\RefreshChannelsVideos\RefreshAllChannelsVideos());
+        })->description('Refresh channels\' videos')->cron('*/15 * * * *');
     }
 }

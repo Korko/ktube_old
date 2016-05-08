@@ -1,24 +1,31 @@
 Vue.config.devtools = true;
 
-var VideosComponent = require('../vue/Videos.vue');
-
 Vue.filter('fromNow', function (value) {
 	return moment(value, 'YYYY-MM-DD HH:mm:ss').fromNow();
 });
 
+var Foo = Vue.extend({
+    template: '<p>This is foo!</p>'
+});
+
 var router = new VueRouter();
 router.map({
-        '/videos': {
-                component: function (resolve) {
-                        resolve(VideosComponent);
-                }
-        }
+	'/': {
+		component: Foo
+	},
+	'/videos': {
+		component: function (resolve) {
+			resolve(require('../vue/Videos.vue'));
+		}
+	}
 });
 
 var App = Vue.extend({
 	data() {
 		return {
-			loading: false
+			loading: false,
+			title: "Home",
+			store: {}
 		}
 	}
 });

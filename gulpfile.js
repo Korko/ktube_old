@@ -3,7 +3,7 @@ var elixir = require('laravel-elixir');
 require('laravel-elixir-vueify');
 
 var bowerDir = './resources/assets/vendor/';
- 
+
 var lessPaths = [
     bowerDir + "bootstrap/less"
 ];

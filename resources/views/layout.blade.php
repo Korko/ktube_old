@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="root">
 	<head>
 	@section('head')
 		<meta charset="utf-8">
@@ -9,7 +9,10 @@
 		<meta name="author" content="">
 		<link rel="icon" href="/favicon.ico">
 
-		<title>kTube - @yield('title', 'Home')</title>
+		<title v-if="!title">kTube</title>
+		<template v-else>
+			<title>kTube - {{ title }}</title>
+		</template>
 
 		@section('styles')
 			<link href="<< elixir('css/main.css') >>" rel="stylesheet" type="text/css">
@@ -25,7 +28,7 @@
 		<![endif]-->
 	@show
 	</head>
-	<body id="root">
+	<body>
 	@section('body')
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -40,9 +43,10 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Dashboard</a></li>
+						<li><a v-link="'/'">Dashboard</a></li>
+						<li><a v-link="'/videos'">Videos</a></li>
 						<li><a href="#">Settings</a></li>
-						<li><a href="/profile">Profile</a></li>
+						<li><a href="#">Profile</a></li>
 						<li><a href="#">Help</a></li>
 						<li><a href="/auth/logout">Logout</a></li>
 					</ul>

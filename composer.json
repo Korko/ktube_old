@@ -4,16 +4,11 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/korko/socialite"
-        }
-    ],
+    "repositories": [],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "laravel/socialite": "dev-2.0-refreshToken as 2.0.x-dev",
+        "laravel/socialite": "2.0.*",
         "socialiteproviders/dailymotion": "dev-master",
         "socialiteproviders/vimeo": "dev-master",
         "google/apiclient": "1.0.*@dev",

@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $channels = $account->channels;
                 foreach ($channels as $channel) {
-                    $this->dispatch(new RefreshVideos($channel));
+                    $this->dispatch(RefreshChannelsVideos::getInstance($channel));
                 }
             });
         }
