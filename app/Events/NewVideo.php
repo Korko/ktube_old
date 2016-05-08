@@ -2,9 +2,7 @@
 
 namespace Korko\kTube\Events;
 
-use Korko\kTube\Events\Event;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class NewVideo extends Event
 {
