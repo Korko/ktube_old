@@ -25,9 +25,11 @@ class VideoController extends Controller
     }
 
     /**
-     * Get a list of videos
-     * @param  Request $request [description]
-     * @return array            Array with 2 keys: data (list of videos) and has_more (is there any video after the last one)
+     * Get a list of videos.
+     *
+     * @param Request $request [description]
+     *
+     * @return array Array with 2 keys: data (list of videos) and has_more (is there any video after the last one)
      */
     public function all(Request $request)
     {
@@ -45,35 +47,33 @@ class VideoController extends Controller
     }
 
     /**
-     * Get a list of Videos (DB instances) depending on Request conditions
-     * @param  Request $request [description]
-     * @return array            List of Video (DB instance)
+     * Get a list of Videos (DB instances) depending on Request conditions.
+     *
+     * @param Request $request [description]
+     *
+     * @return array List of Video (DB instance)
      */
     private function getVideosFromRequest(Request $request)
     {
         // We can specifically ask for videos after a last one or before a first one
         if (!empty($request->has('last'))) {
-
-            $video  = Video::byHash($request->get('last'));
+            $video = Video::byHash($request->get('last'));
             $videos = $this->getVideosBefore($video);
 
         // We can specifically ask for videos after a last one or before a first one
-        } else if (!empty($request->has('first'))) {
-
-            $video  = Video::byHash($request->get('first'));
+        } elseif (!empty($request->has('first'))) {
+            $video = Video::byHash($request->get('first'));
             $videos = $this->getVideosAfter($video);
-
         } else {
-
             $videos = $this->getVideos();
-
         }
 
         return $videos;
     }
 
     /**
-     * Get an Eloquent instance about Video for the connected user
+     * Get an Eloquent instance about Video for the connected user.
+     *
      * @return Eloquent\Request [description]
      */
     private function getVideosRequest()
@@ -91,7 +91,8 @@ class VideoController extends Controller
     }
 
     /**
-     * Get a bunch of videos for the connected user
+     * Get a bunch of videos for the connected user.
+     *
      * @return array [description]
      */
     private function getVideos()
@@ -100,7 +101,8 @@ class VideoController extends Controller
     }
 
     /**
-     * Get a bunch of videos for the connected user published before an other one
+     * Get a bunch of videos for the connected user published before an other one.
+     *
      * @return array [description]
      */
     private function getVideosBefore(Video $video)
@@ -112,7 +114,8 @@ class VideoController extends Controller
     }
 
     /**
-     * Get a bunch of videos for the connected user published after an other one
+     * Get a bunch of videos for the connected user published after an other one.
+     *
      * @return array [description]
      */
     private function getVideosAfter(Video $video)
