@@ -145,6 +145,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         League\StatsD\Laravel5\Provider\StatsdServiceProvider::class,
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
 
         /*
          * Application Service Providers...
