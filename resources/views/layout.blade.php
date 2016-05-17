@@ -9,7 +9,7 @@
 		<meta name="author" content="">
 		<link rel="icon" href="/favicon.ico">
 
-		<title v-if="!title">kTube</title>
+		<title v-if="!title">kTube - @yield('title')</title>
 		<template v-else>
 			<title>kTube - {{ title }}</title>
 		</template>
