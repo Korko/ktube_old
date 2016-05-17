@@ -55,75 +55,20 @@ class VideoController extends Controller
      */
     private function getVideosFromRequest(Request $request)
     {
+        $model = Video::byUser(Auth::user());
+
         // We can specifically ask for videos after a last one or before a first one
         if (!empty($request->has('last'))) {
             $video = Video::byHash($request->get('last'));
-            $videos = $this->getVideosBefore($video);
+            $model->before($video);
 
         // We can specifically ask for videos after a last one or before a first one
         } elseif (!empty($request->has('first'))) {
             $video = Video::byHash($request->get('first'));
-            $videos = $this->getVideosAfter($video);
-        } else {
-            $videos = $this->getVideos();
+            $model->after($video);
         }
 
-        return $videos;
-    }
-
-    /**
-     * Get an Eloquent instance about Video for the connected user.
-     *
-     * @return Eloquent\Request [description]
-     */
-    private function getVideosRequest()
-    {
-        $channels = Auth::user()->accounts()
-            ->select('id')
-            ->with('channels')->get()
-            ->pluck('channels')->collapse();
-
-        return Video::whereIn('channel_id', $channels->pluck('id')->all())
-            ->select(['id', 'name', 'published_at', 'thumbnail', 'channel_id'])
-            ->with('channel.site')
-            ->orderBy('published_at', 'desc')
-            ->limit(21);
-    }
-
-    /**
-     * Get a bunch of videos for the connected user.
-     *
-     * @return array [description]
-     */
-    private function getVideos()
-    {
-        return $this->getVideosRequest()->get();
-    }
-
-    /**
-     * Get a bunch of videos for the connected user published before an other one.
-     *
-     * @return array [description]
-     */
-    private function getVideosBefore(Video $video)
-    {
-        return $this->getVideosRequest()
-            ->where('id', '<', $video->id)
-            ->where('published_at', '<', $video->published_at)
-            ->get();
-    }
-
-    /**
-     * Get a bunch of videos for the connected user published after an other one.
-     *
-     * @return array [description]
-     */
-    private function getVideosAfter(Video $video)
-    {
-        return $this->getVideosRequest()
-            ->where('id', '>', $video->id)
-            ->where('published_at', '>', $video->published_at)
-            ->get();
+        return $model->page();
     }
 
     /**

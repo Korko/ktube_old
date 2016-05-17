@@ -34,4 +34,38 @@ class Video extends Model
 
         return $query->find($id);
     }
+
+    public function scopeByUser($query, User $user)
+    {
+        $channels = $user->accounts()
+            ->select('id')
+            ->with('channels')->get()
+            ->pluck('channels')->collapse();
+
+        return $query->whereIn('channel_id', $channels->pluck('id')->all());
+    }
+
+    public function scopeBefore($query, Video $video)
+    {
+        return $query
+            ->where('id', '<', $video->id)
+            ->where('published_at', '<', $video->published_at);
+    }
+
+    public function scopeAfter($query, Video $video)
+    {
+        return $query
+            ->where('id', '>', $video->id)
+            ->where('published_at', '>', $video->published_at);
+    }
+
+    public function scopePage()
+    {
+        return $this
+            ->select(['id', 'name', 'published_at', 'thumbnail', 'channel_id'])
+            ->with('channel.site')
+            ->orderBy('published_at', 'desc')
+            ->limit(21)
+            ->get();
+    }
 }
