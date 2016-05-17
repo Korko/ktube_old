@@ -34,7 +34,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/playlists/{playlist}', 'PlaylistController@show');
     Route::get('/playlists/all/{playlist}', 'PlaylistController@all');
 });
-
-if (env('APP_ENV') === 'local') {
-    Route::get('/auth/debug', 'AuthController@debugLogin');
-}

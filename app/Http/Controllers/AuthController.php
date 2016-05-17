@@ -98,13 +98,4 @@ class AuthController extends Controller
 
         return $user;
     }
-
-    public function debugLogin()
-    {
-        $user = User::firstOrFail();
-
-        Auth::login($user, true);
-
-        return redirect('/home')->with('message', 'Welcome, '.$user->name);
-    }
 }
