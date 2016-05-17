@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             JavaScript::put(['videos' => Video::byUser(Auth::user())->page()]);
 
             return view('welcome.user');
