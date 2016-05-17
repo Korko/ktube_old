@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', ['middleware' => 'guest', function () {
-    return view('welcome');
-}]);
+Route::get('/', 'HomeController@index');
 
 Route::get('/auth/login/{provider}', 'AuthController@getLogin');
 Route::get('/auth/login/callback/{provider}', 'AuthController@postLogin');

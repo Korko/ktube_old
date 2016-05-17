@@ -36,7 +36,7 @@ class AuthController extends Controller
         if ($userData = Socialite::with($provider)->user()) {
             $account = $this->updateOrCreateAccount($provider, $userData);
 
-            return redirect('/home')->with('message', 'Welcome, '.$account->user->name);
+            return redirect('/')->with('message', 'Welcome, '.$account->user->name);
         } else {
             abort(500);
         }
