@@ -34,11 +34,9 @@ elixir(function(mix) {
         .scripts([
             'jquery/dist/jquery.min.js',
             'bootstrap/dist/js/bootstrap.min.js',
-            'moment/min/moment-with-locales.min.js',
-            'vue/dist/vue.min.js',
-            'vue-router/dist/vue-router.min.js'
+            'moment/min/moment-with-locales.min.js'
         ], 'public/js/vendor.js', bowerDir)
-        .browserify(["script.js", "app.js"], 'public/js/app.js')
+        .browserify(["script.js", "main.js"], 'public/js/app.js')
         .version(['public/css/main.css', 'public/css/cover.css', 'public/css/app.css', 'public/js/vendor.js', 'public/js/app.js']);
 
 });

@@ -1,32 +1,12 @@
-Vue.config.devtools = true;
+import Vue from 'vue';
+import store from './store.js';
 
-Vue.filter('fromNow', function (value) {
-	return moment(value, 'YYYY-MM-DD HH:mm:ss').fromNow();
+export default Vue.extend({
+        data: function() {
+                return {
+                        loading: false,
+                        title: "Home"
+                }
+        },
+	store: store
 });
-
-var Foo = Vue.extend({
-    template: '<p>This is foo!</p>'
-});
-
-var router = new VueRouter();
-router.map({
-	'/': {
-		component: Foo
-	},
-	'/videos': {
-		component: function (resolve) {
-			resolve(require('../vue/Videos.vue'));
-		}
-	}
-});
-
-var App = Vue.extend({
-	data() {
-		return {
-			loading: false,
-			title: "Home",
-			store: {}
-		}
-	}
-});
-router.start(App, '#root');

@@ -43,8 +43,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a v-link="'/'">Dashboard</a></li>
-						<li><a v-link="'/videos'">Videos</a></li>
+						<li><a v-link="'/'">Videos</a></li>
 						<li><a href="#">Settings</a></li>
 						<li><a href="#">Profile</a></li>
 						<li><a href="#">Help</a></li>
