@@ -20,15 +20,5 @@ Route::get('/video/{video}', 'VideoController@show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth/logout', 'AuthController@getLogout');
-
-    Route::get('/home', 'VideoController@index');
-
-    Route::get('/accounts', 'AccountsController@index');
-    Route::get('/profile', 'ProfileController@index');
-
     Route::get('/videos/all', 'VideoController@all');
-
-    Route::get('/playlists/all', 'PlaylistController@index');
-    Route::get('/playlists/{playlist}', 'PlaylistController@show');
-    Route::get('/playlists/all/{playlist}', 'PlaylistController@all');
 });
