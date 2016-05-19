@@ -31,16 +31,16 @@ class RefreshVideos extends Command
     {
         $channelId = $this->argument('channel');
 
-        if($channelId !== null) {
+        if ($channelId !== null) {
             $channel = Channel::findOrFail($channelId);
 
             RefreshChannelsVideosLibrary::getInstance($channel)->handle();
-	} else {
+        } else {
             $channels = Channel::all();
 
             foreach ($channels as $channel) {
                 RefreshChannelsVideosLibrary::getInstance($channel)->handle();
             }
-	}
+        }
     }
 }
