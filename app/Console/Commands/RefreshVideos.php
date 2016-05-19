@@ -3,25 +3,24 @@
 namespace Korko\kTube\Console\Commands;
 
 use Illuminate\Console\Command;
-use Korko\kTube\Account;
+use Korko\kTube\Channel;
 use Korko\kTube\Library\RefreshChannelsVideos\RefreshChannelsVideos as RefreshChannelsVideosLibrary;
-use Korko\kTube\Library\RefreshSubscriptions\RefreshSubscriptions as RefreshSubscriptionsLibrary;
 
-class RefreshSubscriptions extends Command
+class RefreshVideos extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'refresh:subscriptions {account}';
+    protected $signature = 'refresh:videos {channel?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Refresh an account\'s subscriptions.';
+    protected $description = 'Refresh a channel videos.';
 
     /**
      * Execute the console command.
@@ -30,14 +29,18 @@ class RefreshSubscriptions extends Command
      */
     public function handle()
     {
-        $accountId = $this->argument('account');
+        $channelId = $this->argument('channel');
 
-        $account = Account::findOrFail($accountId);
+        if($channelId !== null) {
+            $channel = Channel::findOrFail($channelId);
 
-        $channels = RefreshSubscriptionsLibrary::getInstance($account)->handle();
-
-        foreach ($channels as $channel) {
             RefreshChannelsVideosLibrary::getInstance($channel)->handle();
-        }
+	} else {
+            $channels = Channel::all();
+
+            foreach ($channels as $channel) {
+                RefreshChannelsVideosLibrary::getInstance($channel)->handle();
+            }
+	}
     }
 }

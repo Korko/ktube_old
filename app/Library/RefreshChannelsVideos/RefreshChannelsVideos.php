@@ -4,7 +4,6 @@ namespace Korko\kTube\Library\RefreshChannelsVideos;
 
 use Illuminate\Support\Collection;
 use Korko\kTube\Channel;
-use Korko\kTube\Events\NewVideo;
 use Korko\kTube\Exceptions\InvalidProviderException;
 use Korko\kTube\Video;
 
@@ -44,8 +43,6 @@ abstract class RefreshChannelsVideos
 
         $videos = $videos->map(function ($video) {
             $video['channel_id'] = $this->channel->id;
-
-            Event::fire(new NewVideo($video));
 
             return $video;
         });

@@ -4,7 +4,7 @@
         </div>
 
         <div id="new-videos-list" class="row" v-if="newVideos.length">
-                <a v-click="appendNewVideos">{{ newVideos.length }} nouvelles vidéos</a>
+                <a v-on:click="appendNewVideos">{{ newVideos.length }} nouvelles vidéos</a>
         </div>
 
         <div id="video-list" class="row" v-if="videos.length">
@@ -57,13 +57,13 @@ export default {
                        	}
                	}
         },
-        data: function() {
+        created: function() {
         	// Every 5 minutes, ask the server if there's new messages
                 setInterval(function() {
                        this.checkNewVideos();
                 }.bind(this), 5 * 60 * 1000);
 
-                return {
+                this.$data = {
                         lock: false,
                         newVideos: []
                 };
@@ -95,9 +95,13 @@ export default {
                	checkNewVideos: function() {
                        	$.ajax('/videos/all?first='+this.firstVideo).success(function ($data) {
                                	// Add the new videos at the very first in the list of new videos
-                               	this.prependVideos($data.videos);
+                               	this.newVideos = $data.videos.concat(this.newVideos);
                        	}.bind(this));
-               	}
+               	},
+		appendNewVideos: function() {
+			this.prependVideos(this.newVideos);
+			this.newVideos = [];
+		}
         }
 };
 </script>
