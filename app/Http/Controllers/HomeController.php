@@ -15,7 +15,7 @@ class HomeController extends Controller
 
             JavaScript::put([
                 'videos'   => $videos->slice(0, 20),
-                'hasMore' => isset($videos[20]), // If the 21's exists, there's more
+                'hasMore'  => isset($videos[20]), // If the 21's exists, there's more
             ]);
 
             return view('welcome.user');
