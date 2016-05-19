@@ -10,3 +10,5 @@ export default Vue.extend({
         },
 	store: store
 });
+
+store.dispatch('APPEND', videos, hasMore);

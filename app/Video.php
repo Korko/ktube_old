@@ -48,24 +48,31 @@ class Video extends Model
     public function scopeBefore($query, Video $video)
     {
         return $query
-            ->where('id', '<', $video->id)
-            ->where('published_at', '<', $video->published_at);
+            ->where('id', '<>', $video->id)
+            ->where('published_at', '<=', $video->published_at);
     }
 
     public function scopeAfter($query, Video $video)
     {
         return $query
-            ->where('id', '>', $video->id)
-            ->where('published_at', '>', $video->published_at);
+            ->where('id', '<>', $video->id)
+            ->where('published_at', '>=', $video->published_at);
     }
 
-    public function scopePage()
+    public function scopePage($query)
     {
-        return $this
+        $videos = $query
             ->select(['id', 'name', 'published_at', 'thumbnail', 'channel_id'])
             ->with('channel.site')
             ->orderBy('published_at', 'desc')
             ->limit(21)
             ->get();
+
+        foreach ($videos as &$video) {
+            $video->hash = Hashids::encode($video->id);
+            unset($video->id);
+        }
+
+	return $videos;
     }
 }

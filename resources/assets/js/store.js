@@ -5,14 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state : {
-		videos: videos || []
+		videos: [],
+		hasMore: true
 	},
 	mutations: {
-		APPEND: function (state, videos) {
-			state.videos = state.videos.concat(videos);
+		APPEND: function (state, videos, hasMore) {
+			Vue.set(state, 'videos', state.videos.concat(videos));
+			state.hasMore = (hasMore === undefined) ? state.hasMore : hasMore;
 		},
 		PREPEND: function (state, videos) {
-			state.videos = videos.concat(state.videos);
+			Vue.set(state, 'videos', videos.concat(state.videos));
 		}
 	},
 	strict: true
